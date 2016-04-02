@@ -2,7 +2,8 @@ var express = require('express'),
 		app = express(),
 		bodyParser = require('body-parser'),
 		hbs = require('hbs'),
-		mongoose = require('mongoose');
+		mongoose = require('mongoose'), 
+		apiController = require('./controllers/apiController');
 
 // configures bodyParser (accepts form data)
 app.use(bodyParser.urlencoded({extended: true}));
@@ -17,16 +18,20 @@ app.set('view engine', 'hbs');
 // connect to mongo for our database
 mongoose.connect('mongodb://localhost');
 
-var user = require('./models/user.js');
-var house = require('./models/house.js');
+var User = require('./models/user.js');
+var House = require('./models/house.js');
 
 
-app.get('*', function(req, res) {
-	console.log('getting route');
-	res.render('index');
+// app.get('*', function(req, res) {
+// 	console.log('getting route');
+// 	res.render('index');
+// });
+
+app.get('/api', function (req, res) {
+			res.json({
+			message: "made it to api"
+		});
 });
-
-
 
 
 // running on port 3000s
