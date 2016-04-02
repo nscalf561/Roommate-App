@@ -28,6 +28,8 @@ User.remove({}, function (err, users) {
 				console.log("error creating new user:", err);
 				process.exit();
 				mongoose.connection.close();
+			} else {
+				console.log("Users reseeded");
 			}
 		});
 	}

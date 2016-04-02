@@ -9,20 +9,26 @@ var express = require('express'),
 		houseController = require('../controllers/houseController'),
 		userController = require('../controllers/userController');
 
-
+// API directory
 router.route('/api')
 	.get(apiController.index);
 
+// API Users
 router.route('/api/users')
 	.get(userController.index);
 
+// API Individual User
 router.route('/api/users/:id')
 	.get(userController.showUser)
 	.delete(userController.deleteUser);
 
+// API Houses
+router.route('/api/households')
+	.get(houseController.index)
+	.post(houseController.createHouse);
 
-
-router.route('/api/houses')
-	.get(houseController.index);
+router.route('/api/households/:id')
+	.get(houseController.showHouse)
+	.delete(houseController.deleteHouse);
 
 module.exports = router;
