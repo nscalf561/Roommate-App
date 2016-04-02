@@ -49,6 +49,27 @@ var houseController = {
 				res.json({message: "Household deleted!"});
 			}
 		});
+	},
+
+	updateHouse : function (req, res) {
+		House.findOne({_id: req.params.id}, function (err, house) {
+			if (err) {
+				res.status(500).send();
+				console.log("There was an error finding the household:", house);
+			} 
+			
+			if (req.body.name) { house.name = req.body.name; }
+			if (req.body.address) { house.address = req.body.address; }
+
+			House.update({_id: req.params.id}, house, function (err, house) {
+				if (err) {
+					res.status(500).send();
+					console.log("There was an error updating the house:", err);
+				} else {
+					res.json({house: house});
+				}
+			});
+		});
 	}
 };
 

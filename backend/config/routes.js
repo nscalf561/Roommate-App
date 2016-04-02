@@ -22,13 +22,15 @@ router.route('/api/users/:id')
 	.get(userController.showUser)
 	.delete(userController.deleteUser);
 
-// API Houses
+// API Household
 router.route('/api/households')
 	.get(houseController.index)
 	.post(houseController.createHouse);
 
+// API Individal Household
 router.route('/api/households/:id')
 	.get(houseController.showHouse)
-	.delete(houseController.deleteHouse);
+	.delete(houseController.deleteHouse)
+	.put(houseController.updateHouse);
 
 module.exports = router;
