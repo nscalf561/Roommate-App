@@ -14,36 +14,41 @@
 
   <ion-side-menu side="left">
     <ion-header-bar class="bar-stable">
-      <h1 class="title">Menu</h1>
+      <h1 class="title">Menu <i class="icon ion-android-home"></i></h1>
     </ion-header-bar>
     <ion-content>
-      <ion-list>
-<!--         <ion-item menu-close ng-click="login()">
-          Login
+
+      <ion-list>    
+
+        <ion-item class="item item-icon-left" menu-close href="#/app/userSettings">
+          Username<i class="icon ion-person"></i>
         </ion-item>
- -->        
-<!--         <ion-item menu-close ng-click="#/app/userSettings">
-          Username
-        </ion-item> -->
-        <ion-item menu-close href="#/app/dashboard">
-          Dashboard
+
+        <ion-item class="item item-icon-right" menu-close href="#/app/dashboard">
+          Dashboard<i class="icon icon ion-ios-home"></i>
         </ion-item>
-        <ion-item menu-close href="#/app/chores">
-          Chores
+
+        <ion-item class="item item-icon-right" menu-close href="#/app/chores">
+          Chores<i class="icon icon ion-settings"></i>
         </ion-item>
-<!--         <ion-item menu-close href="#/app/bills">
-          Bills
+
+        <ion-item class="item item-icon-right" menu-close href="#/app/bills">
+          Bills<i class="icon icon ion-card"></i>
         </ion-item>
-        <ion-item menu-close href="#/app/supplies">
-          Supplies
+
+        <ion-item class="item item-icon-right" menu-close href="#/app/supplies">
+          Supplies<i class="icon ion-ios-cart-outline"></i>
         </ion-item>
-        <ion-item menu-close href="#/app/announcements">
-          Announcements
+
+        <ion-item class="item item-icon-right" menu-close href="#/app/announcements">
+          Announcements<i class="icon ion-speakerphone"></i>
         </ion-item>
-        <ion-item menu-close href="#/app/householdSettings">
-          Household Name
-        </ion-item> -->
+
+        <ion-item class="item item-icon-left" menu-close href="#/app/householdSettings">
+          Household Name<i class="icon ion-ios-home"></i>
+        </ion-item>
       </ion-list>
+
     </ion-content>
   </ion-side-menu>
 </ion-side-menus>

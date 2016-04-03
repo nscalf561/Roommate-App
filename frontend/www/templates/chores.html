@@ -1,7 +1,13 @@
 <ion-view view-title="Chores">
   <ion-content>
     <ion-list>
-      This is a test!
+      <ion-item class='item item-button-left item-icon-right' ng-repeat="chore in choreContent">
+      	<div class="upvote-buttons" style="color: red">
+	        <button class="button button-icon ion-ios-arrow-thin-down"></button>{{chore.upvotes}}
+	        <button class="button button-icon ion-close ion-ios-arrow-thin-up"></button>
+        </div>
+        	{{chore.task}}<i class="icon ion-ios-checkmark"></i>
+      </ion-item>
     </ion-list>
   </ion-content>
 </ion-view>
