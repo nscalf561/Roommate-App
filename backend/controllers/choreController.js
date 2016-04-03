@@ -1,62 +1,81 @@
 var app = require('../server');
-var Chore = require('../models/Chore');
-var HouseChore = require('../models/HouseChore');
+// var Chore = require('../models/Chore');
+var House = require('../models/House');
 
 var choreController = {
 
 	// Show all chores
 	index : function (req, res) {
-		db.Chore.find({}, function (err, chores) {
+		House.findOne({_id: req.params.id}, function(err, house) {
+			console.log(house);
 			if (err) {
-				res.status(500).send();
-				console.log("There was an error getting all of the chores:", err);
+				console.log("error has occurred finding the house", err);
+			} else {
+				console.log(house.chores);
+				res.json({chores: house.chores});
 			}
-			res.json({chores: chores});
 		});
 	},
 
 	// Create a new chore
 	createChore : function (req, res) {
-		// Object we're going to save to db
-		var newChore = new Chore({
-			task: req.body.task, 
-			isCompleted: req.body.isCompleted,
-			completedAt: req.body.completedAt,
-			upvotes: req.body.upvotes,
-			completedBy: req.body.completedBy,
-			comments: req.body.comments
-		});
-
-		// Saves the above object, warns if an error occurs
-		newChore.save(function(err, newChore) {
+		
+		// House that we're adding the chore to
+		House.findOne({_id: req.params.id}, function(err, house) {
+			console.log(house.chores);
 			if (err) {
-				res.status(500).send();
-				console.log("There was an error saving the chore:", err);
+				console.log("An error has occurred while finding the house:", err);
 			} else {
-				console.log("The new chore was successfully saved.");
-				
-				var houseChore = {
-					houseId: req.params.id,
-					choreId: newChore._id
+
+				// Object we're going to save to db
+				var newChore = {
+					task: req.body.task, 
+					isCompleted: req.body.isCompleted,
+					completedAt: req.body.completedAt,
+					upvotes: req.body.upvotes,
+					completedBy: req.body.completedBy,
+					comments: req.body.comments
 				};
 
-				db.HouseChore.create(houseChore, function(err, houseChore) {
-					console.log("m2m association made", houseChore);
-				});
-			}
-		});
+				// Saves the above object
+				house.chores.push(newChore);
 
+				house.save(function(err, house) {
+					if (err) {
+						console.log("There was an error saving the chore to the house:", err);
+					} else {
+						console.log(house);
+						res.json({chores: house.chores});
+					}
+				});
+
+			}
+		});		
 	},
 
 	showChore : function (req, res) {
-		db.Chore.find({_id: req.params.id}, function (err, chore) {
+
+		House.findOne({_id: req.params.hid}, function (err, house) {
 			if (err) {
 				res.status(500).send();
-				console.log("There was an error getting this chore:", err);
+				console.log("There was an error getting this household:", err);
 			} else {
-				res.json({chore: chore});
+				
+				var choreLength = house.chores.length;
+				for (var x = 0; x < choreLength; x++) {
+
+					// console.log("this is the id:", house.chores[x]._id);
+					// console.log("id in url:", req.params.id);
+					// console.log(house.chores[x]._id == req.params.id);
+					
+					if (house.chores[x]._id == req.params.id) {
+						// console.log("second chore call:", house.chores);
+						return res.json({chore: house.chores[x]});
+					}
+				}
 			}
 		});
+
 	}
 
 };

@@ -1,17 +1,14 @@
 var User = require('../models/User');
 var House = require('../models/House');
-var Chore = require('../models/Chore');
-var HouseUser = require('../models/HouseUser');
-var HouseChore = require('../models/HouseChore');
+// var Chore = require('../models/Chore');
+// var HouseUser = require('../models/HouseUser');
+// var HouseChore = require('../models/HouseChore');
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/project4');
 // console.log("connected to db");
 
 User.remove({}, function(err, users){});
 House.remove({}, function(err, houses){});
-Chore.remove({}, function(err, chores){});
-HouseUser.remove({}, function(err, houseUsers){});
-HouseChore.remove({}, function(err, housesChores){});
 
 var userList = [
 	{
@@ -23,50 +20,38 @@ var userList = [
 		email: "caleb@caleb.com"
 	}
 ];
-
+console.log("outside user list");
 User.create(userList, function(err, users) {
 	console.log("users created", users);
-	var houseList = [
+	
+	var houseList = 
 		{
 			name: "Monastery",
-			address: "2335 Warring St, Berkeley, CA"
-		}
-	];
-
+			address: "2335 Warring St, Berkeley, CA",
+			users: [],
+			chores: [{
+				task: "clean this thing",
+				isCompleted: false,
+				upvotes: 1,
+				completedBy: "Jessie"
+			}]
+		};
+	console.log('about ot make houses');
 	//create house
-	House.create(houseList, function(err, houses) {
-		console.log("created houses", houses);
-		console.log("users:", users);
-		console.log("houses:", houses);
 
-		var house1 = houses[0];
+	var house = new House(houseList);
+		var house1 = house;
 		var user1 = users[0];
 		var user2 = users[1];
 
-		//associate users with houses
-		var houseUsersList = [
-			{
-				userId: user1._id,
-				houseId: house1._id
-			},
-			{
-				userId: user2._id,
-				houseId: house1._id
-			}
-		];
 
-		//creating the join table
-		HouseUser.create(houseUsersList, function(err, houseUsers) {
-			if (err) {
-				console.log("m2m association could not be made:", err);
-			} else {
-			console.log("m2m association made", houseUsers);
-			mongoose.disconnect();
-			}
-		});
+		house1.users.push(users[0]);
+		house1.users.push(users[1]);
+		console.log(house1.users);
 
-	});
-
+	house.save(function(err, house) {
+		console.log(house);
+	});	
 
 });
 
