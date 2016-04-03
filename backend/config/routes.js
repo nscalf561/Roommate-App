@@ -41,8 +41,8 @@ router.route('/api/households/:id/chores')
 
 // API Individual Chore
 router.route('/api/households/:hid/chores/:id')
-.get(choreController.showChore);
-// .delete(choreController.deleteChore)
+.get(choreController.showChore)
+.delete(choreController.deleteChore);
 // .put(choreController.updateChore);
 
 module.exports = router;

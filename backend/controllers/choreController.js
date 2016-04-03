@@ -58,26 +58,44 @@ var choreController = {
 		House.findOne({_id: req.params.hid}, function (err, house) {
 			if (err) {
 				res.status(500).send();
-				console.log("There was an error getting this household:", err);
+				console.log("An error has occurred while finding the house:", err);
 			} else {
-				
-				var choreLength = house.chores.length;
-				for (var x = 0; x < choreLength; x++) {
-
-					// console.log("this is the id:", house.chores[x]._id);
-					// console.log("id in url:", req.params.id);
-					// console.log(house.chores[x]._id == req.params.id);
-					
-					if (house.chores[x]._id == req.params.id) {
-						// console.log("second chore call:", house.chores);
-						return res.json({chore: house.chores[x]});
+				house.chores.forEach(function(chore) {
+					if (chore._id == req.params.id) {
+						return res.json({chore: chore});
 					}
-				}
+				});
+				res.json(500).send();
 			}
 		});
 
-	}
+	},
 
+	deleteChore : function (req, res) {
+		House.findOne({_id: req.params.hid}, function (err, house) {
+			if (err) {
+				res.status(500).send();
+				console.log("An error has occurred while finding the house:", err);
+			} else {
+				house.chores.forEach(function(chore) {
+					if (chore._id == req.params.id) {
+						var indexOfChore = house.chores.indexOf(chore);
+						house.chores.splice(indexOfChore, 1);
+					}
+				});
+
+				house.save(function(err, house) {
+					if (err) {
+						console.log("There was an error saving the updated house.chores array:", err);
+					} else {
+						console.log(house);
+						res.status(400).send();
+					}
+				});
+
+			}
+		});
+	}
 };
 
 module.exports = choreController;
