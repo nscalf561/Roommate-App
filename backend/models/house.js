@@ -1,6 +1,6 @@
 var mongoose = require('mongoose'),
-		User = require('./user'),
-		Chore = require('./chore'),
+		User = require('./User'),
+		Chore = require('./Chore'),
 		Schema = mongoose.Schema;
 
 var HouseSchema = new Schema ({
@@ -10,7 +10,10 @@ var HouseSchema = new Schema ({
 		type: Schema.Types.ObjectId,
 		ref: 'User'
 	}], 
-	chore: [Chore.schema]
+	chores: [{
+		type: Schema.Types.ObjectId,
+		ref: 'Chore'
+	}]
 });
 
 var House = mongoose.model('House', HouseSchema);

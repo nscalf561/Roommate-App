@@ -19,8 +19,8 @@ app.set('view engine', 'hbs');
 // connect to mongo for our database
 mongoose.connect('mongodb://localhost/project4');
 
-var User = require('./models/user.js');
-var House = require('./models/house.js');
+// var User = require('./models/user.js');
+// var House = require('./models/house.js');
 
 app.use(routes);
 // running on port 3000s

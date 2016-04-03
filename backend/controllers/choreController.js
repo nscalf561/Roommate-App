@@ -1,11 +1,12 @@
 var app = require('../server');
-var Chore = require('../models/chore');
+var Chore = require('../models/Chore');
+var HouseChore = require('../models/HouseChore');
 
 var choreController = {
 
 	// Show all chores
 	index : function (req, res) {
-		Chore.find({}, function (err, chores) {
+		db.Chore.find({}, function (err, chores) {
 			if (err) {
 				res.status(500).send();
 				console.log("There was an error getting all of the chores:", err);
@@ -27,16 +28,36 @@ var choreController = {
 		});
 
 		// Saves the above object, warns if an error occurs
-		newChore.save(function(err) {
+		newChore.save(function(err, newChore) {
 			if (err) {
 				res.status(500).send();
 				console.log("There was an error saving the chore:", err);
 			} else {
 				console.log("The new chore was successfully saved.");
+				
+				var houseChore = {
+					houseId: req.params.id,
+					choreId: newChore._id
+				};
+
+				db.HouseChore.create(houseChore, function(err, houseChore) {
+					console.log("m2m association made", houseChore);
+				});
 			}
 		});
 
 	},
+
+	showChore : function (req, res) {
+		db.Chore.find({_id: req.params.id}, function (err, chore) {
+			if (err) {
+				res.status(500).send();
+				console.log("There was an error getting this chore:", err);
+			} else {
+				res.json({chore: chore});
+			}
+		});
+	}
 
 };
 

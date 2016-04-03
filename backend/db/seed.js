@@ -1,13 +1,17 @@
-var User = require('../models/user');
-var House = require('../models/house');
-var HouseUser = require('../models/houseUser');
+var User = require('../models/User');
+var House = require('../models/House');
+var Chore = require('../models/Chore');
+var HouseUser = require('../models/HouseUser');
+var HouseChore = require('../models/HouseChore');
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/project4');
 // console.log("connected to db");
 
 User.remove({}, function(err, users){});
 House.remove({}, function(err, houses){});
+Chore.remove({}, function(err, chores){});
 HouseUser.remove({}, function(err, houseUsers){});
+HouseChore.remove({}, function(err, housesChores){});
 
 var userList = [
 	{
@@ -25,8 +29,7 @@ User.create(userList, function(err, users) {
 	var houseList = [
 		{
 			name: "Monastery",
-			address: "2335 Warring St, Berkeley, CA",
-			users: ["57005ba0df8ed6cf273701a5"]
+			address: "2335 Warring St, Berkeley, CA"
 		}
 	];
 
@@ -54,8 +57,12 @@ User.create(userList, function(err, users) {
 
 		//creating the join table
 		HouseUser.create(houseUsersList, function(err, houseUsers) {
+			if (err) {
+				console.log("m2m association could not be made:", err);
+			} else {
 			console.log("m2m association made", houseUsers);
 			mongoose.disconnect();
+			}
 		});
 
 	});

@@ -37,11 +37,11 @@ router.route('/api/households/:id')
 // API Chores
 router.route('/api/households/:id/chores')
 .get(choreController.index)
-// .post(choreController.createChore);
+.post(choreController.createChore);
 
 // API Individual Chore
-// router.route('/api/households/:id/chores/:id')
-// .get(choreController.showChore)
+router.route('/api/households/:id/chores/:id')
+.get(choreController.showChore);
 // .delete(choreController.deleteChore)
 // .put(choreController.updateChore);
 

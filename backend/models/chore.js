@@ -4,7 +4,7 @@ var mongoose = require('mongoose'),
 var ChoreSchema = new Schema ({
 	task: String,
 	isCompleted: Boolean,
-	completedAt: Date,
+	completedAt: { type: Date, default: new Date()},
 	upvotes: Number,
 	completedBy: String,
 	comments: [String]

@@ -1,5 +1,4 @@
 var mongoose = require('mongoose'),
-		House = require('./house'),
 		Schema = mongoose.Schema;
 
 var UserSchema = new Schema ({
