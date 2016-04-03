@@ -1,18 +1,19 @@
 var mongoose = require('mongoose'),
 		User = require('./User'),
-		Chore = require('./Chore'),
+		// Chore = require('./Chore'),
 		Schema = mongoose.Schema;
 
 var HouseSchema = new Schema ({
 	name: String, 
 	address: String,
-	users: [{
-		type: Schema.Types.ObjectId,
-		ref: 'User'
-	}], 
+	users: [], 
 	chores: [{
-		type: Schema.Types.ObjectId,
-		ref: 'Chore'
+		task: String,
+		isCompleted: Boolean,
+		completedAt: { type: Date, default: new Date()},
+		upvotes: Number,
+		completedBy: String,
+		comments: [String]
 	}]
 });
 

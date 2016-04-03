@@ -40,9 +40,9 @@ router.route('/api/households/:id/chores')
 .post(choreController.createChore);
 
 // API Individual Chore
-router.route('/api/households/:id/chores/:id')
-.get(choreController.showChore);
-// .delete(choreController.deleteChore)
+router.route('/api/households/:hid/chores/:id')
+.get(choreController.showChore)
+.delete(choreController.deleteChore);
 // .put(choreController.updateChore);
 
 module.exports = router;
