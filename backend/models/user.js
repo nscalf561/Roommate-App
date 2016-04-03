@@ -1,12 +1,10 @@
 var mongoose = require('mongoose'),
-		House = require('./house.js'),
 		Schema = mongoose.Schema;
 
-var userSchema = new Schema ({
+var UserSchema = new Schema ({
 	name: String,
-	access_token: String,
 	email: String
 });
 
-var User = mongoose.model('User', userSchema);
+var User = mongoose.model('User', UserSchema);
 module.exports = User;

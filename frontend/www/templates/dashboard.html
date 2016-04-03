@@ -1,0 +1,12 @@
+<ion-view view-title="Master Your Domain">
+  <ion-content>
+	  	<div class="card" ng-repeat="content in dashboardContent" href="#/app/dashboard/{{content.id}}">
+		  	<div class="item item-text-wrap">
+		    	{{content.title}}
+		  	</div>
+		  	<div class="item item-divider">
+    			{{content.completedBy || content.author}}, {{content.date}}
+  			</div>
+		</div>
+  </ion-content>
+</ion-view>
