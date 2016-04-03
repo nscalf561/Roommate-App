@@ -1,13 +1,22 @@
-var express = require('express'),
-		app = express(),
-		bodyParser = require('body-parser'),
-		hbs = require('hbs'),
-		mongoose = require('mongoose'), 
-		apiController = require('./controllers/apiController');
+var express 		= require('express'),
+	app 			= express(),
+	bodyParser  	= require('body-parser'),
+	hbs 			= require('hbs'),
+	mongoose 		= require('mongoose'), 
+	apiController 	= require('./controllers/apiController'),
+	passport		= require('passport'),
+	config 			= require('./config/database'),
+	jwt				= require('jwt-simple');
 
 // configures bodyParser (accepts form data)
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
+
+//log to console
+app.use(morgan('dev'));
+
+//use the passport package in our application
+app.use(passport.initialie());
 
 // serves static files from public folder
 app.use(express.static(__dirname + '/public'));
