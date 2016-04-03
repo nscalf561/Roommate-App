@@ -20,8 +20,6 @@ var userList = [
 	}
 ];
 
-
-
 User.create(userList, function(err, users) {
 	console.log("users created", users);
 	var houseList = [

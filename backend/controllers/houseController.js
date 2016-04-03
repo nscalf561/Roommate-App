@@ -1,5 +1,5 @@
-var app = require('../server.js');
-var House = require('../models/house.js');
+var app = require('../server');
+var House = require('../models/house');
 
 var houseController = {
 	//show all page for houses

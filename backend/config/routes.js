@@ -7,7 +7,8 @@ var express = require('express'),
 		mongoose = require('mongoose'), 
 		apiController = require('../controllers/apiController'),
 		houseController = require('../controllers/houseController'),
-		userController = require('../controllers/userController');
+		userController = require('../controllers/userController'),
+		choreController = require('../controllers/choreController');
 
 // API directory
 router.route('/api')
@@ -32,5 +33,16 @@ router.route('/api/households/:id')
 	.get(houseController.showHouse)
 	.delete(houseController.deleteHouse)
 	.put(houseController.updateHouse);
+
+// API Chores
+router.route('/api/households/:id/chores')
+.get(choreController.index)
+// .post(choreController.createChore);
+
+// API Individual Chore
+// router.route('/api/households/:id/chores/:id')
+// .get(choreController.showChore)
+// .delete(choreController.deleteChore)
+// .put(choreController.updateChore);
 
 module.exports = router;

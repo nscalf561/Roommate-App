@@ -1,5 +1,5 @@
 var mongoose = require('mongoose'),
-		House = require('./house.js'),
+		House = require('./house'),
 		Schema = mongoose.Schema;
 
 var UserSchema = new Schema ({

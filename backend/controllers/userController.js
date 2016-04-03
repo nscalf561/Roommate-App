@@ -1,5 +1,5 @@
-var app = require('../server.js');
-var User = require('../models/user.js');
+var app = require('../server');
+var User = require('../models/user');
 
 
 var userController = {
