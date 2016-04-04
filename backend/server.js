@@ -6,7 +6,8 @@ var express 		= require('express'),
 	apiController 	= require('./controllers/apiController'),
 	passport		= require('passport'),
 	config 			= require('./config/database'),
-	jwt				= require('jwt-simple');
+	jwt				= require('jwt-simple'),
+	morgan			= require('morgan'),
 	routes 			= require('./config/routes');
 
 
@@ -18,7 +19,7 @@ app.use(bodyParser.json());
 app.use(morgan('dev'));
 
 //use the passport package in our application
-app.use(passport.initialie());
+app.use(passport.initialize());
 
 // serves static files from public folder
 app.use(express.static(__dirname + '/public'));
@@ -27,7 +28,10 @@ app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'hbs');
 
 // connect to mongo for our database
-mongoose.connect('mongodb://localhost/project4');
+mongoose.connect(config.database);
+
+//pass passort for configuration
+require('./config/passport')(passport);
 
 // var User = require('./models/user.js');
 // var House = require('./models/house.js');
