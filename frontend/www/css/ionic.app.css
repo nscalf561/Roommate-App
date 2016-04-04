@@ -9742,3 +9742,6 @@ a.button {
   opacity: 0.7;
   text-align: right;
   font-weight: normal; }
+
+.item .item-content .sideMenu {
+  background-color: #34495E !important; }
