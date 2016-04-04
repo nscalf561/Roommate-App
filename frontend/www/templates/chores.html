@@ -1,13 +1,12 @@
-<ion-view view-title="Chores"><button class="button button-icon ion-plus" ng-click="showNewMessageModal()"></button>
-      <ion-nav-buttons side="right">
-        <button class="button button-icon ion-plus" ng-click="showNewChoreModal()">
-        </button>
-      </ion-nav-buttons>
+<ion-view view-title="Chores">
+  <button class="button button-icon ion-plus" ng-click="showNewMessageModal()"></button>
+    <ion-nav-buttons side="right">
+      <button class="button button-icon ion-plus" ng-click="showNewChoreModal()">
+      </button>
+    </ion-nav-buttons>
   <ion-content>
-    <ion-list>
-      <ion-item class='item item-button-left item-icon-right' ng-repeat="chore in self.all">
-
-
+    <ion-list id="chores">
+      <ion-item class='item item-button-left item-icon-right' ng-repeat="chore in chores.all">
       	<div class="upvote-buttons" style="color: red">
 	        <button class="button button-icon ion-ios-arrow-thin-down"></button>{{chore.upvotes}}
 	        <button class="button button-icon ion-close ion-ios-arrow-thin-up"></button>
@@ -42,5 +41,5 @@
       </ion-content>
 
     </div>
-  </script>
+    </script>
 

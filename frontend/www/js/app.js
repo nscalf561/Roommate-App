@@ -37,7 +37,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'dashboard.controller
     views: {
       'menuContent': {
         templateUrl: 'templates/chores.html',
-        controller: 'ChoreCtrl'
+        controller: 'ChoreCtrl as chores'
       }
     }
   })
