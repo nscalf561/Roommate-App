@@ -1,15 +1,19 @@
-var express 		= require('express'),
-	app 			= express(),
-	bodyParser  	= require('body-parser'),
-	hbs 			= require('hbs'),
-	mongoose 		= require('mongoose'), 
+var express 			= require('express'),
+	app 						= express(),
+	bodyParser  		= require('body-parser'),
+	hbs 						= require('hbs'),
+	mongoose 				= require('mongoose'), 
 	apiController 	= require('./controllers/apiController'),
-	passport		= require('passport'),
-	config 			= require('./config/database'),
-	jwt				= require('jwt-simple'),
-	morgan			= require('morgan'),
-	routes 			= require('./config/routes');
+	passport				= require('passport'),
+	config 					= require('./config/database'),
+	jwt							= require('jwt-simple'),
+	morgan					= require('morgan'),
+	cors 						= require('cors'),
+	routes 					= require('./config/routes');
 
+// Allows for cross origin resource sharing, THIS MUST BE ON TOP
+// Chores data is sent in the response object, 'object.data.chores[0]'
+app.use(cors());
 
 // configures bodyParser (accepts form data)
 app.use(bodyParser.urlencoded({extended: true}));

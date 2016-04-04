@@ -1,12 +1,12 @@
 var mongoose = require('mongoose'),
-		User = require('./User'),
+		// User = require('./User'),
 		// Chore = require('./Chore'),
 		Schema = mongoose.Schema;
 
 var HouseSchema = new Schema ({
 	name: String, 
 	address: String,
-	users: [], 
+	// users: [], 
 	chores: [{
 		task: String,
 		isCompleted: Boolean,

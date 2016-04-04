@@ -1,18 +1,18 @@
-var 	express = require('express'),
-		router = express.Router(),
-		path = require('path'),
-		app = express(),
-		bodyParser = require('body-parser'),
-		hbs = require('hbs'),
-		mongoose = require('mongoose'), 
-		apiController = require('../controllers/apiController'),
-		houseController = require('../controllers/houseController'),
-		userController = require('../controllers/userController'),
-		choreController = require('../controllers/choreController'),
-		passport		= require('passport'),
-		jwt				= require('jwt-simple'),
-		config 			= require('./database'),
-		User = mongoose.model('User');
+var express           = require('express'),
+		router            = express.Router(),
+		path              = require('path'),
+		app               = express(),
+		bodyParser        = require('body-parser'),
+		hbs               = require('hbs'),
+		mongoose          = require('mongoose'), 
+		apiController     = require('../controllers/apiController'),
+		houseController   = require('../controllers/houseController'),
+		userController    = require('../controllers/userController'),
+		choreController   = require('../controllers/choreController'),
+		passport          = require('passport'),
+		jwt	              = require('jwt-simple'),
+		config            = require('./database'),
+		User              = mongoose.model('User');
 
 // API directory
 router.route('/api')

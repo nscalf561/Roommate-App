@@ -11,6 +11,8 @@ var choreController = {
 			if (err) {
 				console.log("error has occurred finding the house", err);
 			} else {
+				// console.log(house.chores);
+				console.log(typeof house.chores);
 				console.log(house.chores);
 				res.json({chores: house.chores});
 			}

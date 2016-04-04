@@ -1,6 +1,6 @@
 angular.module('chore.controller', ['ionic'])
 
-.controller('ChoreCtrl', function($scope, $ionicModal, $http) {
+.controller('ChoreCtrl', function($scope, $ionicModal, $http, $timeout) {
   // $scope.choreContent = [
   // 	{
 		// 	task: 'Clean Kitchen', 
@@ -51,21 +51,21 @@ angular.module('chore.controller', ['ionic'])
 
   getChores();
 
+  $scope.chores = self.all;
+
 
   function getChores() {
-  	console.log("ABSDJADBAJSDBNAKJSDBAKJSDBASJDB HERE WE ARE")
   	$http
-  		.get('http://localhost:3000/api/households/5701abf21ba282f3299ad64c/chores')
+  		.get('http://localhost:3000/api/households/5701867a0f28973d75003de3/chores')
   		.then(function(res){
-  			console.log("sdjkfnjdsknfkjsdnfjkds", res);
-  			self.all.push(res.data.chores);
+				self.all = res.data.chores;
   		});
   }
 
 
 
 	// New Chore Modal Functions
-  // Creates and loads the new message modal
+  // Creates and loads the new chore modal
   $ionicModal.fromTemplateUrl('new-chore.html', function(modal) {
     $scope.choreModal = modal;
   }, {
