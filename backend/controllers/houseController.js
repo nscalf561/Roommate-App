@@ -19,11 +19,12 @@ var houseController = {
 			address: req.body.address
 		});
 
-		newHouse.save(function(err) {
+		newHouse.save(function(err, newHouse) {
 			if (err) {
 				res.status(500).send();
 				console.log("There was an error saving the household:", err);
 			} else {
+				res.json({house: newHouse});
 				console.log("The new household was successfully saved.");
 			}
 		});
