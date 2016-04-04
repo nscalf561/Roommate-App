@@ -53,9 +53,9 @@ angular.module('chore.controller', ['ionic'])
 
 
   function getChores() {
-  	console.log("ABSDJADBAJSDBNAKJSDBAKJSDBASJDB HERE WE ARE")
+  	console.log("ABSDJADBAJSDBNAKJSDBAKJSDBASJDB HERE WE ARE");
   	$http
-  		.get('http://localhost:3000/api/households/5701abf21ba282f3299ad64c/chores')
+  		.get('http://localhost:3000/api/households/5701867a0f28973d75003de3/chores')
   		.then(function(res){
   			console.log("sdjkfnjdsknfkjsdnfjkds", res);
   			self.all.push(res.data.chores);
