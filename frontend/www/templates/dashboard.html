@@ -5,7 +5,7 @@
 		    	{{content.title}}
 		  	</div>
 		  	<div class="item item-divider">
-    			{{content.completedBy || content.author}}, {{content.date}}
+    			{{content.completedBy || content.author}}, <span am-time-ago="content.date"></span>
   			</div>
 		</div>
   </ion-content>
