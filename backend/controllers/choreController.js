@@ -6,7 +6,7 @@ var choreController = {
 
 	// Show all chores
 	index : function (req, res) {
-		House.findOne({_id: req.params.id}, function(err, house) {
+		House.findOne({_id: req.params.hid}, function(err, house) {
 			console.log(house);
 			if (err) {
 				console.log("error has occurred finding the house", err);
@@ -21,7 +21,7 @@ var choreController = {
 	createChore : function (req, res) {
 		
 		// House that we're adding the chore to
-		House.findOne({_id: req.params.id}, function(err, house) {
+		House.findOne({_id: req.params.hid}, function(err, house) {
 			console.log(house.chores);
 			if (err) {
 				console.log("An error has occurred while finding the house:", err);
