@@ -35,7 +35,7 @@ router.route('/api/households/:id')
 	.put(houseController.updateHouse);
 
 // API Chores
-router.route('/api/households/:id/chores')
+router.route('/api/households/:hid/chores')
 .get(choreController.index)
 .post(choreController.createChore);
 
