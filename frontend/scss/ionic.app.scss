@@ -7,13 +7,13 @@ For example, you might change some of the default colors:
 $light:                           #fff !default;
 $stable:                          #f8f8f8 !default;
 $positive:                        #387ef5 !default;
-$calm:                            #11c1f3 !default;
 $energized:                       #ffc900 !default;
 $assertive:                       #ef473a !default;
 $royal:                           #886aea !default;
 $dark:                            #444 !default;
 */
 
+$calm:                            #ECF0F1 !default;
 $balanced:                        #34495E !default;
 
 // The path for our ionicons font files, relative to the built CSS in www/css
@@ -31,9 +31,8 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 }
 
 .item-divider {
-	background-color: $balanced;
-	color: white;
-	opacity: 0.7;
+	background-color: $calm;
+	color: $balanced;
 	text-align: right;
 	font-weight:  normal;
 	
@@ -41,4 +40,23 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 .item .item-content .sideMenu {
 	background-color: $balanced !important;
+}
+
+.balancedBackground {
+	background-color: $balanced;
+	border: none;
+}
+
+.button-calm {
+	color: $balanced !important;
+}
+.white-text {
+	color: white;
+}
+.balanced-text {
+	color: $balanced;
+}
+
+.button.button-positive {
+	background-color: $balanced;
 }
