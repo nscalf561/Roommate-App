@@ -36,7 +36,7 @@ User.create(userList, function(err, users) {
 				completedBy: "Jessie"
 			}]
 		};
-	console.log('about ot make houses');
+	console.log('about to make houses');
 	//create house
 
 	var house = new House(houseList);
