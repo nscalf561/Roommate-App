@@ -1,0 +1,51 @@
+<ion-view view-title="Announcements"> 
+
+  <ion-nav-buttons side="right">
+    <button class="button button-icon ion-plus" ng-click="showNewAnnouncementModal()">
+    </button>
+  </ion-nav-buttons>
+
+  <ion-content>
+    <div class="announcementDiv">
+      <div class="card" ng-repeat="announcement in announcements | orderBy: 'createdAt'">
+      <!-- will later use this setup when using dynamic data -->
+      <!--       <ion-item ng-repeat="announcement in announcements.all | orderBy: 'createdAt'"> -->
+        <div class="item item-text-wrap">
+          <div class="author section">{{announcement.author}}</div>
+          <br>
+          <div class="content section">{{announcement.content}}</div>
+          <br>
+          <div class="date" am-time-ago="announcement.createdAt"></div>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>
+
+
+
+<script id="new-announcement.html" type="text/ng-template">
+<div class="modal">
+
+  // Modal header bar
+  <ion-header-bar class="bar-secondary">
+    <h1 class="title">Create New Announcement</h1>
+    <button class="button button-clear button-balanced" ng-click="closeNewAnnouncementModal()">Cancel</button>
+  </ion-header-bar>
+
+  // Modal content 
+  <ion-content>
+    <form ng-submit="createAnnouncement(newAnnouncement)">
+      <div class="list">
+        <label class="item item-input">
+          <textarea rows="5" placeholder="What's your announcement?" ng-model="newAnnouncement.content" ng-maxlength="140" ng-minlength="4"></textarea>
+        </label>
+      </div>
+      <div class="padding">
+        <button type="submit" class="button button-block button-block button-balanced">Post Announcement</button>
+      </div>
+    </form>
+  </ion-content>
+
+</div>
+</script>
