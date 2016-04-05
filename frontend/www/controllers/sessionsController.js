@@ -1,6 +1,6 @@
 angular.module('sessions.controller', ['ionic'])
  
-.controller('LoginCtrl', function($scope, AuthService, $ionicPopup, $state) {
+.controller('LoginCtrl', function($rootScope, $scope, AuthService, $ionicPopup, $state) {
   $scope.user = {
     name: '',
     password: ''
@@ -10,6 +10,8 @@ angular.module('sessions.controller', ['ionic'])
     AuthService.login($scope.user).then(function(msg) {
       var payload = AuthService.jwtToJSON();
       if (payload.households.length > 0) {
+        $rootScope.houseId = payload.households[0];
+        $rootScope.userId = payload._id;
         $state.go('app.dashboard');
       } else {
         $state.go('app.households');

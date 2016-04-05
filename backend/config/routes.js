@@ -39,6 +39,7 @@ router.route('/api/users')
 router.route('/api/users/:id')
 	.get(userController.showUser)
   .put(userController.updateUser)
+	// .put(sessionsController.addUserHouse)
 	.delete(userController.deleteUser);
 
 // API Household
