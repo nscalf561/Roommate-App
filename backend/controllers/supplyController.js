@@ -1,13 +1,12 @@
-var app = require('../server');
+var app 		= require('../server');
+var House 	= require('../models/house');
 
-var House = require('../models/House');
 
 var supplyController = {
 
-	// Show all supplies
+	// show all supplies
 	index : function (req, res) {
 		House.findOne({_id: req.params.hid}, function(err, house) {
-			console.log(house);
 			if (err) {
 				console.log("error has occurred finding the house", err);
 			} else {
@@ -16,41 +15,37 @@ var supplyController = {
 		});
 	},
 
-	// Create a new supply
+	// create a new supply
 	createSupply : function (req, res) {
-		
-		// House that we're adding the chore to
+		// find house that we're adding the supply to
 		House.findOne({_id: req.params.hid}, function(err, house) {
-			console.log(house.supplies);
 			if (err) {
 				console.log("An error has occurred while finding the house:", err);
 			} else {
 
-				// Object we're going to save to db
+				// supply object we're going to save to db
 				var newSupply = {
 					item: req.body.item, 
 					createdAt: new Date(),
-					createdBy: "test" //TODO insert current user
+					createdBy: "test" // TODO insert current user
 				};
 
-				// Saves the above object
+				// saves the above supply object
 				house.supplies.push(newSupply);
-
 				house.save(function(err, house) {
 					if (err) {
 						console.log("There was an error saving the supply to the house:", err);
 					} else {
-						console.log(house);
 						res.json({supplies: house.supplies});
 					}
 				});
-
 			}
 		});		
 	},
 
-	showSupply : function (req, res) {
 
+	// show an individual supply
+	showSupply : function (req, res) {
 		House.findOne({_id: req.params.hid}, function (err, house) {
 			if (err) {
 				res.status(500).send();
@@ -65,15 +60,18 @@ var supplyController = {
 				});
 			}
 		});
-
 	},
 
+
+	// delete an individual supply
 	deleteSupply : function (req, res) {
 		House.findOne({_id: req.params.hid}, function (err, house) {
 			if (err) {
 				res.status(500).send();
 				console.log("An error has occurred while finding the house:", err);
 			} else {
+
+				// find the nested supply we want to delete and remove it from the house
 				house.supplies.forEach(function(supply) {
 					if (supply._id == req.params.id) {
 						var indexOfSupply = house.supplies.indexOf(supply);
@@ -81,15 +79,14 @@ var supplyController = {
 					}
 				});
 
+				// save these changes to the house so they persist in the database
 				house.save(function(err, house) {
 					if (err) {
 						console.log("There was an error saving the updated house.supplies array:", err);
 					} else {
-						console.log(house);
 						res.status(400).send();
 					}
 				});
-
 			}
 		});
 	}

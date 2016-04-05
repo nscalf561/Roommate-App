@@ -1,5 +1,6 @@
 var mongoose 	= require('mongoose'),
-		Schema 		= mongoose.Schema;
+	Schema 		= mongoose.Schema;
+
 
 var HouseSchema = new Schema ({
 	name: String, 
@@ -25,6 +26,7 @@ var HouseSchema = new Schema ({
 		purchasedOn: { type: Date }
 	}]
 });
+
 
 var House = mongoose.model('House', HouseSchema);
 module.exports = House;

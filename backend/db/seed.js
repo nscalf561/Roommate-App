@@ -1,29 +1,64 @@
-var User = require('../models/User');
-var House = require('../models/House');
-// var Chore = require('../models/Chore');
-// var HouseUser = require('../models/HouseUser');
-// var HouseChore = require('../models/HouseChore');
-var mongoose = require('mongoose');
+var mongoose 	= require('mongoose');
+var User 			= mongoose.model('User');
+var House 		= mongoose.model('House');
+var HouseUser = mongoose.model('HouseUser');
+
 mongoose.connect('mongodb://localhost/project4');
-// console.log("connected to db");
 
-User.remove({}, function(err, users){});
-House.remove({}, function(err, houses){});
 
+// remove all existing users and houses from db
+User.remove({}, function(err, users){
+	if (err) {
+		console.log("error removing users:", err);
+		process.exit();
+		mongoose.connection.close();
+	} else {
+		console.log("users deleted");
+	}
+});
+House.remove({}, function(err, houses){
+	if (err) {
+		console.log("error removing houses:", err);
+		process.exit();
+		mongoose.connection.close();
+	} else {
+		console.log("houses deleted");
+	}
+});
+// clear HouseUser join table
+HouseUser.remove({}, function(err, houseUsers){
+	if (err) {
+		console.log("error clearing houseUser join table:", err);
+		process.exit();
+		mongoose.connection.close();
+	} else {
+		console.log("houseUser join table cleared");
+	}
+});
+
+
+// create list of users to be seeded
 var userList = [
 	{
-		name: "Jessie",
-		email: "cheese@cheeseLovers.net"
+		name: {
+			type: "Jessie",
+		},
+		password: {}// TODO
 	},
 	{
-		name: "Caleb",
-		email: "caleb@caleb.com"
+		name: {
+			type: "Jessie",
+		},
+		password: {}// TODO
 	}
 ];
-console.log("outside user list");
+
+
+// create above list of users
 User.create(userList, function(err, users) {
 	console.log("users created", users);
-	
+
+	// create list of houses to be seeded
 	var houseList = 
 		{
 			name: "Monastery",
@@ -36,66 +71,21 @@ User.create(userList, function(err, users) {
 				completedBy: "Jessie"
 			}]
 		};
-	console.log('about to make houses');
-	//create house
 
-	var house = new House(houseList);
-		var house1 = house;
-		var user1 = users[0];
-		var user2 = users[1];
+	var house 	= new House(houseList);
+	var house1 	= house;
+	var user1 	= users[0];
+	var user2 	= users[1];
 
+	// move users into designated households
+	house1.users.push(users[0]);
+	house1.users.push(users[1]);
+	console.log(house1.users);
 
-		house1.users.push(users[0]);
-		house1.users.push(users[1]);
-		console.log(house1.users);
-
+	// save 
 	house.save(function(err, house) {
-		console.log(house);
+	console.log(house);
 	});	
 
 });
 
-
-
-// User.remove({}, function (err) {
-// 	if (err) {
-// 		console.log("error removing user:", err);
-// 		process.exit();
-// 		mongoose.connection.close();
-// 	} else {
-// 		console.log("users deleted");
-// 		User.create(userList, function (err, users) {
-// 			if (err) {
-// 				console.log("error creating new user:", err);
-// 				process.exit();
-// 				mongoose.connection.close();
-// 			} else {
-// 				var user1 = userList[0];
-// 				var user2 = userList[1];
-
-
-// 				// console.log("Users reseeded");
-// 			}
-// 		});
-// 	}
-// });
-
-// House.remove({}, function (err) {
-// 	if (err) {
-// 		console.log("error removing user:", err);
-// 		process.exit();
-// 		mongoose.connection.close();
-// 	} else {
-// 		console.log("houses deleted");
-// 		House.create(houseList, function (err, houses) {
-// 			if (err) {
-// 				console.log("error creating new user:", err);
-// 				process.exit();
-// 				mongoose.connection.close();
-// 			} else {
-// 			console.log('Houses reseeded');		
-// 			console.log("first user in house:", houses[0].users[0].name);
-// 		}
-// 	});
-// 	}
-// });

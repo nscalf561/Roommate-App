@@ -1,35 +1,29 @@
-var app = require('../server');
-// var Chore = require('../models/Chore');
-var House = require('../models/House');
+var app 		= require('../server');
+var House 	= require('../models/house');
+
 
 var choreController = {
 
-	// Show all chores
+	// show all chores
 	index : function (req, res) {
 		House.findOne({_id: req.params.hid}, function(err, house) {
-			console.log(house);
 			if (err) {
 				console.log("error has occurred finding the house", err);
 			} else {
-				// console.log(house.chores);
-				console.log(typeof house.chores);
-				console.log(house.chores);
 				res.json({chores: house.chores});
 			}
 		});
 	},
 
-	// Create a new chore
+	// create a new chore
 	createChore : function (req, res) {
-		
-		// House that we're adding the chore to
+		// find the house that we're adding the chore to
 		House.findOne({_id: req.params.hid}, function(err, house) {
-			console.log(house.chores);
 			if (err) {
 				console.log("An error has occurred while finding the house:", err);
 			} else {
 
-				// Object we're going to save to db
+				// object we're going to save to the house
 				var newChore = {
 					task: req.body.task, 
 					isCompleted: req.body.isCompleted,
@@ -39,24 +33,22 @@ var choreController = {
 					comments: req.body.comments
 				};
 
-				// Saves the above object
+				// save the above object
 				house.chores.push(newChore);
-
 				house.save(function(err, house) {
 					if (err) {
 						console.log("There was an error saving the chore to the house:", err);
 					} else {
-						console.log(house);
 						res.json({chores: house.chores});
 					}
 				});
-
 			}
 		});		
 	},
 
-	showChore : function (req, res) {
 
+	// show an individual chore
+	showChore : function (req, res) {
 		House.findOne({_id: req.params.hid}, function (err, house) {
 			if (err) {
 				res.status(500).send();
@@ -71,9 +63,10 @@ var choreController = {
 				});
 			}
 		});
-
 	},
 
+
+	// delete an individual chore
 	deleteChore : function (req, res) {
 		House.findOne({_id: req.params.hid}, function (err, house) {
 			if (err) {
@@ -91,14 +84,13 @@ var choreController = {
 					if (err) {
 						console.log("There was an error saving the updated house.chores array:", err);
 					} else {
-						console.log(house);
 						res.status(400).send();
 					}
 				});
-
 			}
 		});
 	}
 };
+
 
 module.exports = choreController;

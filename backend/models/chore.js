@@ -1,5 +1,6 @@
 var mongoose = require('mongoose'),
-		Schema = mongoose.Schema;
+		Schema   = mongoose.Schema;
+
 
 var ChoreSchema = new Schema ({
 	task: String,
@@ -9,6 +10,7 @@ var ChoreSchema = new Schema ({
 	completedBy: String,
 	comments: [String]
 });
+
 
 var Chore = mongoose.model('Chore', ChoreSchema);
 module.exports = Chore;

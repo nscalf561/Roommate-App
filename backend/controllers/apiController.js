@@ -1,5 +1,6 @@
 var app = require('../server');
 
+
 var apiController = {
 
 	index: function (req, res) {
@@ -32,7 +33,13 @@ var apiController = {
       {method: "GET", path: "/api/households/:hid/chores", description: "See a list of all household chores"},
       {method: "POST", path: "/api/households/:hid/chores", description: "Create a new chore for a particular household"},
       {method: "GET", path: "/api/households/:hid/chores/:id", description: "see individual chore details"},
-      {method: "DELETE", path: "/api/households/:hid/chores/:id", description: "Delete an individual chore"}      
+      {method: "DELETE", path: "/api/households/:hid/chores/:id", description: "Delete an individual chore"},      
+      
+      //supply endpoints
+      {method: "GET", path: "/api/households/:hid/supplies", description: "See a list of all household supplies"},
+      {method: "POST", path: "/api/households/:hid/supplies", description: "Create a new supply for a particular household"},
+      {method: "GET", path: "/api/households/:hid/supplies/:id", description: "see individual supply details"},
+      {method: "DELETE", path: "/api/households/:hid/supplies/:id", description: "Delete an individual supply"},
       ]
 		});
 	}
