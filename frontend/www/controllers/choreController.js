@@ -1,6 +1,6 @@
 angular.module('chore.controller', ['ionic'])
 
-.controller('ChoreCtrl', function($scope, $ionicModal, $http, $timeout) {
+.controller('ChoreCtrl', function($rootScope, $scope, $ionicModal, $http, $timeout) {
 
   var self = this;
   self.all = [];
@@ -15,7 +15,7 @@ angular.module('chore.controller', ['ionic'])
 
   function getChores() {
   	$http
-  		.get('http://localhost:3000/api/households/5703066c1d3b3865b8727c11/chores')
+  		.get('http://localhost:3000/api/households/' + $rootScope.houseId + '/chores')
   		.then(function(res){
 				self.all = res.data.chores;
   		});
