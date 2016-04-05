@@ -1,15 +1,17 @@
 angular.module('dashboard.controller', ['angularMoment'])
 
-.controller('DashboardCtrl', function($scope, $http, AuthService) {
+.controller('DashboardCtrl', function($rootScope, $scope, $http, AuthService) {
 
 var payload = AuthService.jwtToJSON();
 //TODO
   $http
-  	.get('http://localhost:3000/api/households/' + payload.households[0])
+  	.get('http://localhost:3000/api/households/' + $rootScope.houseId)
   	.then(function(res) {
   	   // $scope.supplies = res.data.house[0].supplies;
-  	   $scope.chores = res.data.house[0].chores;
-  	   $scope.announcements= res.data.house[0].announcements;
+       var house = res.data.house[0];
+       // console.log(res.data);
+  	   $scope.chores = house.chores;
+  	   // $scope.announcements= res.data.house[0].announcements;
   	});
 
   // $scope.dashboardContent = [
