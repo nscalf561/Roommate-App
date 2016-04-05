@@ -1,13 +1,12 @@
-var app = require('../server');
+var app 		= require('../server');
+var House 	= require('../models/house');
 
-var House = require('../models/House');
 
 var announcementController = {
 
-	// Show all announcements
+	// show all announcements
 	index : function (req, res) {
 		House.findOne({_id: req.params.hid}, function(err, house) {
-			console.log(house);
 			if (err) {
 				console.log("error has occurred finding the house", err);
 			} else {
@@ -16,40 +15,38 @@ var announcementController = {
 		});
 	},
 
-	// Create a new announcement
+
+	// create a new announcement
 	createAnnouncement : function (req, res) {
-		
-		// House that we're adding the chore to
+		// find the house that we're adding the chore to
 		House.findOne({_id: req.params.hid}, function(err, house) {
 			if (err) {
 				console.log("An error has occurred while finding the house:", err);
 			} else {
 
-				// Object we're going to save to db
+				// object we're going to save to db
 				var newAnnouncement = {
 					content: req.body.content, 
-					author: "test", //need to get this from the jwt
+					author: "test", // TODO - need to get this from the jwt
 					createdAt: new Date()
 				};
 
-				// Saves the above object
+				// saves the above object
 				house.announcements.push(newAnnouncement);
-
 				house.save(function(err, house) {
 					if (err) {
 						console.log("There was an error saving the announcement to the house:", err);
 					} else {
-						console.log(house);
 						res.json({announcements: house.announcements});
 					}
 				});
-
 			}
 		});		
 	},
 
-	showAnnouncement : function (req, res) {
 
+	// show an individual announcement
+	showAnnouncement : function (req, res) {
 		House.findOne({_id: req.params.hid}, function (err, house) {
 			if (err) {
 				res.status(500).send();
@@ -64,32 +61,33 @@ var announcementController = {
 				});
 			}
 		});
-
 	},
 
+
+	// delete an individual announcement
 	deleteAnnouncement : function (req, res) {
 		House.findOne({_id: req.params.hid}, function (err, house) {
 			if (err) {
 				res.status(500).send();
 				console.log("An error has occurred while finding the house:", err);
 			} else {
+
+				// find the nested announcement we want to delete and remove it from the house
 				house.announcements.forEach(function(announcement) {
 					if (announcement._id == req.params.id) {
-						console.log(announcement._id);
 						var indexOfAnnouncement = house.announcements.indexOf(announcement);
 						house.announcements.splice(indexOfAnnouncement, 1);
 					}
 				});
 
+				// save these changes to the house so they persist in the database
 				house.save(function(err, house) {
 					if (err) {
 						console.log("There was an error saving the updated house.announcements array:", err);
 					} else {
-						console.log(house);
 						res.status(400).send();
 					}
 				});
-
 			}
 		});
 	}

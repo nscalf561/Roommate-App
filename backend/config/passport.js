@@ -1,10 +1,11 @@
 var JwtStrategy = require('passport-jwt').Strategy;
- 
+
 var mongoose = require('mongoose');
 
 // load up the user model
 var User = mongoose.model('User');
-var config = require('../config/database'); // get db config file
+// get db config file
+var config = require('../config/database');
  
 module.exports = function(passport) {
   var opts = {};

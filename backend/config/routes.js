@@ -118,7 +118,7 @@ router.route('/api/households')
 	.post(houseController.createHouse);
 
 // API Individal Household
-router.route('/api/households/:id')
+router.route('/api/households/:hid')
 	.get(houseController.showHouse)
 	.delete(houseController.deleteHouse)
 	.put(houseController.updateHouse);
