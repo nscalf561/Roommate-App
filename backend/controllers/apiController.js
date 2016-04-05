@@ -14,6 +14,7 @@ var apiController = {
       //user endpoints
       {method: "GET", path: "/api/users", description: "See a list of all users"},
       {method: "GET", path: "/api/users/:id", description: "See individual user details"},
+      {method: "PUT", path: "/api/users/:id", description: "Update an individual user"},
       {method: "DELETE", path: "/api/users/:id", description: "Delete an individual user"},
 
       //household endpoints

@@ -38,6 +38,7 @@ router.route('/api/users')
 // API Individual User
 router.route('/api/users/:id')
 	.get(userController.showUser)
+  .put(userController.updateUser)
 	.delete(userController.deleteUser);
 
 // API Household
