@@ -1,7 +1,5 @@
-var mongoose = require('mongoose'),
-		// User = require('./User'),
-		// Chore = require('./Chore'),
-		Schema = mongoose.Schema;
+var mongoose 	= require('mongoose'),
+		Schema 		= mongoose.Schema;
 
 var HouseSchema = new Schema ({
 	name: String, 

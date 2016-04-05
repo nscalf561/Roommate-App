@@ -1,12 +1,9 @@
 angular.module('dashboard.controller', ['angularMoment'])
 
-.controller('DashboardCtrl', function($scope, $http) {
+.controller('DashboardCtrl', function($scope, $http, AuthService) {
 
-var payload = window.localStorage.yourTokenKey;
-    payload = payload.split('.')[1];
-    payload = window.atob(payload);
-    payload = JSON.parse(payload);
-
+var payload = AuthService.jwtToJSON();
+//TODO
   $http
   	.get('http://localhost:3000/api/households/' + payload.households[0])
   	.then(function(res) {

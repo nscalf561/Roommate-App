@@ -36,9 +36,6 @@ mongoose.connect(config.database);
 //pass passort for configuration
 require('./config/passport')(passport);
 
-// var User = require('./models/user.js');
-// var House = require('./models/house.js');
-
 app.use(routes);
 // running on port 3000s
 app.listen(3000, function(){
