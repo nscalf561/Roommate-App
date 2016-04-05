@@ -1,6 +1,7 @@
 var app 	= require('../server.js'),
-	House 	= require('../models/house'),
-	User 	= require('../models/user');
+	// House 	= require('../models/house'),
+	// User 	= require('../models/user'),
+	HouseUser = require('../models/houseUser');
 
 var houseuserController = {
 	showHouseUser : function (req, res) {
