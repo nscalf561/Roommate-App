@@ -8,8 +8,10 @@ var express 		= require('express'),
 	config 			= require('./config/database'),
 	jwt				= require('jwt-simple'),
 	morgan			= require('morgan'),
+	cors 			= require('cors'),
 	routes 			= require('./config/routes');
 
+app.use(cors());
 
 // configures bodyParser (accepts form data)
 app.use(bodyParser.urlencoded({extended: true}));

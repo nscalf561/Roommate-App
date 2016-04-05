@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'sessions.controller', 'dashboard.controller', 'chore.controller', 'bill.controller'])
+angular.module('starter', ['ionic', 'dashboard.controller', 'chore.controller', 'bill.controller'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -25,11 +25,50 @@ angular.module('starter', ['ionic', 'sessions.controller', 'dashboard.controller
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
 
-    .state('app', {
+  .state('app', {
     url: '/app',
     abstract: true,
     templateUrl: 'templates/menu.html',
-    controller: 'SessionsCtrl'
+  })
+
+  .state('app.login', {
+    url: '/login', 
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/login.html',
+        controller: 'LoginCtrl'
+      }
+    }
+  })
+
+  .state('app.register', {
+    url: '/logout',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/register.html',
+        controller: 'RegisterCtrl'
+      }
+    }
+  })
+
+  .state('app.inside', {
+    url: '/inside',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/inside.html',
+        controller: 'InsideCtrl'
+      }
+    }
+  })
+
+  .state('app.dashboard', {
+    url: '/dashboard',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/dashboard.html',
+        controller: 'DashboardCtrl'
+      }
+    }
   })
 
   .state('app.chores', {
@@ -50,54 +89,20 @@ angular.module('starter', ['ionic', 'sessions.controller', 'dashboard.controller
         controller: 'BillCtrl'
       }
     }
-  })
+  });
 
-  .state('app.login', {
-    url: '/login', 
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/login.html',
-        controller: 'SessionsCtrl'
-      }
-    }
-  })
-
-  // .state('app.search', {
-  //   url: '/search',
-  //   views: {
-  //     'menuContent': {
-  //       templateUrl: 'templates/search.html'
-  //     }
-  //   }
-  // })
-
-  // .state('app.browse', {
-  //     url: '/browse',
-  //     views: {
-  //       'menuContent': {
-  //         templateUrl: 'templates/browse.html'
-  //       }
-  //     }
-  //   })
-    .state('app.dashboard', {
-      url: '/dashboard',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/dashboard.html',
-          controller: 'DashboardCtrl'
-        }
-      }
-    });
-
-  // .state('app.single', {
-  //   url: '/playlists/:playlistId',
-  //   views: {
-  //     'menuContent': {
-  //       templateUrl: 'templates/playlist.html',
-  //       controller: 'PlaylistCtrl'
-  //     }
-  //   }
-  // });
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/login');
+})
+
+.run(function ($rootScope, $state, AuthService, AUTH_EVENTS) {
+  $rootScope.$on('$stateChangeStart', function (event,next, nextParams, fromState) {
+    if (!AuthService.isAuthenticated()) {
+      console.log(next.name);
+      if (next.name !== 'app.login' && next.name !== 'app.register') {
+        event.preventDefault();
+        $state.go('app.login');
+      }
+    }
+  });
 });
