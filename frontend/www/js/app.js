@@ -30,6 +30,7 @@ angular.module('starter', ['ionic', 'dashboard.controller', 'chore.controller', 
     url: '/app',
     abstract: true,
     templateUrl: 'templates/menu.html',
+    controller: 'LogoutCtrl'
   })
 
   .state('app.login', {
@@ -52,15 +53,15 @@ angular.module('starter', ['ionic', 'dashboard.controller', 'chore.controller', 
     }
   })
 
-  .state('app.inside', {
-    url: '/inside',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/inside.html',
-        controller: 'InsideCtrl'
-      }
-    }
-  })
+  // .state('app.inside', {
+  //   url: '/inside',
+  //   views: {
+  //     'menuContent': {
+  //       templateUrl: 'templates/inside.html',
+  //       controller: 'InsideCtrl'
+  //     }
+  //   }
+  // })
 
   .state('app.dashboard', {
     url: '/dashboard',

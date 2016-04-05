@@ -8,7 +8,7 @@ angular.module('starter')
  
   $scope.login = function() {
     AuthService.login($scope.user).then(function(msg) {
-      $state.go('inside');
+      $state.go('app.households');
     }, function(errMsg) {
       var alertPopup = $ionicPopup.alert({
         title: 'Login failed!',
@@ -40,7 +40,7 @@ angular.module('starter')
   };
 })
  
-.controller('InsideCtrl', function($scope, AuthService, API_ENDPOINT, $http, $state) {
+.controller('LogoutCtrl', function($scope, AuthService, API_ENDPOINT, $http, $state) {
   $scope.destroySession = function() {
     AuthService.logout();
   };
