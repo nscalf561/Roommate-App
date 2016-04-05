@@ -1,18 +1,18 @@
 var express                = require('express'),
-		router                 = express.Router(),
-		path                   = require('path'),
-		app                    = express(),
-		bodyParser             = require('body-parser'),
-		hbs                    = require('hbs'),
-		mongoose               = require('mongoose'), 
-		apiController          = require('../controllers/apiController'),
-		houseController        = require('../controllers/houseController'),
-		userController         = require('../controllers/userController'),
-		choreController        = require('../controllers/choreController'),
-    announcementController = require('../controllers/announcementController'),
-		supplyController       = require('../controllers/supplyController'),
-    sessionsController     = require('../controllers/sessionsController'),
-		User                   = mongoose.model('User');
+	router                 = express.Router(),
+	path                   = require('path'),
+	app                    = express(),
+	bodyParser             = require('body-parser'),
+	hbs                    = require('hbs'),
+	mongoose               = require('mongoose'), 
+	apiController          = require('../controllers/apiController'),
+	houseController        = require('../controllers/houseController'),
+	userController         = require('../controllers/userController'),
+	choreController        = require('../controllers/choreController'),
+	announcementController = require('../controllers/announcementController'),
+	supplyController       = require('../controllers/supplyController'),
+	sessionsController     = require('../controllers/sessionsController'),
+	User                   = mongoose.model('User');
 
 
 // API directory
