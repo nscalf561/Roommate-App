@@ -10,6 +10,7 @@ var choreController = {
 			if (err) {
 				console.log("error has occurred finding the house", err);
 			} else {
+				console.log(house);
 				res.json({chores: house.chores});
 			}
 		});
