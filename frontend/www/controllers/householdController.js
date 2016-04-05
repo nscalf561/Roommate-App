@@ -1,6 +1,6 @@
 angular.module('household.controller', ['ionic'])
 
-.controller('HouseholdCtrl', function($scope, $ionicModal, $ionicPopup, $http) {
+.controller('HouseholdCtrl', function($rootScope, $scope, $ionicModal, $ionicPopup, $http) {
 
 	var self = this;
 	self.all = [];
@@ -16,7 +16,7 @@ angular.module('household.controller', ['ionic'])
 
 	$scope.getHouseholds = function () {
 		$http
-			.get('http://localhost:3000//api/households')
+			.get('http://localhost:3000/api/households')
 			.then(function(err, res) {
 				if (err) {
 					console.log('error', err);
@@ -38,11 +38,25 @@ angular.module('household.controller', ['ionic'])
 		console.log('Need to build functionality to create household and add current user to it.', newHousehold);
 	};
 
+
+
 	$scope.joinHousehold = function (household) {
-
+		console.log(household);
+		var houseAndUserId = {
+				userId : $rootScope.userId,
+				houseId : $rootScope.houseId
+			};
+		$http
+			.post('http://localhost:3000/api/houseuser')
+			.then(function(err, res) {
+				if (err) {
+					console.log("Error:", err);
+				} else {
+					res.json(houseAndUserId);
+				}
+			});
 	};
-
-
+	
 
 
 	//Popup alert if user has not filled out all portions of the new household form

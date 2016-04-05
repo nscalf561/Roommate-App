@@ -1,4 +1,4 @@
-var express                = require('express'),
+var express              = require('express'),
 	router                 = express.Router(),
 	path                   = require('path'),
 	app                    = express(),
@@ -10,9 +10,10 @@ var express                = require('express'),
 	userController         = require('../controllers/userController'),
 	choreController        = require('../controllers/choreController'),
 	announcementController = require('../controllers/announcementController'),
+	houseuserController    = require('../controllers/houseuserController'),
 	supplyController       = require('../controllers/supplyController'),
 	sessionsController     = require('../controllers/sessionsController'),
-	HouseUser			   = mongoose.model('HouseUser'),
+	HouseUser			   			 = mongoose.model('HouseUser'),
 	User                   = mongoose.model('User');
 
 
