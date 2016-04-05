@@ -1,5 +1,5 @@
 var app 			= require('../server'),
-		User 			= require('../models/User'),
+		User 			= require('../models/user'),
 		passport  = require('passport'),
 		jwt	      = require('jwt-simple'),
 		config    = require('../config/database');

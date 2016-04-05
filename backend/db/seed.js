@@ -1,7 +1,7 @@
 var mongoose 	= require('mongoose');
-var User 			= mongoose.model('User');
-var House 		= mongoose.model('House');
-var HouseUser = mongoose.model('HouseUser');
+var User 		= require('../models/user');
+var House 		= require('../models/house');
+var HouseUser 	= require('../models/houseUser');
 
 mongoose.connect('mongodb://localhost/project4');
 
