@@ -21,6 +21,7 @@ angular.module('household.controller', ['ionic'])
 
 	$scope.joinHousehold = function (household) {
 		console.log('Build functionality to have user join ', household);
+		console.log('current user', window);
 	};
 
 

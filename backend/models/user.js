@@ -11,7 +11,8 @@ var UserSchema = new Schema ({
 	password: {
 		type: String,
 		required: true
-	}
+	},
+    households: [String]
 });
 
 UserSchema.pre('save', function (next) {

@@ -4,6 +4,15 @@ angular.module('starter')
   var LOCAL_TOKEN_KEY = 'yourTokenKey';
   var isAuthenticated = false;
   var authToken;
+
+  var jwtToJSON = function() {
+    var payload = window.localStorage.yourTokenKey;
+    payload = payload.split('.')[1];
+    payload = window.atob(payload);
+    payload = JSON.parse(payload);
+
+    return payload;
+  };
  
   function loadUserCredentials() {
     var token = window.localStorage.getItem(LOCAL_TOKEN_KEY);
@@ -67,6 +76,7 @@ angular.module('starter')
     login: login,
     register: register,
     logout: logout,
+    jwtToJSON: jwtToJSON,
     isAuthenticated: function() {return isAuthenticated;},
   };
 })
