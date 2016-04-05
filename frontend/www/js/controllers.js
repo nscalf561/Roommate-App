@@ -8,7 +8,13 @@ angular.module('starter')
  
   $scope.login = function() {
     AuthService.login($scope.user).then(function(msg) {
-      $state.go('app.households');
+      var payload = AuthService.jwtToJSON();
+      console.log(payload);
+      if (payload.households.length > 0) {
+        $state.go('app.dashboard');
+      } else {
+        $state.go('app.households');
+      }
     }, function(errMsg) {
       var alertPopup = $ionicPopup.alert({
         title: 'Login failed!',
