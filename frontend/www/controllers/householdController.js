@@ -2,10 +2,29 @@ angular.module('household.controller', ['ionic'])
 
 .controller('HouseholdCtrl', function($scope, $ionicModal, $ionicPopup, $http) {
 
+	var self = this;
+	self.all = [];
+	self.newHouse = {};
+
+	$scope.houses = self.all;
+
 	$scope.households = [
 		{name: "The Monastery", address: "2335 Warring St, Berkeley CA"},
 		{name: "GA Headquarters", address: "225 Bush St, San Francisco CA"}
 	];
+
+
+	$scope.getHouseholds = function () {
+		$http
+			.get('http://localhost:3000//api/households')
+			.then(function(err, res) {
+				if (err) {
+					console.log('error', err);
+				} else {
+					self.all = res.data.houses;
+				}
+			});
+	};
 
 
 	$scope.createHousehold = function (newHousehold) {
