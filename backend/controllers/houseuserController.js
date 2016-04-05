@@ -3,10 +3,18 @@ var app 	= require('../server.js'),
 	User 	= require('../models/user');
 
 var houseuserController = {
+	showHouseUser : function (req, res) {
+		HouseUser.find({}, function (err, houseusers) {
+			if (err) {
+				res.status(500).send();
+				console.log("There was an error getting all of the occupants:", err);
+			}
+			res.json({houseusers: houseusers});
+		});
+	},
 
 	joinHouse: function(req, res) {
-		
-
+		console.log("user has joined house");
 	}
 
 };

@@ -88,6 +88,7 @@ router.route('/api/households/:hid/supplies/:id')
 
 // API HouseUser
 router.route('/api/houseuser')
+	.get(houseuserController.showHouseUser)
 	.post(houseuserController.joinHouse);
 
 
