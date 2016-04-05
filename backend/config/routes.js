@@ -10,7 +10,8 @@ var express           = require('express'),
 		userController    = require('../controllers/userController'),
 		choreController   = require('../controllers/choreController'),
     announcementController = require('../controllers/announcementController'),
-		passport          = require('passport'),
+		supplyController  = require('../controllers/supplyController'),
+    passport          = require('passport'),
 		jwt	              = require('jwt-simple'),
 		config            = require('./database'),
 		User              = mongoose.model('User');
@@ -144,6 +145,18 @@ router.route('/api/households/:hid/announcements')
   router.route('/api/households/:hid/announcements/:id')
   .get(announcementController.showAnnouncement)
   .delete(announcementController.deleteAnnouncement);
+
+
+// API Supplies
+router.route('/api/households/:hid/supplies')
+  .get(supplyController.index)
+  .post(supplyController.createSupply);
+
+
+// API Individual Supply
+  router.route('/api/households/:hid/supplies/:id')
+  .get(supplyController.showSupply)
+  .delete(supplyController.deleteSupply);
 
 
 module.exports = router;

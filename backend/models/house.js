@@ -6,7 +6,6 @@ var mongoose = require('mongoose'),
 var HouseSchema = new Schema ({
 	name: String, 
 	address: String,
-	// users: [], 
 	chores: [{
 		task: String,
 		isCompleted: Boolean,
@@ -19,6 +18,13 @@ var HouseSchema = new Schema ({
 		content: String,
 		author: String,
 		createdAt: { type: Date, default: new Date()}
+	}],
+	supplies: [{
+		item: String,
+		createdBy: String,
+		createdAt: { type: Date, default: new Date()},
+		purchasedBy: String,
+		purchasedOn: { type: Date }
 	}]
 });
 

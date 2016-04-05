@@ -65,9 +65,10 @@ var choreController = {
 				house.chores.forEach(function(chore) {
 					if (chore._id == req.params.id) {
 						return res.json({chore: chore});
+					} else {
+						res.status(500).send();
 					}
 				});
-				res.json(500).send();
 			}
 		});
 
