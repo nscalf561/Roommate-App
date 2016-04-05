@@ -1,29 +1,14 @@
 <ion-view view-title="Login">
-  <ion-header-bar>
-    <h1 class="title">Login</h1>
-    <div class="buttons">
-      <button class="button button-clear" ng-click="closeLogin()">Close</button>
-    </div>
-  </ion-header-bar>
-  <ion-content class="balancedBackground">
-    <div class="row">
-      <div class="col loginDiv">
-        <form ng-submit="doLogin()">
-          <div class="list">
-            <label class="item item-input">
-              <span class="input-label">Username</span>
-              <input type="text" ng-model="loginData.username">
-            </label>
-            <label class="item item-input">
-              <span class="input-label">Password</span>
-              <input type="password" ng-model="loginData.password">
-            </label>
-            <label class="item balancedBackground">
-              <button class="button button-block button-calm" type="submit">Log in</button>
-            </label>
-          </div>
-        </form>
-      </div>
+  <ion-content class="padding">
+    <div class="list">
+      <label class="item item-input">
+        <input type="text" ng-model="user.name" placeholder="Name">
+      </label>
+      <label class="item item-input">
+        <input type="password" ng-model="user.password" placeholder="Password">
+      </label>
+      <button class="button button-block button-balanced" ng-click="login()">Log in</button>
+      <button class="button button-positive button-clear button-full" ui-sref="app.register">Register now!</button>
     </div>
   </ion-content>
 </ion-view>

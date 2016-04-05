@@ -20,19 +20,19 @@
     <script src="lib/angular-moment/angular-moment.js"></script>
 
     <!-- your app's js -->
-    <script src="controllers/sessionsController.js"></script>  
     <script src="controllers/announcementController.js"></script>   
     <script src="controllers/householdController.js"></script>    
     <script src="controllers/dashboardController.js"></script>
     <script src="controllers/choreController.js"></script>
     <script src="controllers/billController.js"></script>
     <script src="js/app.js"></script>
+    <script src="js/controllers.js"></script>
+    <script src="js/services.js"></script>
+    <script src="js/constants.js"></script>
   </head>
 
-  <body ng-app="starter">
+  <body ng-app="starter" ng-controller="AppCtrl">
     <ion-nav-view></ion-nav-view>
-
-
   </body>
 
 </html>
