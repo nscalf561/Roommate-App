@@ -60,3 +60,38 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .button.button-positive {
 	background-color: $balanced;
 }
+
+
+//announcement
+
+.announcementDiv {
+	.section {
+		margin-bottom: -15px;
+	}
+	.content {
+		margin-left: 5px;
+	}
+	.author {
+		font-weight: bold;
+	}
+	.date {
+		color: gray;
+		text-align: right !important;
+
+	}
+}
+
+
+//dashboard
+.dashboardDiv {
+	.section {
+		margin-bottom: 5px;
+	}
+	.date {
+	}
+	.associatedUser {
+		margin-bottom: -5px;
+		text-align: right !important;
+	}
+}
+

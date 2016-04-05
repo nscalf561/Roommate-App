@@ -56,7 +56,7 @@ angular.module('chore.controller', ['ionic'])
 
   function getChores() {
   	$http
-  		.get('http://localhost:3000/api/households/5701867a0f28973d75003de3/chores')
+  		.get('http://localhost:3000/api/households/5702ea993b5de77d0d190157/chores')
   		.then(function(res){
 				self.all = res.data.chores;
   		});

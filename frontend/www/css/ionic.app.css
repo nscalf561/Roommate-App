@@ -9759,3 +9759,23 @@ a.button {
 
 .button.button-positive {
   background-color: #34495E; }
+
+.announcementDiv .section {
+  margin-bottom: -15px; }
+
+.announcementDiv .content {
+  margin-left: 5px; }
+
+.announcementDiv .author {
+  font-weight: bold; }
+
+.announcementDiv .date {
+  color: gray;
+  text-align: right !important; }
+
+.dashboardDiv .section {
+  margin-bottom: 5px; }
+
+.dashboardDiv .associatedUser {
+  margin-bottom: -5px;
+  text-align: right !important; }
