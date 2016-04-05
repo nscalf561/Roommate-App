@@ -1,13 +1,13 @@
-<ion-view view-title="Chores"><button class="button button-icon ion-plus" ng-click="showNewMessageModal()"></button>
-      <ion-nav-buttons side="right">
-        <button class="button button-icon ion-plus" ng-click="showNewChoreModal()">
-        </button>
-      </ion-nav-buttons>
+<ion-view view-title="Chores">
+
+    <ion-nav-buttons side="right">
+      <button class="button button-icon ion-plus" ng-click="showNewChoreModal()">
+      </button>
+    </ion-nav-buttons>
+
   <ion-content>
-    <ion-list>
-      <ion-item class='item item-button-left item-icon-right' ng-repeat="chore in self.all">
-
-
+    <ion-list id="chores">
+      <ion-item class='item item-button-left item-icon-right' ng-repeat="chore in chores.all">
       	<div class="upvote-buttons" style="color: red">
 	        <button class="button button-icon ion-ios-arrow-thin-down"></button>{{chore.upvotes}}
 	        <button class="button button-icon ion-close ion-ios-arrow-thin-up"></button>
@@ -18,29 +18,29 @@
   </ion-content>
 </ion-view>
 
-    <script id="new-chore.html" type="text/ng-template">
-    <div class="modal">
+<script id="new-chore.html" type="text/ng-template">
+  <div class="modal">
 
-      // Modal header bar
-      <ion-header-bar class="bar-secondary">
-        <h1 class="title">Post New Chore</h1>
-        <button class="button button-clear button-balanced" ng-click="closeNewChoreModal()">Cancel</button>
-      </ion-header-bar>
+    // Modal header bar
+    <ion-header-bar class="bar-secondary">
+      <h1 class="title">Post New Chore</h1>
+      <button class="button button-clear button-balanced" ng-click="closeNewChoreModal()">Cancel</button>
+    </ion-header-bar>
 
-      // Modal content 
-      <ion-content>
-        <form ng-submit="createChore(newChore)">
-          <div class="list">
-            <label class="item item-input">
-              <textarea rows="5" placeholder="What needs to be done?" ng-model="newChore.content" ng-maxlength="60" ng-minlength="4"></textarea>
-            </label>
-          </div>
-          <div class="padding">
-            <button type="submit" class="button button-block button-block button-balanced">Add Chore</button>
-          </div>
-        </form>
-      </ion-content>
+    // Modal content 
+    <ion-content>
+      <form ng-submit="createChore(newChore)">
+        <div class="list">
+          <label class="item item-input">
+            <textarea rows="5" placeholder="What needs to be done?" ng-model="newChore.content" ng-maxlength="60" ng-minlength="4"></textarea>
+          </label>
+        </div>
+        <div class="padding">
+          <button type="submit" class="button button-block button-block button-balanced">Add Chore</button>
+        </div>
+      </form>
+    </ion-content>
 
-    </div>
-  </script>
+  </div>
+</script>
 

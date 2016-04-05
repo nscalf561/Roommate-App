@@ -11,6 +11,7 @@ var express 		= require('express'),
 	cors 			= require('cors'),
 	routes 			= require('./config/routes');
 
+// Allows for cross origin resource sharing, THIS MUST BE ON TOP
 app.use(cors());
 
 // configures bodyParser (accepts form data)

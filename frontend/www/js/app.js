@@ -4,7 +4,8 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'dashboard.controller', 'chore.controller', 'bill.controller'])
+angular.module('starter', ['ionic', 'dashboard.controller', 'chore.controller', 'household.controller', 'announcement.controller', 'bill.controller'])
+
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -76,7 +77,29 @@ angular.module('starter', ['ionic', 'dashboard.controller', 'chore.controller', 
     views: {
       'menuContent': {
         templateUrl: 'templates/chores.html',
-        controller: 'ChoreCtrl'
+        controller: 'ChoreCtrl as chores'
+      }
+    }
+  })
+
+  .state('app.households', {
+    url: '/households',
+    views: {
+      'menuContent' : {
+        templateUrl: 'templates/households.html',
+        controller: 'HouseholdCtrl'
+        // controller: 'HouseholdCtrl as households'
+      }
+    }
+  })
+
+  .state('app.announcements', {
+    url: '/announcements',
+    views: {
+      'menuContent' : {
+        templateUrl: 'templates/announcements.html',
+        controller: 'AnnouncementCtrl'
+        // controller: 'AnnouncementCtrl as announcements'
       }
     }
   })

@@ -1,18 +1,19 @@
-var 	express = require('express'),
-		router = express.Router(),
-		path = require('path'),
-		app = express(),
-		bodyParser = require('body-parser'),
-		hbs = require('hbs'),
-		mongoose = require('mongoose'), 
-		apiController = require('../controllers/apiController'),
-		houseController = require('../controllers/houseController'),
-		userController = require('../controllers/userController'),
-		choreController = require('../controllers/choreController'),
-		passport		= require('passport'),
-		jwt				= require('jwt-simple'),
-		config 			= require('./database'),
-		User = mongoose.model('User');
+var express           = require('express'),
+		router            = express.Router(),
+		path              = require('path'),
+		app               = express(),
+		bodyParser        = require('body-parser'),
+		hbs               = require('hbs'),
+		mongoose          = require('mongoose'), 
+		apiController     = require('../controllers/apiController'),
+		houseController   = require('../controllers/houseController'),
+		userController    = require('../controllers/userController'),
+		choreController   = require('../controllers/choreController'),
+    announcementController = require('../controllers/announcementController'),
+		passport          = require('passport'),
+		jwt	              = require('jwt-simple'),
+		config            = require('./database'),
+		User              = mongoose.model('User');
 
 
 // API directory
@@ -127,5 +128,18 @@ router.route('/api/households/:hid/chores/:id')
 .get(choreController.showChore)
 .delete(choreController.deleteChore);
 // .put(choreController.updateChore);
+
+
+// API Announcements
+router.route('/api/households/:hid/announcements')
+  .get(announcementController.index)
+  .post(announcementController.createAnnouncement);
+
+
+// API Individual Announcement
+  router.route('/api/households/:hid/announcements/:id')
+  .get(announcementController.showAnnouncement)
+  .delete(announcementController.deleteAnnouncement);
+
 
 module.exports = router;

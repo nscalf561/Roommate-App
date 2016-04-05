@@ -1,11 +1,11 @@
 var mongoose = require('mongoose'),
-		User = require('./User'),
-		House = require('./House'),
+		House = mongoose.model('House'),
+	  User = mongoose.model('User'),
 		Schema = mongoose.Schema;
 
 var HouseUserSchema = new Schema ({
-	houseId : {type: House.Types.ObjectId, ref: 'House'},
-	userId : {type: House.Types.ObjectId, ref: 'User'}
+	houseId : {type: Schema.Types.ObjectId, ref: 'House'},
+	userId : {type: Schema.Types.ObjectId, ref: 'User'}
 });
 
 var HouseUser = mongoose.model('HouseUser', HouseUserSchema);
