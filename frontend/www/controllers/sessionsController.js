@@ -1,4 +1,4 @@
-angular.module('starter')
+angular.module('sessions.controller', ['ionic'])
  
 .controller('LoginCtrl', function($scope, AuthService, $ionicPopup, $state) {
   $scope.user = {
@@ -9,7 +9,6 @@ angular.module('starter')
   $scope.login = function() {
     AuthService.login($scope.user).then(function(msg) {
       var payload = AuthService.jwtToJSON();
-      console.log(payload);
       if (payload.households.length > 0) {
         $state.go('app.dashboard');
       } else {

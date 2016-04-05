@@ -1,4 +1,4 @@
 module.exports = {
-	'secret': 'devdacticIsAwesome',
+	'secret': 'mySecretKey',
 	'database': 'mongodb://localhost/project4'
 };

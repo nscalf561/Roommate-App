@@ -1,8 +1,10 @@
-var app = require('../server');
-var House = require('../models/House');
+var app 	= require('../server');
+var House 	= require('../models/house');
+
 
 var houseController = {
-	//show all page for houses
+
+	// show all houses
 	index : function (req, res) {
 		House.find({}, function (err, houses) {
 			if (err) {
@@ -13,6 +15,8 @@ var houseController = {
 		});
 	},
 
+
+	// create a house
 	createHouse : function (req, res) {
 		var newHouse = new House({
 			name: req.body.name, 
@@ -30,8 +34,10 @@ var houseController = {
 		});
 	},
 
+
+	// show an individual house
 	showHouse : function (req, res) {
-		House.find({_id: req.params.id}, function (err, house) {
+		House.find({_id: req.params.hid}, function (err, house) {
 			if (err) {
 				res.status(500).send();
 				console.log("There was an error getting this household:", err);
@@ -41,8 +47,10 @@ var houseController = {
 		});
 	},
 
+
+	// delete an individual house
 	deleteHouse : function (req, res) {
-		House.remove({_id: req.params.id}, function (err) {
+		House.remove({_id: req.params.hid}, function (err) {
 			if (err) {
 				res.status(500).send();
 				console.log("There was an error deleting the household:", err);
@@ -52,17 +60,20 @@ var houseController = {
 		});
 	},
 
+
+	// update an individual house
 	updateHouse : function (req, res) {
-		House.findOne({_id: req.params.id}, function (err, house) {
+		House.findOne({_id: req.params.hid}, function (err, house) {
 			if (err) {
 				res.status(500).send();
 				console.log("There was an error finding the household:", house);
 			} 
-			
+
 			if (req.body.name) { house.name = req.body.name; }
 			if (req.body.address) { house.address = req.body.address; }
 
-			House.update({_id: req.params.id}, house, function (err, house) {
+			// find the house in the db, pass it the updated house object and save changes
+			House.update({_id: req.params.hid}, house, function (err, house) {
 				if (err) {
 					res.status(500).send();
 					console.log("There was an error updating the house:", err);
@@ -73,5 +84,6 @@ var houseController = {
 		});
 	}
 };
+
 
 module.exports = houseController;
