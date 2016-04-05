@@ -1,13 +1,15 @@
 <ion-view view-title="Master Your Domain">
 
+
+
   <ion-content>
     <div class="dashboardDiv">
       <div class="card" ng-repeat="content in dashboardContent | orderBy: 'date'">
       <!-- will later use this setup when using dynamic data -->
       <!--       <ion-item ng-repeat="content in dashboardContent.all | orderBy: 'createdAt'"> -->
         <div class="item item-text-wrap">
-          <div class="content section">{{content.title}}</div>
-          <div class="associatedUser section"><span style="font-weight: bold">{{content.completedBy || content.author}}</span>  <span class="date" style="color: gray" am-time-ago="content.date"></span></div>
+          <div class="content section">{{content.task}}</div>
+          <div class="associatedUser section"><span style="font-weight: bold">{{content.completedBy || content.upvotes}}</span>  <span class="date" style="color: gray" am-time-ago="content.date"></span></div>
       </div>
     </div>
   </ion-content>
