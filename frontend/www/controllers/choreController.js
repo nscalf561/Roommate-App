@@ -5,7 +5,6 @@ angular.module('chore.controller', ['ionic'])
   var self = this;
   self.all = [];
   self.newChore = {};
-  // self.deleteChore = deleteChore;
 
   getChores();
 
@@ -56,41 +55,19 @@ angular.module('chore.controller', ['ionic'])
 
   // increment upvote function
   $scope.incrementUpvote = function(chore) {
-    // if the user has not already upvoted the chore, they can increment the upvote count
-    if (chore.upvotedBy.indexOf($rootScope.userId) === -1) {
 
-      var whoUpvoted = chore.upvotedBy;
-      whoUpvoted.push($rootScope.userId.toString());
+    // create new object containing ID of user who is upvoting/downvoting
+    var choreInfo = {
+      userWhoUpvoted: $rootScope.userId
+    };
 
-      // create new object where upvotes is incremented by 1 and user is added to upvotedBy array
-      var incrementedChore = {
-        upvotes: chore.upvotes += 1,
-        upvotedBy: whoUpvoted
-      };
-
-      // save new chore object in database
-      $http
-        .put('http://localhost:3000/api/households/' + $rootScope.houseId + '/chores/' + chore._id, incrementedChore)
-        .then(function(res) {
-          console.log('added upvote to chore');
-        });
-      // if user has already upvoted the chore, decrement upvotes by 1 and user is removed from upvotedBy array
-    } else {
-        var upvotedList = chore.upvotedBy;
-        var indexOfUser = upvotedList.indexOf($rootScope.userId);
-        upvotedList.splice(indexOfUser, 1);
-
-        var decrementedChore = {
-          upvotes: chore.upvotes -= 1,
-          upvotedBy: upvotedList
-        };
-
-      $http
-      .put('http://localhost:3000/api/households/' + $rootScope.houseId + '/chores/' + chore._id, decrementedChore)
+    // save new chore object in database
+    $http
+      .put('http://localhost:3000/api/households/' + $rootScope.houseId + '/chores/' + chore._id, choreInfo)
       .then(function(res) {
-        console.log('subtracted upvote from chore');
+        console.log('edited chore upvotes');
+        getChores();
       });
-    }
   };
 
   // mark a chore completed
@@ -121,10 +98,27 @@ angular.module('chore.controller', ['ionic'])
         console.log('reset chore details');
         getChores();
       });
-
-    // TODO: make call to backend to store archivedChore details
-
+      
+    // make call to backend to archive completed chore (for dashboard and data visualization)
+    $http
+      .post('http://localhost:3000/api/households/' + $rootScope.houseId + '/completedChores/', archivedChore)
+      .then(function(res) {
+        console.log('Archived the chore');
+      });
   };
+
+
+
+  $scope.deleteChore = function (chore) {
+    $http
+      .delete('http://localhost:3000/api/households/' + $rootScope.houseId + '/chores/' + chore._id)
+      .then(function(res) {
+        console.log('THIS IS A TEST');
+        getChores();
+      });
+  };
+
+
 	// New Chore Modal Functions
   // Creates and loads the new chore modal
   $ionicModal.fromTemplateUrl('new-chore.html', function(modal) {
