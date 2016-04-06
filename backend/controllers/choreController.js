@@ -85,12 +85,10 @@ var choreController = {
 						// change the chore details to reflect the new upvote status and the user who upvoted/downvoted it
 						// if user has not already upvoted
 							if(chore.upvotedBy.indexOf(req.body.userWhoUpvoted) === -1) {
-								console.log('user has not upvoted');
 								chore.upvotedBy.push(req.body.userWhoUpvoted);
 								chore.upvotes +=1;
 							// if user has already upvoted it
 							} else {
-								console.log('user has already upvoted');
 								var indexOfUser = chore.upvotedBy.indexOf(req.body.userWhoUpvoted);
 								chore.upvotedBy.splice(indexOfUser, 1);
 								chore.upvotes -= 1;
@@ -99,7 +97,7 @@ var choreController = {
 						// if we are marking the chore completed, clear upvotes/comments/add new completedAt date
 						if (req.body.completedAt) { chore.completedAt = req.body.completedAt; }
 						if (req.body.comments) { chore.comments = req.body.comments; }
-						if (req.body.comments) { chore.comments = req.body.comments; }
+						if (req.body.upvotes) { chore.upvotes = req.body.upvotes; }
 
 						// save these changes to the database
 						house.save(function(err, house) {

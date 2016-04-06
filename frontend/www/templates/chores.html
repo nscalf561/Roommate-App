@@ -7,10 +7,11 @@
 
   <ion-content>
     <ion-list id="chores">
-      <ion-item class='item item-icon-left item-icon-right' ng-repeat="chore in chores.all | orderBy: 'createdAt' | orderBy: '-upvotes'">
+      <ion-item class='item item-icon-left item-icon-right' ng-repeat="chore in chores.all | orderBy: ['-upvotes', 'completedAt']">
         <i class="icon ion-ios-arrow-thin-up" ng-click="incrementUpvote(chore)" on-swipe-left="deleteChore(chore)"></i>
           {{chore.upvotes}}
-        	{{chore.task}}
+        	{{chore.task}}<br>
+          last completed <span class="date" style="color: gray" am-time-ago="chore.completedAt"></span>
           <button class="button button-icon ion-ios-trash" ng-click="deleteChore(chore)"></button>
           <i class="icon ion-ios-checkmark" ng-click="markCompleted(chore)"></i>
       </ion-item>
