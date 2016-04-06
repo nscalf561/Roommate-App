@@ -20,7 +20,6 @@ var houseuserController = {
 			houseId: req.body.houseId, 
 			userId: req.body.userId
 		});
-		// console.log("OCCUPANT", occupant);
 
 		occupant.save(function(err, occupant) {
 			if (err) {
