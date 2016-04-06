@@ -98,7 +98,7 @@ angular.module('chore.controller', ['ionic'])
         console.log('reset chore details');
         getChores();
       });
-      
+
     // make call to backend to archive completed chore (for dashboard and data visualization)
     $http
       .post('http://localhost:3000/api/households/' + $rootScope.houseId + '/completedChores/', archivedChore)
@@ -119,23 +119,46 @@ angular.module('chore.controller', ['ionic'])
   };
 
 
-	// New Chore Modal Functions
+
+
+  // New Chore Modal Functions
   // Creates and loads the new chore modal
-  $ionicModal.fromTemplateUrl('new-chore.html', function(modal) {
-    $scope.choreModal = modal;
-  }, {
-    scope: $scope,
-    animation: 'slide-in-up' //look at this later
-  });
+   $ionicModal.fromTemplateUrl('new-chore.html', {
+        scope: $scope,
+        animation: 'slide-in-up'
+      }).then(function(modal) {
+        $scope.newChoreModal = modal;
+      });
 
   //opens the new message modal
   $scope.showNewChoreModal = function() {
-    $scope.choreModal.show();
+    $scope.newChoreModal.show();
   };
 
   //closes the new message modal
   $scope.closeNewChoreModal = function() {
-    $scope.choreModal.hide();
+    $scope.newChoreModal.hide();
+  };
+
+
+  // Chore Details Modal Functions
+  // Creates and loads the chore details modal
+   $ionicModal.fromTemplateUrl('chore-details.html', {
+        scope: $scope,
+        animation: 'slide-in-up'
+      }).then(function(modal) {
+        $scope.choreDetailsModal = modal;
+      });
+
+  //opens the new message modal
+  $scope.showChoreDetailsModal = function(chore) {
+    $scope.chore = chore;
+    $scope.choreDetailsModal.show();
+  };
+
+  //closes the new message modal
+  $scope.closeChoreDetailsModal = function() {
+    $scope.choreDetailsModal.hide();
   };
 
 
