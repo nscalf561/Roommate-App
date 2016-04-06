@@ -4,27 +4,43 @@ angular.module('household.controller', ['ionic'])
 
 	$scope.households = [];
 
-	$http
-		.get('http://localhost:3000/api/households')
-		.then(function(res) {
-				res.data.houses.forEach(function(house){
-					$scope.households.push(house);
-				});
-		});
+	// get all houses with initial load of template
+	getHouseholds();
 
+	function getHouseholds() {
+		$http
+			.get('http://localhost:3000/api/households')
+			.then(function(res) {
+					res.data.houses.forEach(function(house){
+						$scope.households.push(house);
+					});
+			});
+	}
 
-	// $scope.createHousehold = function (newHousehold) {
-	// 	if (!newHousehold) {
-	// 		$scope.showHouseholdNameAlert();
-	// 	} else if (!newHousehold.name) {
-	// 		$scope.showHouseholdNameAlert();
-	// 	} else if (!newHousehold.address) {
-	// 		$scope.showAddressAlert();
-	// 	}
-	// 	console.log('Need to build functionality to create household and add current user to it.', newHousehold);
-	// };
+	$scope.createHousehold = function (newHousehold) {
+		if (!newHousehold) {
+			$scope.showHouseholdNameAlert();
+		} else if (!newHousehold.name) {
+			$scope.showHouseholdNameAlert();
+		} else if (!newHousehold.address) {
+			$scope.showAddressAlert();
+		}
+		
+		var newHouse = {
+			name: newHousehold.name,
+			address: newHousehold.address
+		};
+
+		$http
+			.post('http://localhost:3000/api/households', newHouse)
+			.then(function(res) {
+				console.log(newHouse);
+  				getHouseholds();
+			});
+	};
 
 	$scope.joinHousehold = function (household) {
+
 		var payload = AuthService.jwtToJSON();
 		var houseAndUserId = {
 				userId : payload._id,
@@ -35,7 +51,7 @@ angular.module('household.controller', ['ionic'])
 			.post('http://localhost:3000/api/houseuser', houseAndUserId)
 			.then(function(res) {
 				console.log(houseAndUserId);
-				$state.go('app.announcements');
+				$state.go('app.dashboard');
 			});
 	};
 	
