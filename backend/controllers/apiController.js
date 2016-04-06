@@ -34,6 +34,7 @@ var apiController = {
       {method: "GET", path: "/api/households/:hid/chores", description: "See a list of all household chores"},
       {method: "POST", path: "/api/households/:hid/chores", description: "Create a new chore for a particular household"},
       {method: "GET", path: "/api/households/:hid/chores/:id", description: "see individual chore details"},
+      {method: "PUT", path: "/api/households/:hid/chores/:id", description: "Update an individual chore"},   
       {method: "DELETE", path: "/api/households/:hid/chores/:id", description: "Delete an individual chore"},      
       
       //supply endpoints

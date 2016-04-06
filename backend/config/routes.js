@@ -61,8 +61,8 @@ router.route('/api/households/:hid/chores')
 // API Individual Chore
 router.route('/api/households/:hid/chores/:id')
   .get(choreController.showChore)
-  .delete(choreController.deleteChore);
-// .put(choreController.updateChore);
+  .delete(choreController.deleteChore)
+	.put(choreController.updateChore);
 
 
 // API Announcements

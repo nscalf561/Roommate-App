@@ -12,6 +12,7 @@ angular.module('sessions.controller', ['ionic'])
       if (payload.households.length > 0) {
         $rootScope.houseId = payload.households[0];
         $rootScope.userId = payload._id;
+        $rootScope.userName = payload.name;
         $state.go('app.dashboard');
       } else {
         $state.go('app.households');
