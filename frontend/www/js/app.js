@@ -34,7 +34,8 @@ angular.module('starter', [
     url: '/app',
     abstract: true,
     templateUrl: 'templates/menu.html',
-    controller: 'LogoutCtrl'
+    controller: 'LogoutCtrl',
+    // authenticate: true
   })
 
   .state('app.login', {
@@ -43,6 +44,7 @@ angular.module('starter', [
       'menuContent': {
         templateUrl: 'templates/login.html',
         controller: 'LoginCtrl'
+        // authenticate: false
       }
     }
   })
@@ -52,7 +54,8 @@ angular.module('starter', [
     views: {
       'menuContent': {
         templateUrl: 'templates/register.html',
-        controller: 'RegisterCtrl'
+        controller: 'RegisterCtrl',
+        // authenticate: false
       }
     }
   })
@@ -62,7 +65,8 @@ angular.module('starter', [
     views: {
       'menuContent': {
         templateUrl: 'templates/dashboard.html',
-        controller: 'DashboardCtrl'
+        controller: 'DashboardCtrl',
+        // authenticate: true
       }
     }
   })
@@ -72,7 +76,8 @@ angular.module('starter', [
     views: {
       'menuContent': {
         templateUrl: 'templates/chores.html',
-        controller: 'ChoreCtrl as chores'
+        controller: 'ChoreCtrl as chores',
+        // authenticate: true
       }
     }
   })
@@ -82,7 +87,8 @@ angular.module('starter', [
     views: {
       'menuContent' : {
         templateUrl: 'templates/households.html',
-        controller: 'HouseholdCtrl'
+        controller: 'HouseholdCtrl',
+        // authenticate: true
         // controller: 'HouseholdCtrl as households'
       }
     }
@@ -93,7 +99,8 @@ angular.module('starter', [
     views: {
       'menuContent' : {
         templateUrl: 'templates/announcements.html',
-        controller: 'AnnouncementCtrl'
+        controller: 'AnnouncementCtrl',
+        // authenticate: true
         // controller: 'AnnouncementCtrl as announcements'
       }
     }
@@ -104,7 +111,8 @@ angular.module('starter', [
     views: {
       'menuContent': {
         templateUrl: 'templates/bills.html',
-        controller: 'BillCtrl'
+        controller: 'BillCtrl',
+        // authenticate: true
       }
     }
   });
@@ -113,8 +121,12 @@ angular.module('starter', [
   $urlRouterProvider.otherwise('/app/login');
 })
 
-.run(function ($rootScope, $state, AuthService, AUTH_EVENTS) {
+.run(function ($rootScope, $state, AuthService, AUTH_EVENTS/*, $route*/) {
   $rootScope.$on('$stateChangeStart', function (event,next, nextParams, fromState) {
+    // console.log($route.current.templateUrl);
+    // if (AuthService.isAuthenticated() && $route.current.templateUrl) {
+    //   $state.go('app.dashboard');
+    // }
     if (!AuthService.isAuthenticated()) {
       console.log(next.name);
       if (next.name !== 'app.login' && next.name !== 'app.register') {

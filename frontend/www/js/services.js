@@ -1,6 +1,6 @@
 angular.module('starter')
  
-.service('AuthService', function($q, $http, API_ENDPOINT) {
+.service('AuthService', function($q, $http, API_ENDPOINT, $rootScope) {
   var LOCAL_TOKEN_KEY = 'yourTokenKey';
   var isAuthenticated = false;
   var authToken;
@@ -9,7 +9,8 @@ angular.module('starter')
     var payload = window.localStorage.yourTokenKey;
     payload = payload.split('.')[1];
     payload = window.atob(payload);
-    payload = JSON.parse(payload);
+    $rootScope.payload = JSON.parse(payload);
+
 
     return payload;
   };

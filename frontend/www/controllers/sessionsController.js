@@ -1,11 +1,17 @@
 angular.module('sessions.controller', ['ionic'])
  
 .controller('LoginCtrl', function($rootScope, $scope, AuthService, $ionicPopup, $state) {
+  if (AuthService.isAuthenticated()) {
+    console.log("authenticated");
+    $state.go('app.dashboard');
+  }
+
   $scope.user = {
     name: '',
     password: ''
   };
- 
+
+
   $scope.login = function() {
     AuthService.login($scope.user).then(function(msg) {
       var payload = AuthService.jwtToJSON();
