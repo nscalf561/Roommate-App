@@ -83,6 +83,8 @@ var choreController = {
 						// change the chore details to reflect the new upvote and the user who upvoted it
 						if (req.body.upvotes) { chore.upvotes = parseInt(req.body.upvotes); }
 						if (req.body.upvotedBy) { chore.upvotedBy = req.body.upvotedBy; }
+						if (req.body.completedAt) { chore.completedAt = req.body.completedAt; }
+						if (req.body.comments) { chore.comments = req.body.comments; }
 
 						// save these changes to the database
 						house.save(function(err, house) {

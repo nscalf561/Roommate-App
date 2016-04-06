@@ -25,6 +25,9 @@ var HouseSchema = new Schema ({
 		createdAt: { type: Date, default: new Date()},
 		purchasedBy: String,
 		purchasedOn: { type: Date }
+	}],
+	completedChores: [{
+		
 	}]
 });
 

@@ -7,10 +7,10 @@
 
   <ion-content>
     <ion-list id="chores">
-      <ion-item class='item item-icon-left item-icon-right' ng-repeat="chore in chores.all">
+      <ion-item class='item item-icon-left item-icon-right' ng-repeat="chore in chores.all | orderBy: 'createdAt' | orderBy: '-upvotes'">
         <i class="icon ion-ios-arrow-thin-up" ng-click="incrementUpvote(chore)"></i>
           {{chore.upvotes}}
-        	{{chore.task}}<i class="icon ion-ios-checkmark"></i>
+        	{{chore.task}}<i class="icon ion-ios-checkmark" ng-click="markCompleted(chore)"></i>
       </ion-item>
     </ion-list>
   </ion-content>

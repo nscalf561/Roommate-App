@@ -95,6 +95,40 @@ angular.module('chore.controller', ['ionic'])
   };
 
 
+
+  // mark a chore completed
+  $scope.markCompleted = function (chore) {
+
+    // create an object to send to householdHistory
+    var archivedChore = {
+      task: chore.task,
+      completedAt: new Date(),
+      completedByName: $rootScope.userName,
+      completedById: $rootScope.userId
+    };
+
+    // create an object to reset active chore in house db
+    var resetChore = {
+      // clear out comments array
+      comments: [],
+      // clear out upvotes array
+      upvotes: "0",
+      // reset completed by date
+      completedAt: new Date(),
+    };
+
+    // make call to backend to reset chore details
+    $http
+      .put('http://localhost:3000/api/households/' + $rootScope.houseId + '/chores/' + chore._id, resetChore)
+      .then(function(res) {
+        console.log('reset chore details');
+        getChores();
+      });
+
+    // TODO: make call to backend to store archivedChore details
+
+  };
+
 	// New Chore Modal Functions
   // Creates and loads the new chore modal
   $ionicModal.fromTemplateUrl('new-chore.html', function(modal) {
