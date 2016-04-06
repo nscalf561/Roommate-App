@@ -59,14 +59,16 @@ angular.module('chore.controller', ['ionic'])
     // if the user has not already upvoted the chore, they can increment the upvote count
     if (chore.upvotedBy.indexOf($rootScope.userId) === -1) {
 
-      var whoUpvoted = chore.upvotedBy;
-      whoUpvoted.push($rootScope.userId.toString());
+      whoUpvoted = chore.upvotedBy;
+      whoUpvoted.push($rootScope.userId);
 
       // create new object where upvotes is incremented by 1 and user is added to upvotedBy array
       var incrementedChore = {
         upvotes: chore.upvotes += 1,
         upvotedBy: whoUpvoted
       };
+
+      console.log(incrementedChore);
 
       // save new chore object in database
       $http
@@ -84,6 +86,8 @@ angular.module('chore.controller', ['ionic'])
           upvotes: chore.upvotes -= 1,
           upvotedBy: upvotedList
         };
+
+        console.log(decrementedChore);
 
       $http
       .put('http://localhost:3000/api/households/' + $rootScope.houseId + '/chores/' + chore._id, decrementedChore)
@@ -125,6 +129,19 @@ angular.module('chore.controller', ['ionic'])
     // TODO: make call to backend to store archivedChore details
 
   };
+
+
+
+  $scope.deleteChore = function (chore) {
+    $http
+      .delete('http://localhost:3000/api/households/' + $rootScope.houseId + '/chores/' + chore._id)
+      .then(function(res) {
+        console.log('Chore deleted');
+        getChores();
+      });
+  };
+
+
 	// New Chore Modal Functions
   // Creates and loads the new chore modal
   $ionicModal.fromTemplateUrl('new-chore.html', function(modal) {

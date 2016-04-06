@@ -91,7 +91,7 @@ var choreController = {
 							if (err) {
 								console.log("There was an error saving the updated house.chores array:", err);
 							} else {
-								console.log('your shit actually saved');
+								console.log('Your chore has been updated.');
 								res.json({house: house});
 							}
 						});
@@ -120,7 +120,8 @@ var choreController = {
 					if (err) {
 						console.log("There was an error saving the updated house.chores array:", err);
 					} else {
-						res.status(400).send();
+						console.log("the chore was successfully deleted");
+						res.json({house: house});
 					}
 				});
 			}
