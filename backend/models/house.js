@@ -26,9 +26,9 @@ var HouseSchema = new Schema ({
 		purchasedBy: String,
 		purchasedOn: { type: Date }
 	}],
-	completedChores: [{
+	// completedChores: [{
 		
-	}]
+	// }]
 });
 
 
