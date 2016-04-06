@@ -1,6 +1,6 @@
 var app 	= require('../server.js'),
 	// House 	= require('../models/house'),
-	// User 	= require('../models/user'),
+	User 	= require('../models/user'),
 	HouseUser = require('../models/houseUser');
 
 var houseuserController = {
@@ -15,7 +15,7 @@ var houseuserController = {
 	},
 
 	joinHouse: function (req, res) {
-		console.log(req.body);
+
 		var occupant = new HouseUser({
 			houseId: req.body.houseId, 
 			userId: req.body.userId
@@ -28,6 +28,23 @@ var houseuserController = {
 			} else {
 				res.status(200).send();
 				console.log("Successfuly joined household!");
+			}
+		});
+
+		User.findOne({_id: occupant.userId}, function(err, user) {
+			if (err) {
+				console.log("error getting the user joining a house:", err);
+			} else {
+				console.log(occupant.houseId);
+				user.households.push(occupant.houseId);
+				user.save(function(err, user) {
+					if (err) {
+						console.log("There was an error saving the user's houseId", err);
+					} else {
+						res.status(200).send();
+						console.log("Successfully saved houseId in user.households");
+					}
+				});
 			}
 		});
 	},
