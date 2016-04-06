@@ -75,11 +75,10 @@ var choreController = {
 				res.status(500).send();
 				console.log("An error has occurred while finding the house:", err);
 			} else { 
+				
 				// find the specific chore within the house
 				house.chores.forEach(function(chore) {
 					if (chore._id == req.params.id) {
-						console.log(chore);
-						var upvoteNum = parseInt(req.body.upvotes);
 
 						// change the chore details to reflect the new upvote and the user who upvoted it
 						if (req.body.upvotes) { chore.upvotes = parseInt(req.body.upvotes); }

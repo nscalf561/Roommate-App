@@ -47,7 +47,7 @@ angular.module('chore.controller', ['ionic'])
         .then(function(res) {
           console.log('added new chore:', chore);
           // push the chore object to the front-end array of chores
-          self.all.push(chore);
+          getChores();
           // close new chore model
           $scope.closeNewChoreModal();
         });
