@@ -28,7 +28,7 @@ angular.module('chore.controller', ['ionic'])
   $scope.createChore = function(newChore) {
     // if new chore form field is empty, show popup so user knows they must complete field
     if (!newChore) {
-      $scope.showChoreAlert();
+      $scope.showFailToAddChoreAlert();
       return;
     } else {
 
@@ -56,26 +56,42 @@ angular.module('chore.controller', ['ionic'])
 
 
   // increment upvote function
-  $scope.addUpvote = function(chore) {
-    // if the user has not already upvoted the chore
-    if (chore.upvotedBy.indexOf($rootScope.userId) === -1)
-      // console.log(chore.upvotedBy.indexOf($rootScope.userId));
+  $scope.incrementUpvote = function(chore) {
+    // if the user has not already upvoted the chore, they can increment the upvote count
+    if (chore.upvotedBy.indexOf($rootScope.userId) === -1) {
+
+      var whoUpvoted = chore.upvotedBy;
+      whoUpvoted.push($rootScope.userId.toString());
 
       // create new object where upvotes is incremented by 1 and user is added to upvotedBy array
-      var updatedChore = {
+      var incrementedChore = {
         upvotes: chore.upvotes += 1,
-        upvotedBy: chore.upvotedBy.push($rootScope.userId)
+        upvotedBy: whoUpvoted
       };
 
-    // console.log(chore._id);
-    // console.log('you upvoted, and here is the current user', $rootScope.userId);
+      // save new chore object in database
+      $http
+        .put('http://localhost:3000/api/households/' + $rootScope.houseId + '/chores/' + chore._id, incrementedChore)
+        .then(function(res) {
+          console.log('added upvote to chore');
+        });
+      // if user has already upvoted the chore, decrement upvotes by 1 and user is removed from upvotedBy array
+    } else {
+        var upvotedList = chore.upvotedBy;
+        var indexOfUser = upvotedList.indexOf($rootScope.userId);
+        upvotedList.splice(indexOfUser, 1);
 
-    // save new chore object in database
-    $http
-      .put('http://localhost:3000/api/households/' + $rootScope.houseId + '/chores/' + chore._id, updatedChore)
+        var decrementedChore = {
+          upvotes: chore.upvotes -= 1,
+          upvotedBy: upvotedList
+        };
+
+      $http
+      .put('http://localhost:3000/api/households/' + $rootScope.houseId + '/chores/' + chore._id, decrementedChore)
       .then(function(res) {
-        console.log('added upvote to chore', chore);
+        console.log('subtracted upvote from chore');
       });
+    }
   };
 
 
@@ -100,7 +116,7 @@ angular.module('chore.controller', ['ionic'])
 
 
   //Popup alert if user has not filled out the new chore form
-  $scope.showChoreAlert = function() {
+  $scope.showFailToAddChoreAlert = function() {
     var alertPopup = $ionicPopup.alert({
       title: 'Could not create chore',
       template: 'Must include a chore description.'
@@ -110,5 +126,6 @@ angular.module('chore.controller', ['ionic'])
       console.log('redirected user back to new chore form');
     });
   };
+
 
 });
