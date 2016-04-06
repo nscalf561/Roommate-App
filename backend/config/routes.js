@@ -1,20 +1,21 @@
-var express              = require('express'),
-	router                 = express.Router(),
-	path                   = require('path'),
-	app                    = express(),
-	bodyParser             = require('body-parser'),
-	hbs                    = require('hbs'),
-	mongoose               = require('mongoose'), 
-	apiController          = require('../controllers/apiController'),
-	houseController        = require('../controllers/houseController'),
-	userController         = require('../controllers/userController'),
-	choreController        = require('../controllers/choreController'),
-	announcementController = require('../controllers/announcementController'),
-	houseuserController    = require('../controllers/houseuserController'),
-	supplyController       = require('../controllers/supplyController'),
-	sessionsController     = require('../controllers/sessionsController'),
-	HouseUser			   			 = mongoose.model('HouseUser'),
-	User                   = mongoose.model('User');
+var express              		= require('express'),
+	router                 		= express.Router(),
+	path                  		= require('path'),
+	app                  		  = express(),
+	bodyParser          		  = require('body-parser'),
+	hbs                 		  = require('hbs'),
+	mongoose            		  = require('mongoose'), 
+	apiController        		  = require('../controllers/apiController'),
+	houseController      		  = require('../controllers/houseController'),
+	userController       		  = require('../controllers/userController'),
+	choreController      		  = require('../controllers/choreController'),
+	announcementController		= require('../controllers/announcementController'),
+	houseuserController    		= require('../controllers/houseuserController'),
+	supplyController       		= require('../controllers/supplyController'),
+	sessionsController     		= require('../controllers/sessionsController'),
+	completedChoreController 	= require('../controllers/completedChoreController'),
+	HouseUser			   			 		= mongoose.model('HouseUser'),
+	User                   		= mongoose.model('User');
 
 
 // API directory
@@ -91,6 +92,16 @@ router.route('/api/households/:hid/supplies/:id')
 router.route('/api/houseuser')
 	.get(houseuserController.showHouseUser)
 	.post(houseuserController.joinHouse);
+
+// API Completed Chores
+router.route('/api/households/:hid/completedChores')
+	.get(completedChoreController.index)
+	.post(completedChoreController.createCompletedChore);
+
+// API Individual Completed Chore
+router.route('/api/households/:hid/completedChores/:id')
+	.get(completedChoreController.showCompletedChore)
+	.delete(completedChoreController.deleteCompletedChore);
 
 
 

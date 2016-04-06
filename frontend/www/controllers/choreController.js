@@ -98,9 +98,13 @@ angular.module('chore.controller', ['ionic'])
         console.log('reset chore details');
         getChores();
       });
-
-    // TODO: make call to backend to store archivedChore details
-
+      
+    // make call to backend to archive completed chore (for dashboard and data visualization)
+    $http
+      .post('http://localhost:3000/api/households/' + $rootScope.houseId + '/completedChores/', archivedChore)
+      .then(function(res) {
+        console.log('Archived the chore');
+      });
   };
 
 
