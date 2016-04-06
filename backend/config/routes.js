@@ -1,4 +1,4 @@
-var express                = require('express'),
+var express              = require('express'),
 	router                 = express.Router(),
 	path                   = require('path'),
 	app                    = express(),
@@ -10,8 +10,10 @@ var express                = require('express'),
 	userController         = require('../controllers/userController'),
 	choreController        = require('../controllers/choreController'),
 	announcementController = require('../controllers/announcementController'),
+	houseuserController    = require('../controllers/houseuserController'),
 	supplyController       = require('../controllers/supplyController'),
 	sessionsController     = require('../controllers/sessionsController'),
+	HouseUser			   			 = mongoose.model('HouseUser'),
 	User                   = mongoose.model('User');
 
 
@@ -70,23 +72,26 @@ router.route('/api/households/:hid/announcements')
   .get(announcementController.index)
   .post(announcementController.createAnnouncement);
 
-
 // API Individual Announcement
-  router.route('/api/households/:hid/announcements/:id')
+router.route('/api/households/:hid/announcements/:id')
   .get(announcementController.showAnnouncement)
   .delete(announcementController.deleteAnnouncement);
-
 
 // API Supplies
 router.route('/api/households/:hid/supplies')
   .get(supplyController.index)
   .post(supplyController.createSupply);
 
-
 // API Individual Supply
-  router.route('/api/households/:hid/supplies/:id')
+router.route('/api/households/:hid/supplies/:id')
   .get(supplyController.showSupply)
   .delete(supplyController.deleteSupply);
+
+// API HouseUser
+router.route('/api/houseuser')
+	.get(houseuserController.showHouseUser)
+	.post(houseuserController.joinHouse);
+
 
 
 module.exports = router;
