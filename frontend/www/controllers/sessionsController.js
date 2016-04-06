@@ -1,7 +1,7 @@
 angular.module('sessions.controller', ['ionic'])
  
 .controller('LoginCtrl', function($rootScope, $scope, AuthService, $ionicPopup, $state) {
-  if (AuthService.isAuthenticated()) {
+  if (AuthService.isAuthenticated() && AuthService.jwtToJSON().households[0]) {
     console.log("authenticated");
     $state.go('app.dashboard');
   }

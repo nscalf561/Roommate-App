@@ -9,9 +9,9 @@ angular.module('starter')
     var payload = window.localStorage.yourTokenKey;
     payload = payload.split('.')[1];
     payload = window.atob(payload);
-    $rootScope.payload = JSON.parse(payload);
-
-
+    payload = JSON.parse(payload);
+    $rootScope.payload = payload;
+    
     return payload;
   };
  

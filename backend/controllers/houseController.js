@@ -37,13 +37,8 @@ var houseController = {
 
 	// show an individual house
 	showHouse : function (req, res) {
-		House.find({_id: req.params.hid}, function (err, house) {
-			if (err) {
-				res.status(500).send();
-				console.log("There was an error getting this household:", err);
-			} else {
-				res.json({house: house});
-			}
+		House.findOne({_id: req.params.hid}, function (err, house) {
+			res.json({house: house});
 		});
 	},
 
