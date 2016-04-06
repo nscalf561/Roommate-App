@@ -21,8 +21,6 @@ angular.module('chore.controller', ['ionic'])
   		});
   }
 
-
-
 	// New Chore Modal Functions
   // Creates and loads the new chore modal
   $ionicModal.fromTemplateUrl('new-chore.html', function(modal) {
