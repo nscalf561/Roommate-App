@@ -8,7 +8,7 @@ var HouseSchema = new Schema ({
 	chores: [{
 		task: String,
 		isCompleted: Boolean,
-		completedAt: { type: Date, default: new Date()},
+		completedAt: { type: Date, default: new Date() },
 		upvotes: Number,
 		completedBy: String,
 		upvotedBy: [String],
@@ -17,17 +17,20 @@ var HouseSchema = new Schema ({
 	announcements: [{
 		content: String,
 		author: String,
-		createdAt: { type: Date, default: new Date()}
+		createdAt: { type: Date, default: new Date() }
 	}],
 	supplies: [{
 		item: String,
 		createdBy: String,
-		createdAt: { type: Date, default: new Date()},
+		createdAt: { type: Date, default: new Date() },
 		purchasedBy: String,
 		purchasedOn: { type: Date }
 	}],
 	completedChores: [{
-		
+		task: String,
+		completedAt: { type: Date, default: new Date() },
+		completedByName: String,
+		completedById: String
 	}]
 });
 

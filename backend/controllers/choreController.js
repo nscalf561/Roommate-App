@@ -80,18 +80,31 @@ var choreController = {
 				house.chores.forEach(function(chore) {
 					if (chore._id == req.params.id) {
 
-						// change the chore details to reflect the new upvote and the user who upvoted it
-						if (req.body.upvotes) { chore.upvotes = parseInt(req.body.upvotes); }
-						if (req.body.upvotedBy) { chore.upvotedBy = req.body.upvotedBy; }
+						// if the use did an upvote/downvote action
+						if (req.body.userWhoUpvoted) {
+						// change the chore details to reflect the new upvote status and the user who upvoted/downvoted it
+						// if user has not already upvoted
+							if(chore.upvotedBy.indexOf(req.body.userWhoUpvoted) === -1) {
+								chore.upvotedBy.push(req.body.userWhoUpvoted);
+								chore.upvotes +=1;
+							// if user has already upvoted it
+							} else {
+								var indexOfUser = chore.upvotedBy.indexOf(req.body.userWhoUpvoted);
+								chore.upvotedBy.splice(indexOfUser, 1);
+								chore.upvotes -= 1;
+							}
+						}
+						// if we are marking the chore completed, clear upvotes/comments/add new completedAt date
 						if (req.body.completedAt) { chore.completedAt = req.body.completedAt; }
 						if (req.body.comments) { chore.comments = req.body.comments; }
+						if (req.body.upvotes) { chore.upvotes = req.body.upvotes; }
 
 						// save these changes to the database
 						house.save(function(err, house) {
 							if (err) {
 								console.log("There was an error saving the updated house.chores array:", err);
 							} else {
-								console.log('your shit actually saved');
+								console.log('Your chore has been updated.');
 								res.json({house: house});
 							}
 						});
@@ -120,7 +133,8 @@ var choreController = {
 					if (err) {
 						console.log("There was an error saving the updated house.chores array:", err);
 					} else {
-						res.status(400).send();
+						console.log("the chore was successfully deleted");
+						res.json({house: house});
 					}
 				});
 			}

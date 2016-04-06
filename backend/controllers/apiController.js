@@ -42,6 +42,13 @@ var apiController = {
       {method: "POST", path: "/api/households/:hid/supplies", description: "Create a new supply for a particular household"},
       {method: "GET", path: "/api/households/:hid/supplies/:id", description: "see individual supply details"},
       {method: "DELETE", path: "/api/households/:hid/supplies/:id", description: "Delete an individual supply"},
+
+      //completed chore endpoints
+      {method: "GET", path: "/api/households/:hid/completedChores", description: "See a list of all completed household chores"},
+      {method: "POST", path: "/api/households/:hid/completedChores", description: "Create a new instance of a completed chore for a particular household"},
+      {method: "GET", path: "/api/households/:hid/completedChores/:id", description: "See individual completed chore details"},
+      {method: "DELETE", path: "/api/households/:hid/completedChores/:id", description: "Delete an instance of a completed chore"},   
+      
       ]
 		});
 	}
