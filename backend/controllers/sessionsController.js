@@ -5,6 +5,7 @@ var app 			= require('../server'),
 		config    = require('../config/database');
 
 var sessionsController = {
+
 	signup : function (req, res) {
 		if (!req.body.name || !req.body.password) {
     	res.json({success: false, msg: 'Please pass name and password.'});
@@ -73,10 +74,10 @@ var sessionsController = {
 	// }
 };
 
+
 getToken = function (headers) {
   if (headers && headers.authorization) {
     var parted = headers.authorization.split(' ');
-    console.log("AKSJBDJHABDJHASBDJAHSDBASJHLDBAJHDSBA HERE", parted);
     if (parted.length === 2) {
       return parted[1];
     } else {

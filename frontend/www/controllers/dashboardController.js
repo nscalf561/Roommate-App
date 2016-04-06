@@ -5,7 +5,7 @@ angular.module('dashboard.controller', ['angularMoment'])
   var payload = AuthService.jwtToJSON();
   //TODO
   $http
-  	.get('http://localhost:3000/api/households/' + $rootScope.houseId)
+  	.get('http://localhost:3000/api/households/' + $rootScope.payload.households[0])
   	.then(function(res) {
   	   // $scope.supplies = res.data.house[0].supplies;
        var house = res.data.house[0];
