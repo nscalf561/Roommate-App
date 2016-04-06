@@ -1,6 +1,6 @@
 angular.module('household.controller', ['ionic'])
 
-.controller('HouseholdCtrl', function(AuthService, $scope, $ionicModal, $ionicPopup, $http) {
+.controller('HouseholdCtrl', function(AuthService, $scope, $ionicModal, $ionicPopup, $http, $state) {
 
 	$scope.households = [];
 
@@ -35,6 +35,7 @@ angular.module('household.controller', ['ionic'])
 			.post('http://localhost:3000/api/houseuser', houseAndUserId)
 			.then(function(res) {
 				console.log(houseAndUserId);
+				$state.go('app.announcements');
 			});
 	};
 	

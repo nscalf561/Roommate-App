@@ -67,6 +67,41 @@ var choreController = {
 	},
 
 
+	//update an individual chore
+	updateChore : function (req, res) {
+		// find the house the chore is nested in
+		House.findOne({_id: req.params.hid}, function (err, house) {
+			if (err) {
+				res.status(500).send();
+				console.log("An error has occurred while finding the house:", err);
+			} else { 
+				
+				// find the specific chore within the house
+				house.chores.forEach(function(chore) {
+					if (chore._id == req.params.id) {
+
+						// change the chore details to reflect the new upvote and the user who upvoted it
+						if (req.body.upvotes) { chore.upvotes = parseInt(req.body.upvotes); }
+						if (req.body.upvotedBy) { chore.upvotedBy = req.body.upvotedBy; }
+						if (req.body.completedAt) { chore.completedAt = req.body.completedAt; }
+						if (req.body.comments) { chore.comments = req.body.comments; }
+
+						// save these changes to the database
+						house.save(function(err, house) {
+							if (err) {
+								console.log("There was an error saving the updated house.chores array:", err);
+							} else {
+								console.log('your shit actually saved');
+								res.json({house: house});
+							}
+						});
+					}
+				});
+			}
+		});
+	},
+
+
 	// delete an individual chore
 	deleteChore : function (req, res) {
 		House.findOne({_id: req.params.hid}, function (err, house) {
