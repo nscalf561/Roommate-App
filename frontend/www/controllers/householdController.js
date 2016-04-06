@@ -1,59 +1,40 @@
 angular.module('household.controller', ['ionic'])
 
-.controller('HouseholdCtrl', function($rootScope, $scope, $ionicModal, $ionicPopup, $http) {
+.controller('HouseholdCtrl', function(AuthService, $scope, $ionicModal, $ionicPopup, $http) {
 
-	var self = this;
-	self.all = [];
-	self.newHouse = {};
+	$scope.households = [];
 
-	$scope.houses = self.all;
-
-	$scope.households = [
-		{name: "The Monastery", address: "2335 Warring St, Berkeley CA"},
-		{name: "GA Headquarters", address: "225 Bush St, San Francisco CA"}
-	];
-
-
-	$scope.getHouseholds = function () {
-		$http
-			.get('http://localhost:3000/api/households')
-			.then(function(err, res) {
-				if (err) {
-					console.log('error', err);
-				} else {
-					self.all = res.data.houses;
-				}
-			});
-	};
+	$http
+		.get('http://localhost:3000/api/households')
+		.then(function(res) {
+				res.data.houses.forEach(function(house){
+					$scope.households.push(house);
+				});
+		});
 
 
-	$scope.createHousehold = function (newHousehold) {
-		if (!newHousehold) {
-			$scope.showHouseholdNameAlert();
-		} else if (!newHousehold.name) {
-			$scope.showHouseholdNameAlert();
-		} else if (!newHousehold.address) {
-			$scope.showAddressAlert();
-		}
-		console.log('Need to build functionality to create household and add current user to it.', newHousehold);
-	};
-
-
+	// $scope.createHousehold = function (newHousehold) {
+	// 	if (!newHousehold) {
+	// 		$scope.showHouseholdNameAlert();
+	// 	} else if (!newHousehold.name) {
+	// 		$scope.showHouseholdNameAlert();
+	// 	} else if (!newHousehold.address) {
+	// 		$scope.showAddressAlert();
+	// 	}
+	// 	console.log('Need to build functionality to create household and add current user to it.', newHousehold);
+	// };
 
 	$scope.joinHousehold = function (household) {
-		console.log(household);
+		var payload = AuthService.jwtToJSON();
 		var houseAndUserId = {
-				userId : $rootScope.userId,
-				houseId : $rootScope.houseId
+				userId : payload._id,
+				houseId : household._id
 			};
+
 		$http
-			.post('http://localhost:3000/api/houseuser')
-			.then(function(err, res) {
-				if (err) {
-					console.log("Error:", err);
-				} else {
-					res.json(houseAndUserId);
-				}
+			.post('http://localhost:3000/api/houseuser', houseAndUserId)
+			.then(function(res) {
+				console.log(houseAndUserId);
 			});
 	};
 	
