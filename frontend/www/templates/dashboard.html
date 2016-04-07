@@ -1,6 +1,6 @@
 <ion-view view-title="Master Your Domain">
 
-  <ion-content>
+  <ion-content class="balancedBackground">
     <div class="dashboardDiv">
       <div class="card" ng-repeat="content in dashboardContent | orderBy: 'date'">
         <div class="item item-text-wrap item-icon-right">
@@ -18,7 +18,7 @@
         <div class="associatedUser section">
           <div class="item item-divider">
 
-            <span ng-if="content.completedBy">Chore added <span am-time-ago="content.completedAt"></span> by {{content.completedBy}}</span>
+            <span ng-if="content.completedBy">Added <span am-time-ago="content.completedAt"></span> by {{content.completedBy}}</span>
 
             <span ng-if="content.userName">
             Posted <span am-time-ago="content.createdAt"></span> by {{content.userName}}
