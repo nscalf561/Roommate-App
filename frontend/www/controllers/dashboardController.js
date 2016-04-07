@@ -4,11 +4,12 @@ angular.module('dashboard.controller', ['angularMoment'])
 
   var payload = AuthService.jwtToJSON();
 
+  // makes the controller re-render info from the household upon entering the dashboard
   $scope.$on('$ionicView.enter', function() {
     getHouseholds();
-    });
+  });
 
-
+  // this will get all of the data stored in the household to append to the page
   function getHouseholds() {
     $http
       .get('http://localhost:3000/api/households/' + payload.households[0])
@@ -30,6 +31,19 @@ angular.module('dashboard.controller', ['angularMoment'])
             $scope.dashboardContent.push(supply);
           });
         }
+
+        // organizes the dashboard so that the newest content is on the top
+        var organizedDashboard = $scope.dashboardContent.sort(function(a, b) {
+          if ((a.completedAt || a.createdAt || a.createAt) > (b.completedAt || b.createdAt || b.createAt)) {
+            return -1;
+          } else {
+            return 1;
+          }
+        });
+
+        $scope.dashboardContent = organizedDashboard;
+
+
       });
     }
 });
