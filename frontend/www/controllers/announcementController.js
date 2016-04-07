@@ -4,15 +4,16 @@ angular.module('announcement.controller', ['ionic'])
 
 	var self = this;
   self.all = [];
-
-	getAnnouncements();
-
+  console.log("HEREEEEE", payload);
   var payload = AuthService.jwtToJSON();
+  getAnnouncements();
 
-	function getAnnouncements() {
-		 $http
-  		.get('http://localhost:3000/api/households/' + payload.households[0] + '/announcements')
-  		.then(function(res){
+
+  function getAnnouncements() {
+     $http
+      .get('http://localhost:3000/api/households/' + payload.households[0] + '/announcements')
+      .then(function(res){
+        console.log("HEREEEEE", payload);
 				$scope.announcements = res.data.announcements;
   		});
 	}
