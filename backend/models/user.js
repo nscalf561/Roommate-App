@@ -20,21 +20,6 @@ var UserSchema = new Schema ({
   households: [String]
 });
 
-// UserSchema.pre('save', function(next, done) {
-//   var user = this;
-//   mongoose.models.user.findOne({email : user.email}, function(err, results) {
-//     if(err) {
-//       done(err);
-//     } else if(results) {
-//       user.invalidate("email", "email must be unique");
-//       done(new Error("email must be unique"));
-//     } else {
-//       done();
-//     }
-//   });
-//   next();
-// });
-
 UserSchema.pre('save', function (next) {
   var user = this;
   if (this.isModified('password') || this.isNew) {

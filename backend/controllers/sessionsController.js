@@ -19,7 +19,7 @@ var sessionsController = {
     	// save the user
     		newUser.save(function(err) {
       		if (err) {
-        		return res.json({success: false, msg: 'Username already exists.'});
+        		return res.json({success: false, msg: 'Email has been taken.'});
       		}
       		res.json({success: true, msg: 'Successful created new user.'});
     		});
