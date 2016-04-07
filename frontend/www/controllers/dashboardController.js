@@ -30,6 +30,9 @@ angular.module('dashboard.controller', ['angularMoment'])
           house.supplies.forEach(function(supply) {
             $scope.dashboardContent.push(supply);
           });
+          house.completedChores.forEach(function(completedChore) {
+            $scope.dashboardContent.push(completedChore);
+          });
         }
 
         // organizes the dashboard so that the newest content is on the top
