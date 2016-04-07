@@ -95,3 +95,21 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 	}
 }
 
+//login page
+.loginDiv {
+	background-color: $balanced;
+
+	.logoDiv {
+		margin-top: 5px;
+
+		.logoImg {
+			display: block;
+			width: 100%;
+			margin: 0 auto;
+			height: auto; 
+			color: white;
+		}
+	}
+	
+}
+

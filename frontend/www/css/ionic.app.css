@@ -9779,3 +9779,14 @@ a.button {
 .dashboardDiv .associatedUser {
   margin-bottom: -5px;
   text-align: right !important; }
+
+.loginDiv {
+  background-color: #34495E; }
+  .loginDiv .logoDiv {
+    margin-top: 5px; }
+    .loginDiv .logoDiv .logoImg {
+      display: block;
+      width: 100%;
+      margin: 0 auto;
+      height: auto;
+      color: white; }

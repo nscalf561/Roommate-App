@@ -98,6 +98,7 @@ var choreController = {
 						if (req.body.completedAt) { chore.completedAt = req.body.completedAt; }
 						if (req.body.upvotes) { chore.upvotes = req.body.upvotes; }
 						if (req.body.comments) { chore.comments = []; }
+						if (req.body.upvotedBy) { chore.upvotedBy = req.body.upvotedBy; }
 
 						// if we are adding a comment, push comment object to comments array
 						if (req.body.content) { chore.comments.push(req.body); }
