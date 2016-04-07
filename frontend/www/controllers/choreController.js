@@ -25,8 +25,9 @@ angular.module('chore.controller', ['ionic'])
   $scope.createChore = function(newChore) {
     // if new chore form field is empty, show popup so user knows they must complete field
     if (!newChore) {
-      $scope.showFailToAddChoreAlert();
-      return;
+      return $scope.showFailToAddChoreAlert();
+    } else if (!newChore.task) {
+      return $scope.showFailToAddChoreAlert();
     } else {
 
       // create new chore object that will be saved to household in database 

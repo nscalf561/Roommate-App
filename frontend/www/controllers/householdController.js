@@ -19,11 +19,11 @@ angular.module('household.controller', ['ionic'])
 
 	$scope.createHousehold = function (newHousehold) {
 		if (!newHousehold) {
-			$scope.showHouseholdNameAlert();
+			return $scope.showHouseholdNameAlert();
 		} else if (!newHousehold.name) {
-			$scope.showHouseholdNameAlert();
+			return $scope.showHouseholdNameAlert();
 		} else if (!newHousehold.address) {
-			$scope.showAddressAlert();
+			return $scope.showAddressAlert();
 		}
 		
 		var newHouse = {
