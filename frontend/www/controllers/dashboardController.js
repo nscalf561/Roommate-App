@@ -13,6 +13,7 @@ angular.module('dashboard.controller', ['angularMoment'])
        // console.log(res.data)
        var house = res.data.house;
        // console.log("house:", house);
+       // console.log(res.data)
   	   $scope.chores = house.chores;
        // $scope.announcements= res.data.house[0].announcements;
 

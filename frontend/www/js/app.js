@@ -6,6 +6,7 @@ angular.module('starter', [
                             'chore.controller', 
                             'household.controller', 
                             'announcement.controller', 
+                            'supply.controller',
                             'bill.controller',
                             'sessions.controller'
                           ])
@@ -76,8 +77,18 @@ angular.module('starter', [
     views: {
       'menuContent': {
         templateUrl: 'templates/chores.html',
-        controller: 'ChoreCtrl as chores',
+        controller: 'ChoreCtrl as chores'
         // authenticate: true
+      }
+    }
+  })
+
+  .state('app.supplies', {
+    url: '/supplies',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/supplies.html',
+        controller: 'SupplyCtrl'
       }
     }
   })
