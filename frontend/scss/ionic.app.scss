@@ -44,7 +44,6 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 .balancedBackground {
 	background-color: $balanced;
-	border: none;
 }
 
 .button-calm {
@@ -65,22 +64,17 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 //announcement
 
 .announcementDiv {
-	.section {
-		margin-bottom: -15px;
-	}
-	.content {
-		margin-left: 5px;
-	}
-	.author {
-		font-weight: bold;
-	}
 	.date {
 		color: gray;
 		text-align: right !important;
-
+		margin-top: -5px;
+		margin-bottom: 3px;
 	}
 }
 
+.whiteText {
+	color: white;
+}
 
 //dashboard
 .dashboardDiv {
@@ -88,9 +82,6 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 		margin-bottom: 5px;
 	}
 	.date {
-	}
-	.associatedUser {
-		margin-bottom: -5px;
 		text-align: right !important;
 	}
 }

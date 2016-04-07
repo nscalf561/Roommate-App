@@ -5,18 +5,19 @@
     </button>
   </ion-nav-buttons>
 
-  <ion-content>
+  <ion-content class="balancedBackground">
     <div class="announcementDiv">
       <div class="card" ng-repeat="announcement in announcements | orderBy: '-createdAt'">
         <div class="item item-text-wrap" on-swipe-left="deleteAnnouncement(announcement)">
-          <div class="author section">{{announcement.userName}}</div>
-          <br>
-          <div class="content section">{{announcement.content}}</div>
-          <br>
-          <div class="date">
-          <i ng-click="deleteAnnouncement(announcement)" class="icon ion-ios-trash" ng-show="payload._id === announcement.userId"></i> <span class="date" am-time-ago="announcement.createdAt"></span></div>
+          <div class="date" am-time-ago="announcement.createdAt">
+          </div>
+          {{announcement.content}}
+        </div>
+        <div class="item item-divider">
+          Created by {{announcement.userName}}
         </div>
       </div>
+    </div>
     </div>
   </ion-content>
 </ion-view>
@@ -27,13 +28,13 @@
 <div class="modal">
 
   // Modal header bar
-  <ion-header-bar class="bar-secondary">
-    <h1 class="title">Create New Announcement</h1>
-    <button class="button button-clear button-balanced" ng-click="closeNewAnnouncementModal()">Cancel</button>
+  <ion-header-bar class="bar-balanced">
+    <h1 class="title whiteText">Create New Announcement</h1>
+    <button class="button button-clear whiteText" ng-click="closeNewAnnouncementModal()">Cancel</button>
   </ion-header-bar>
 
   // Modal content 
-  <ion-content>
+  <ion-content class="balancedBackground padding">
     <form ng-submit="createAnnouncement(newAnnouncement)">
       <div class="list">
         <label class="item item-input">
@@ -41,7 +42,7 @@
         </label>
       </div>
       <div class="padding">
-        <button type="submit" class="button button-block button-block button-balanced">Post</button>
+        <button type="submit" class="button button-block button-calm">Post</button>
       </div>
     </form>
   </ion-content>
