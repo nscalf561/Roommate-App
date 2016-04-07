@@ -1,6 +1,6 @@
 angular.module('sessions.controller', ['ionic'])
  
-.controller('LoginCtrl', function($rootScope, $scope, AuthService, $ionicPopup, $state) {
+.controller('LoginCtrl', function($scope, AuthService, $ionicPopup, $state) {
   if (AuthService.isAuthenticated() && AuthService.jwtToJSON().households[0]) {
     console.log("authenticated");
     $state.go('app.dashboard');
@@ -16,9 +16,9 @@ angular.module('sessions.controller', ['ionic'])
     AuthService.login($scope.user).then(function(msg) {
       var payload = AuthService.jwtToJSON();
       if (payload.households.length > 0) {
-        $rootScope.houseId = payload.households[0];
-        $rootScope.userId = payload._id;
-        $rootScope.userName = payload.name;
+        $scope.houseId = payload.households[0];
+        $scope.userId = payload._id;
+        $scope.userName = payload.name;
         $state.go('app.dashboard');
       } else {
         $state.go('app.households');
@@ -54,7 +54,7 @@ angular.module('sessions.controller', ['ionic'])
   };
 })
  
-.controller('LogoutCtrl', function($scope, AuthService, API_ENDPOINT, $http, $state) {
+.controller('LogoutCtrl', function($scope, AuthService, API_ENDPOINT, $http, $state, $window) {
   $scope.destroySession = function() {
     AuthService.logout();
   };
@@ -68,6 +68,7 @@ angular.module('sessions.controller', ['ionic'])
   $scope.logout = function() {
     AuthService.logout();
     $state.go('app.login');
+    $window.location.reload(true);
   };
 })
  

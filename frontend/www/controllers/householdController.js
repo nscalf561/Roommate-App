@@ -1,6 +1,6 @@
 angular.module('household.controller', ['ionic'])
 
-.controller('HouseholdCtrl', function(AuthService, $scope, $ionicModal, $ionicPopup, $http, $state, $rootScope) {
+.controller('HouseholdCtrl', function(AuthService, $scope, $ionicModal, $ionicPopup, $http, $state) {
 
 	$scope.households = [];
 
@@ -46,8 +46,8 @@ angular.module('household.controller', ['ionic'])
 				userId : payload._id,
 				houseId : household._id
 			};
-			
-		$rootScope.houseId = household._id;
+
+
 
 		$http
 			.post('http://localhost:3000/api/houseuser', houseAndUserId)

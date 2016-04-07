@@ -1,6 +1,6 @@
 angular.module('dashboard.controller', ['angularMoment'])
 
-.controller('DashboardCtrl', function($rootScope, $scope, $http, AuthService) {
+.controller('DashboardCtrl', function($scope, $http, AuthService) {
 
   var payload = AuthService.jwtToJSON();
   

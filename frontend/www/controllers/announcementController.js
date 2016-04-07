@@ -1,16 +1,17 @@
 angular.module('announcement.controller', ['ionic'])
 
-.controller('AnnouncementCtrl', function($rootScope, $scope, $ionicModal, $ionicPopup, $http) {
+.controller('AnnouncementCtrl', function(AuthService, $scope, $ionicModal, $ionicPopup, $http) {
 
 	var self = this;
   self.all = [];
 
 	getAnnouncements();
 
+  var payload = AuthService.jwtToJSON();
 
 	function getAnnouncements() {
 		 $http
-  		.get('http://localhost:3000/api/households/' + $rootScope.houseId + '/announcements')
+  		.get('http://localhost:3000/api/households/' + payload.households[0] + '/announcements')
   		.then(function(res){
 				$scope.announcements = res.data.announcements;
   		});
@@ -26,8 +27,8 @@ angular.module('announcement.controller', ['ionic'])
     // create new announcement object to pass to the backend
 		var announcement = {
 			content: newAnnouncement.content,
-			userName: $rootScope.userName,
-			userId: $rootScope.userId,
+			userName: payload.name,
+			userId: payload._id,
 			createdAt: new Date()
 		};
 
@@ -36,7 +37,7 @@ angular.module('announcement.controller', ['ionic'])
 
 		// add the announcement to the house model
     $http
-      .post('http://localhost:3000/api/households/' + $rootScope.houseId + '/announcements', announcement)
+      .post('http://localhost:3000/api/households/' + payload.households[0] + '/announcements', announcement)
       .then(function(res) {
         console.log('added new announcement:', announcement);
         getAnnouncements();
@@ -47,7 +48,7 @@ angular.module('announcement.controller', ['ionic'])
 
   $scope.deleteAnnouncement = function (announcement) {
   $http
-    .delete('http://localhost:3000/api/households/' + $rootScope.houseId + '/announcements/' + announcement._id)
+    .delete('http://localhost:3000/api/households/' + payload.households[0] + '/announcements/' + announcement._id)
     .then(function(res) {
       console.log('Announcement deleted');
       getAnnouncements();
