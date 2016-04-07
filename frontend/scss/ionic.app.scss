@@ -35,17 +35,11 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 	color: $balanced;
 	text-align: right;
 	font-weight:  normal;
-	
-}
-
-.item .item-content .sideMenu {
-	background-color: $balanced !important;
 }
 
 .balancedBackground {
 	background-color: $balanced;
 }
-
 .button-calm {
 	color: $balanced !important;
 }
@@ -55,14 +49,14 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .balanced-text {
 	color: $balanced;
 }
-
 .button.button-positive {
 	background-color: $balanced;
 }
-
+.whiteText {
+	color: white;
+}
 
 //announcement
-
 .announcementDiv {
 	.date {
 		color: gray;
@@ -72,9 +66,6 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 	}
 }
 
-.whiteText {
-	color: white;
-}
 
 //dashboard
 .dashboardDiv {
@@ -85,6 +76,7 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 		text-align: right !important;
 	}
 }
+
 
 //login page
 .loginDiv {
@@ -104,8 +96,4 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 	
 }
 
-.swipeLeftInstructions {
-	font-weight: italic normal;
-
-}
 

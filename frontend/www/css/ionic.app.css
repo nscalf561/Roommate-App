@@ -9741,9 +9741,6 @@ a.button {
   text-align: right;
   font-weight: normal; }
 
-.item .item-content .sideMenu {
-  background-color: #34495E !important; }
-
 .balancedBackground {
   background-color: #34495E; }
 
@@ -9759,14 +9756,14 @@ a.button {
 .button.button-positive {
   background-color: #34495E; }
 
+.whiteText {
+  color: white; }
+
 .announcementDiv .date {
   color: gray;
   text-align: right !important;
   margin-top: -5px;
   margin-bottom: 3px; }
-
-.whiteText {
-  color: white; }
 
 .dashboardDiv .section {
   margin-bottom: 5px; }
@@ -9784,6 +9781,3 @@ a.button {
       margin: 0 auto;
       height: auto;
       color: white; }
-
-.swipeLeftInstructions {
-  font-weight: italic normal; }
