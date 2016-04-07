@@ -40,19 +40,18 @@ angular.module('household.controller', ['ionic'])
 	};
 
 	$scope.joinHousehold = function (household) {
-
+		console.log(household);
 		var payload = AuthService.jwtToJSON();
 		var houseAndUserId = {
 				userId : payload._id,
 				houseId : household._id
 			};
 
-
-
 		$http
 			.post('http://localhost:3000/api/houseuser', houseAndUserId)
 			.then(function(res) {
 				console.log(houseAndUserId);
+				AuthService.storeUserCredentials(res.data.token);
 				$state.go('app.dashboard');
 			});
 	};

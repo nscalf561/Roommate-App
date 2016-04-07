@@ -78,6 +78,7 @@ angular.module('starter')
     register: register,
     logout: logout,
     jwtToJSON: jwtToJSON,
+    storeUserCredentials: storeUserCredentials,
     isAuthenticated: function() {return isAuthenticated;},
   };
 })

@@ -1,6 +1,8 @@
 var app 	= require('../server.js'),
 	// House 	= require('../models/house'),
 	User 	= require('../models/user'),
+	jwt 	= require('jwt-simple'),
+	config    = require('../config/database'),
 	HouseUser = require('../models/houseUser');
 
 var houseuserController = {
@@ -23,10 +25,10 @@ var houseuserController = {
 
 		occupant.save(function(err, occupant) {
 			if (err) {
-				res.status(500).send();
+				// res.status(500).send();
 				console.log("There was an error joining household:", err);
 			} else {
-				res.status(200).send();
+				// res.status(200).send();
 				console.log("Successfuly joined household!");
 			}
 		});
@@ -41,7 +43,12 @@ var houseuserController = {
 					if (err) {
 						console.log("There was an error saving the user's houseId", err);
 					} else {
-						res.status(200).send();
+						var token = jwt.encode(user, config.secret);
+						console.log(token);
+          				// return the information including token as JSON
+          				
+          				res.json({success: true, token: 'JWT ' + token});
+
 						console.log("Successfully saved houseId in user.households");
 					}
 				});

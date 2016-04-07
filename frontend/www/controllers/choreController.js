@@ -2,17 +2,13 @@ angular.module('chore.controller', ['ionic'])
 
 .controller('ChoreCtrl', function($scope, $ionicModal, $ionicPopup, $http, $timeout, AuthService) {
 
-  // var self = this;
-  // self.all = [];
-  // self.newChore = {};
 
   $scope.chores = [];
 
   var payload = AuthService.jwtToJSON();
   getChores();
 
-  // $scope.chores = self.all;
-
+  debugger; 
   // get all chores
   function getChores() {
   	$http
@@ -20,7 +16,6 @@ angular.module('chore.controller', ['ionic'])
   		.then(function(res){
         console.log(res.data.chores);
         $scope.chores = (res.data.chores);
-				// self.all = res.data.chores;
   		});
   }
 

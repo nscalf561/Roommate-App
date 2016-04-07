@@ -40,7 +40,15 @@ angular.module('sessions.controller', ['ionic'])
  
   $scope.signup = function() {
     AuthService.register($scope.user).then(function(msg) {
-      $state.go('app.login');
+      console.log("user registered");
+      AuthService.login($scope.user).then(function(msg) {
+        $state.go('app.households');
+      }, function(errMsg) {
+        var alertPopup = $ionicPopup.alert({
+          title: 'Login failed!',
+          template: errMsg
+        });
+      });
       var alertPopup = $ionicPopup.alert({
         title: 'Register success!',
         template: msg
