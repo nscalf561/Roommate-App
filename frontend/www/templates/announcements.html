@@ -13,8 +13,9 @@
           </div>
           {{announcement.content}}
         </div>
-        <div class="item item-divider">
+        <div class="item item-divider item-icon-left">
           Created by {{announcement.userName}}
+          <i class="icon ion-ios-trash" ng-click="deleteAnnouncement(announcement)"></i>
         </div>
       </div>
     </div>

@@ -31,7 +31,8 @@ angular.module('chore.controller', ['ionic'])
       var chore = {
         task: newChore.task,
         completedAt: new Date(),
-        upvotes: 0
+        upvotes: 0,
+        completedBy: payload.name
       };
 
       // reset chore form to empty

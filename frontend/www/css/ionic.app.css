@@ -9769,7 +9769,8 @@ a.button {
   margin-bottom: 5px; }
 
 .dashboardDiv .date {
-  text-align: right !important; }
+  text-align: right !important;
+  color: gray; }
 
 .loginDiv {
   background-color: #34495E; }
