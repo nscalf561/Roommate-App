@@ -57,9 +57,7 @@ var choreController = {
 			} else {
 				house.chores.forEach(function(chore) {
 					if (chore._id == req.params.id) {
-						return res.json({chore: chore});
-					} else {
-						res.status(500).send();
+						res.json({chore: chore});
 					}
 				});
 			}
@@ -78,6 +76,7 @@ var choreController = {
 				
 				// find the specific chore within the house
 				house.chores.forEach(function(chore) {
+
 					if (chore._id == req.params.id) {
 
 						// if the use did an upvote/downvote action
@@ -94,10 +93,14 @@ var choreController = {
 								chore.upvotes -= 1;
 							}
 						}
+
 						// if we are marking the chore completed, clear upvotes/comments/add new completedAt date
 						if (req.body.completedAt) { chore.completedAt = req.body.completedAt; }
-						if (req.body.comments) { chore.comments = req.body.comments; }
 						if (req.body.upvotes) { chore.upvotes = req.body.upvotes; }
+						if (req.body.comments) { chore.comments = []; }
+
+						// if we are adding a comment, push comment object to comments array
+						if (req.body.content) { chore.comments.push(req.body); }
 
 						// save these changes to the database
 						house.save(function(err, house) {

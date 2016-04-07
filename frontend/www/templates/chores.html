@@ -9,9 +9,12 @@
     <ion-list id="chores">
       <ion-item class='item item-icon-left item-icon-right' ng-repeat="chore in chores.all | orderBy: ['-upvotes', 'completedAt']">
         <i class="icon ion-ios-arrow-thin-up" ng-click="incrementUpvote(chore)" on-swipe-left="deleteChore(chore)"></i>
+          <span ng-click="showChoreDetailsModal(chore)">
           {{chore.upvotes}}
         	{{chore.task}}<br>
-          <span style="color: gray">last completed <span class="date" am-time-ago="chore.completedAt"></span></span>
+            <span style="color: gray">last completed <span class="date" am-time-ago="chore.completedAt"></span></span><br>
+            {{chore.comments.length }} comments
+          </span>
           <button class="button button-icon ion-ios-trash" ng-click="deleteChore(chore)"></button>
           <i class="icon ion-ios-checkmark" ng-click="markCompleted(chore)"></i>
       </ion-item>
@@ -33,13 +36,57 @@
       <form ng-submit="createChore(newChore)">
         <div class="list">
           <label class="item item-input">
-            <textarea rows="5" placeholder="What needs to be done?" ng-model="newChore.task" ng-maxlength="60" ng-minlength="4"></textarea>
+            <textarea rows="5" placeholder="What needs to be done?" ng-model="newChore.task" ng-maxlength="60" ng-minlength="1"></textarea>
           </label>
         </div>
         <div class="padding">
           <button type="submit" class="button button-block button-block button-balanced">Add Chore</button>
         </div>
       </form>
+    </ion-content>
+
+  </div>
+</script>
+
+<script id="chore-details.html" type="text/ng-template">
+  <div class="modal">
+
+    // Modal header bar
+    <ion-header-bar class="bar-secondary">
+      <button class="button button-clear button-balanced" ng-click="closeChoreDetailsModal()"><i class="icon ion-ios-arrow-thin-left"></i></button>
+      <h1 class="title">Chore Details</h1>
+    </ion-header-bar>
+
+    // Modal content 
+    <ion-content>
+
+      <div class="card">
+        <div class="item item-text-wrap">
+          {{chore.task}}
+        </div>
+        <div class="item item-divider">
+          Last completed <span class="date" am-time-ago="chore.completedAt"></span>
+        </div>
+      </div>
+
+      <form ng-submit="addComment(chore)">
+        <div class="list list-inset">
+          <label class="item item-input">
+            <textarea rows="3" placeholder="Write a comment..." ng-model="chore.newCommentContent" ng-minlength="1"></textarea>
+          </label>
+        </div>
+        <div class="padding">
+          <button type="submit" class="button button-block button-block button-balanced">Post</button>
+        </div>
+      </form>
+
+      <div class="list card" ng-show="chore.comments.length > 0">
+        <a class="item" ng-repeat="comment in chore.comments">
+          {{comment.content}}<br/>
+          {{comment.author}}, <span class="date" am-time-ago="comment.createdAt"></span>
+        </a>
+      </div>
+
     </ion-content>
 
   </div>
