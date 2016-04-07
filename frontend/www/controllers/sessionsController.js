@@ -8,6 +8,7 @@ angular.module('sessions.controller', ['ionic'])
 
   $scope.user = {
     name: '',
+    email: '',
     password: ''
   };
 
@@ -19,6 +20,7 @@ angular.module('sessions.controller', ['ionic'])
         $scope.houseId = payload.households[0];
         $scope.userId = payload._id;
         $scope.userName = payload.name;
+        $scope.email = payload.email;
         $state.go('app.dashboard');
       } else {
         $state.go('app.households');
@@ -35,6 +37,7 @@ angular.module('sessions.controller', ['ionic'])
 .controller('RegisterCtrl', function($scope, AuthService, $ionicPopup, $state) {
   $scope.user = {
     name: '',
+    email: '',
     password: ''
   };
  

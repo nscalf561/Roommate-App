@@ -7,11 +7,12 @@ var app 			= require('../server'),
 var sessionsController = {
 
 	signup : function (req, res) {
-		if (!req.body.name || !req.body.password) {
-    	res.json({success: false, msg: 'Please pass name and password.'});
+		if (!req.body.name || !req.body.password || !req.body.email) {
+    	res.json({success: false, msg: 'Please pass name, email, and password.'});
   	} else {
     		var newUser = new User({
       		name: req.body.name,
+          email: req.body.email,
       		password: req.body.password,
       		households: req.body.households
     		});
@@ -27,7 +28,7 @@ var sessionsController = {
 
 	authenticate: function (req, res) {
 		User.findOne({
-    	name: req.body.name
+    	email: req.body.email
   	}, 
   	function(err, user) {
     	if (err) throw err;
