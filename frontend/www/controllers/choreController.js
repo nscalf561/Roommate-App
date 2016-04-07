@@ -1,20 +1,21 @@
 angular.module('chore.controller', ['ionic'])
 
-.controller('ChoreCtrl', function($rootScope, $scope, $ionicModal, $ionicPopup, $http, $timeout) {
+.controller('ChoreCtrl', function($rootScope, $scope, $ionicModal, $ionicPopup, $http, $timeout, AuthService) {
 
   var self = this;
   self.all = [];
   self.newChore = {};
 
+  var payload = AuthService.jwtToJSON();
+
   getChores();
 
   $scope.chores = self.all;
 
-
   // get all chores
   function getChores() {
   	$http
-  		.get('http://localhost:3000/api/households/' + $rootScope.houseId + '/chores')
+  		.get('http://localhost:3000/api/households/' + payload.households[0] + '/chores')
   		.then(function(res){
 				self.all = res.data.chores;
   		});
