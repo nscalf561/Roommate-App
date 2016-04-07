@@ -2,13 +2,15 @@ angular.module('supply.controller', ['ionic'])
 
 .controller('SupplyCtrl', function($rootScope, $scope, $ionicModal, $ionicPopup, $http, $timeout) {
   
+
+  console.log("Supplies page was hit", $rootScope.houseId);
   getSupplies();
 
   function getSupplies() {
     $http
       .get('http://localhost:3000/api/households/' + $rootScope.houseId + '/supplies')
       .then(function(res){
-        console.log("get supplies", res.data.chores);
+        console.log("get supplies", res.data.supplies);
         // self.all = res.data.chores;
       });
     // $http
@@ -20,33 +22,33 @@ angular.module('supply.controller', ['ionic'])
     //   });
   }
 
-  $scope.createChore = function(newSupply) {
-    // if new chore form field is empty, show popup so user knows they must complete field
-    if (!newSupply) {
-      $scope.showFailToAddChoreAlert();
-      return;
-    } else {
-      // create new chore object that will be saved to household in database 
-      var supply = {
-        item: newSupply.item,
-        completedAt: new Date(),
-        purchasedBy: newSupply.purchasedBy
-      };
-      // reset chore form to empty
-      newSupply.item = '';
+  // $scope.createSupply = function(newSupply) {
+  //   // if new chore form field is empty, show popup so user knows they must complete field
+  //   if (!newSupply) {
+  //     $scope.showFailToAddChoreAlert();
+  //     return;
+  //   } else {
+  //     // create new chore object that will be saved to household in database 
+  //     var supply = {
+  //       item: newSupply.item,
+  //       completedAt: new Date(),
+  //       purchasedBy: newSupply.purchasedBy
+  //     };
+  //     // reset chore form to empty
+  //     newSupply.item = '';
 
-      // add the chore to the house model
-      $http
-        .post('http://localhost:3000/api/households/' + $rootScope.houseId + '/supplies', supply)
-        .then(function(res) {
-          console.log('added new supply:', supply);
-          // push the chore object to the front-end array of chores
-          getSupplies();
-          // close new chore model
-          $scope.closeNewSupplyModal();
-        });
-    }
-  };
+  //     // add the chore to the house model
+  //     $http
+  //       .post('http://localhost:3000/api/households/' + $rootScope.houseId + '/supplies', supply)
+  //       .then(function(res) {
+  //         console.log('added new supply:', supply);
+  //         // push the chore object to the front-end array of chores
+  //         getSupplies();
+  //         // close new chore model
+  //         $scope.closeNewSupplyModal();
+  //       });
+  //   }
+  // };
 
 
   // New Chore Modal Functions

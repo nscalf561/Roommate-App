@@ -6,9 +6,11 @@ angular.module('chore.controller', ['ionic'])
   self.all = [];
   self.newChore = {};
 
+  console.log("chores page was hit", $rootScope.houseId);
   getChores();
 
   $scope.chores = self.all;
+
 
 
   // get all chores
