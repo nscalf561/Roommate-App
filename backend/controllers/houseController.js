@@ -1,7 +1,6 @@
 var app 		= require('../server');
 var House 	= require('../models/house');
 
-
 var houseController = {
 
 	// show all houses
