@@ -36,7 +36,7 @@ var userController = {
 			}
 
 				if (req.body.name) { user.name.type = req.body.name; }
-				// if (req.body.email) { user.email = req.body.email; }
+				if (req.body.email) { user.email = req.body.email; }
 				if (req.body.household) { user.households.push(req.body.household); }
 			
 			User.update({_id: req.params.id}, user, function(err, user) {
