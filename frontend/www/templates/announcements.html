@@ -1,0 +1,52 @@
+<ion-view view-title="Announcements"> 
+
+  <ion-nav-buttons side="right">
+    <button class="button button-icon ion-ios-plus-outline" ng-click="showNewAnnouncementModal()">
+    </button>
+  </ion-nav-buttons>
+
+  <ion-content class="balancedBackground">
+    <div class="announcementDiv">
+      <div class="card" ng-repeat="announcement in announcements | orderBy: '-createdAt'">
+        <div class="item item-text-wrap" on-swipe-left="deleteAnnouncement(announcement)">
+          <div class="date" am-time-ago="announcement.createdAt">
+          </div>
+          {{announcement.content}}
+        </div>
+        <div class="item item-divider item-icon-left">
+          Created by {{announcement.userName}}
+          <i class="icon ion-ios-trash" ng-click="deleteAnnouncement(announcement)"></i>
+        </div>
+      </div>
+    </div>
+    </div>
+  </ion-content>
+</ion-view>
+
+
+
+<script id="new-announcement.html" type="text/ng-template">
+<div class="modal">
+
+  // Modal header bar
+  <ion-header-bar class="bar-balanced">
+    <h1 class="title whiteText">Create New Announcement</h1>
+    <button class="button button-clear whiteText" ng-click="closeNewAnnouncementModal()">Cancel</button>
+  </ion-header-bar>
+
+  // Modal content 
+  <ion-content class="balancedBackground padding">
+    <form ng-submit="createAnnouncement(newAnnouncement)">
+      <div class="list">
+        <label class="item item-input">
+          <textarea rows="5" placeholder="What's your announcement?" ng-model="newAnnouncement.content" ng-maxlength="140" ng-minlength="1"></textarea>
+        </label>
+      </div>
+      <div class="padding">
+        <button type="submit" class="button button-block button-calm">Post</button>
+      </div>
+    </form>
+  </ion-content>
+
+</div>
+</script>

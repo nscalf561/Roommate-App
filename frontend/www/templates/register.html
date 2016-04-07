@@ -1,0 +1,20 @@
+<ion-view view-title="Create a new account">
+  <ion-content class="padding">
+    <div class="list">
+      <label class="item item-input">
+        <input type="text" placeholder="Name" ng-model="user.name">
+      </label>
+      <label class="item item-input">
+        <input type="text" placeholder="Email" ng-model="user.email">
+      </label>
+      <label class="item item-input">
+        <input type="password" placeholder="Password" ng-model="user.password">
+      </label>
+    </div>
+    <button class="button button-block button-balanced" ng-click="signup()">
+      Sign Up
+    </button>
+    <button class="button button-positive button-clear button-full" ui-sref="app.login">Already have an account?</button>
+  </ion-content>
+</ion-view>
+

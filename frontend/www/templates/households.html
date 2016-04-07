@@ -1,0 +1,51 @@
+<ion-view view-title="Households"> 
+  {{memberinfo}}
+
+	<ion-nav-buttons side="right">
+	  <button class="button button-icon ion-plus" ng-click="showNewHouseholdModal()">
+	  </button>
+  </ion-nav-buttons>
+
+	  <ion-header-bar class="bar-light bar-subheader">
+			<input type="text" placeholder="Search by Address" data-ng-model="householdSearch">
+		</ion-header-bar>
+
+  <ion-content>
+		<ion-list>
+			<ion-item ng-repeat="household in households | orderBy: 'name' | filter: householdSearch" ng-click="joinHousehold(household)">
+				<span style="font-weight: bold">{{household.name}}</span>
+				<br>
+				<span style="color: gray">{{household.address}}</span>
+			</ion-item>
+		</ion-list>
+  </ion-content>
+</ion-view>
+
+<script id="new-household.html" type="text/ng-template">
+<div class="modal">
+
+  // Modal header bar
+  <ion-header-bar class="bar-secondary">
+    <h1 class="title">Create New Household</h1>
+    <button class="button button-clear button-balanced" ng-click="closeNewHouseholdModal()">Cancel</button>
+  </ion-header-bar>
+
+  // Modal content 
+  <ion-content>
+    <form ng-submit="createHousehold(newHousehold)">
+      <div class="list">
+        <label class="item item-input">
+          <input type="text" placeholder="Household Name" ng-model="newHousehold.name" ng-maxlength="30" ng-minlength="1"></input>
+        </label>
+        <label class="item item-input">
+          <textarea rows="4" placeholder="Address" ng-model="newHousehold.address" ng-maxlength="60" ng-minlength="1"></textarea>
+        </label>
+      </div>
+      <div class="padding">
+        <button type="submit" ng-click="closeNewHouseholdModal()" class="button button-block button-block button-balanced">Create Household</button>
+      </div>
+    </form>
+  </ion-content>
+
+</div>
+</script>

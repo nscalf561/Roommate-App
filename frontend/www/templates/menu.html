@@ -1,0 +1,53 @@
+<ion-side-menus enable-menu-with-back-views="true">
+  <ion-side-menu-content>
+    <ion-nav-bar class="bar-balanced">
+
+      <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+        </button>
+      </ion-nav-buttons>
+
+    </ion-nav-bar>
+    <ion-nav-view name="menuContent"></ion-nav-view>
+  </ion-side-menu-content>
+
+  <ion-side-menu side="left">
+    <ion-header-bar class="bar-balanced">
+      <h1 class="title">Menu</h1>
+    </ion-header-bar>
+    <ion-content id="sideMenu">
+
+      <ion-list>    
+
+        <ion-item class="item item-icon-left sideMenu" menu-close href="#/app/userSettings">
+          {{payload.name}}<i class="icon ion-person"></i>
+        </ion-item>
+
+        <ion-item class="item item-icon-right" menu-close href="#/app/dashboard">
+          Dashboard<i class="icon ion-ios-home"></i>
+        </ion-item>
+
+        <ion-item class="item item-icon-right" menu-close href="#/app/chores">
+          Chores<i class="icon ion-settings"></i>
+        </ion-item>
+
+        <ion-item class="item item-icon-right" menu-close href="#/app/bills">
+          Bills<i class="icon ion-card"></i>
+        </ion-item>
+
+        <ion-item class="item item-icon-right" menu-close href="#/app/supplies">
+          Supplies<i class="icon ion-ios-cart"></i>
+        </ion-item>
+
+        <ion-item class="item item-icon-right" menu-close href="#/app/announcements">
+          Announcements<i class="icon ion-speakerphone"></i>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+
+    <ion-footer-bar class="bar-calm">
+      <ion-item class="item item-icon-left" nav-clear menu-close ng-click="logout()" style="left:0;right:0;margin:0; width: 100%; position: fixed;">Logout<i class="icon ion-log-out"></i> </ion-item>
+    </ion-footer-bar>
+
+  </ion-side-menu>
+</ion-side-menus>

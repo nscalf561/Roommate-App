@@ -1,0 +1,48 @@
+<ion-view view-title="Supplies" id="suppliesView">
+
+  <ion-nav-buttons side="right">
+    <button class="button button-icon ion-plus" ng-click="showNewSupplyModal()">
+    </button>
+  </ion-nav-buttons>
+
+  <ion-content class="balancedBackground">
+    <div class="supplyDiv">
+      <div class="card" ng-repeat="supply in supplies | orderBy: '-createdAt'">
+        <div class="item item-text-wrap item-icon-right" on-swipe-left="deleteSupply(supply)">
+          <span>{{supply.item}}</span>
+          <i class="icon ion-ios-trash" ng-click="deleteSupply(supply)"></i>
+        </div>
+
+        <div class="item item-divider">
+          <span class="instructionalFooter">Created by {{supply.createdByName}}
+      </div>
+    </div>
+  </ion-content>
+</ion-view>
+
+<script id="new-supply.html" type="text/ng-template">
+  <div class="modal">
+
+    // Modal header bar
+    <ion-header-bar class="bar-balanced">
+      <h1 class="title whiteText">Create New Supply</h1>
+      <button class="button button-clear whiteText" ng-click="closeNewSupplyModal()">Cancel</button>
+    </ion-header-bar>
+
+    // Modal content 
+    <ion-content class="balancedBackground padding">
+      <form ng-submit="createSupply(newSupply)">
+        <div class="list">
+          <label class="item item-input">
+            <textarea rows="5" placeholder="What needs to be purchased?" ng-model="newSupply.item" ng-maxlength="60" ng-minlength="1">
+            </textarea>
+          </label>
+        </div>
+        <div class="padding">
+          <button type="submit" class="button button-block button-calm">Post</button>
+        </div>
+      </form>
+    </ion-content>
+
+  </div>
+</script>
