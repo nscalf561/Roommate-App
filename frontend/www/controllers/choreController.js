@@ -10,17 +10,16 @@ angular.module('chore.controller', ['ionic'])
 
   $scope.chores = self.all;
 
+
   // get all chores
   function getChores() {
   	$http
   		.get('http://localhost:3000/api/households/' + $rootScope.houseId + '/chores')
   		.then(function(res){
-        console.log(res.data.chores);
-        console.log('userId:', $rootScope.userId);
-        console.log('houseId:',$rootScope.houseId);
 				self.all = res.data.chores;
   		});
   }
+
 
   // create new chore
   $scope.createChore = function(newChore) {
@@ -70,6 +69,7 @@ angular.module('chore.controller', ['ionic'])
       });
   };
 
+
   // mark a chore completed
   $scope.markCompleted = function (chore) {
 
@@ -118,6 +118,25 @@ angular.module('chore.controller', ['ionic'])
       });
   };
 
+
+  $scope.addComment = function(chore) {
+    console.log('new comment function has been reached. comment:', chore.newCommentContent);
+
+    var comment = {
+      content: chore.newCommentContent,
+      author: $rootScope.userName,
+      createdAt: new Date()
+    };
+
+    $http
+      .put('http://localhost:3000/api/households/' + $rootScope.houseId + '/chores/' + chore._id, comment)
+      .then(function(res) {
+        getChores();
+        chore.comments.push(comment);
+        chore.newCommentContent = '';
+      });
+
+  };
 
 
 

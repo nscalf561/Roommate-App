@@ -12,7 +12,11 @@ var HouseSchema = new Schema ({
 		upvotes: Number,
 		completedBy: String,
 		upvotedBy: [String],
-		comments: [String]
+		comments: [{
+			content: String,
+			author: String,
+			createdAt: { type: Date, default: new Date() }
+		}]
 	}],
 	announcements: [{
 		content: String,
