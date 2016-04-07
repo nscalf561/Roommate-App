@@ -27,8 +27,9 @@ var announcementController = {
 				// object we're going to save to db
 				var newAnnouncement = {
 					content: req.body.content, 
-					author: "test", // TODO - need to get this from the jwt
-					createdAt: new Date()
+					userName: req.body.userName,
+					userId: req.body.userId,
+					createdAt: req.body.createdAt
 				};
 
 				// saves the above object
@@ -85,7 +86,7 @@ var announcementController = {
 					if (err) {
 						console.log("There was an error saving the updated house.announcements array:", err);
 					} else {
-						res.status(400).send();
+						res.json({house: house});
 					}
 				});
 			}

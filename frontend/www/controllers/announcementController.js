@@ -1,29 +1,58 @@
 angular.module('announcement.controller', ['ionic'])
 
-.controller('AnnouncementCtrl', function($scope, $ionicModal, $ionicPopup, $http) {
+.controller('AnnouncementCtrl', function($rootScope, $scope, $ionicModal, $ionicPopup, $http) {
 
-$scope.announcements = [
-	{
-		author: 'Jessie',
-		content: 'need TP',
-		createdAt: 'April 3, 2016'
-	},
-	{
-		author: 'Nick',
-		content: 'who drank my beer?',
-		createdAt: 'April 2, 2016'
-	},
-	{
-		author: 'Jessie',
-		content: 'CALEB TURN OFF YOUR MUSIC RIGHT NOW',
-		createdAt: 'March 29, 2016'
+	var self = this;
+  self.all = [];
+
+	getAnnouncements();
+
+
+	function getAnnouncements() {
+		 $http
+  		.get('http://localhost:3000/api/households/' + $rootScope.houseId + '/announcements')
+  		.then(function(res){
+				$scope.announcements = res.data.announcements;
+  		});
 	}
-];
 
 
-$scope.createAnnouncement = function(newAnnouncement) {
-	console.log('will eventually add new announcement', newAnnouncement);
-};
+
+	$scope.createAnnouncement = function(newAnnouncement) {
+    if (!newAnnouncement) {
+      return $scope.showFailToAddAnnouncementAlert();
+    }
+
+    // create new announcement object to pass to the backend
+		var announcement = {
+			content: newAnnouncement.content,
+			userName: $rootScope.userName,
+			userId: $rootScope.userId,
+			createdAt: new Date()
+		};
+
+		// reset the announcement form to empty
+		newAnnouncement.content = '';
+
+		// add the announcement to the house model
+    $http
+      .post('http://localhost:3000/api/households/' + $rootScope.houseId + '/announcements', announcement)
+      .then(function(res) {
+        console.log('added new announcement:', announcement);
+        getAnnouncements();
+        // close new chore model
+        $scope.closeNewAnnouncementModal();
+      });		
+	};
+
+  $scope.deleteAnnouncement = function (announcement) {
+  $http
+    .delete('http://localhost:3000/api/households/' + $rootScope.houseId + '/announcements/' + announcement._id)
+    .then(function(res) {
+      console.log('Announcement deleted');
+      getAnnouncements();
+    });
+  };
 
 	// New Announcement Modal Functions
   // Creates and loads the new announcement modal
@@ -44,6 +73,18 @@ $scope.createAnnouncement = function(newAnnouncement) {
     $scope.announcementModal.hide();
   };
 
+
+  //Popup alert if user has not filled out the new announcement form
+  $scope.showFailToAddAnnouncementAlert = function() {
+    var alertPopup = $ionicPopup.alert({
+      title: 'Could not create announcement',
+      template: 'Must include an announcement description!'
+    });
+
+    alertPopup.then(function(res) {
+      console.log('redirected user back to new announcement form');
+    });
+  };
 
 
 });
