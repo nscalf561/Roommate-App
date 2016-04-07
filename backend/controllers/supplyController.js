@@ -15,6 +15,7 @@ var supplyController = {
 		});
 	},
 
+
 	// create a new supply
 	createSupply : function (req, res) {
 		// find house that we're adding the supply to
@@ -27,7 +28,8 @@ var supplyController = {
 				var newSupply = {
 					item: req.body.item, 
 					createdAt: new Date(),
-					createdBy: "test" // TODO insert current user
+					createdByName: req.body.createdByName,
+					createdById: req.body.createdById
 				};
 
 				// saves the above supply object

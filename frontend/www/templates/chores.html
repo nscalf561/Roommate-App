@@ -5,34 +5,40 @@
       </button>
     </ion-nav-buttons>
 
-  <ion-content>
-    <ion-list id="chores">
-      <ion-item class='item item-icon-left item-icon-right' ng-repeat="chore in chores | orderBy: ['-upvotes', 'completedAt']">
-        <i class="icon ion-ios-arrow-thin-up" ng-click="incrementUpvote(chore)" on-swipe-left="deleteChore(chore)"></i>
+  <ion-content class="balancedBackground">
+    <div class="choresDiv">
+      <div class="card" ng-repeat="chore in chores | orderBy: ['-upvotes', 'completedAt']">
+        <div class="item item-text-wrap item-icon-left item-icon-right" on-swipe-left="deleteChore(chore)">
+          <i class="icon ion-ios-arrow-thin-up" ng-click="incrementUpvote(chore)"></i>
           <span ng-click="showChoreDetailsModal(chore)">
           {{chore.upvotes}}
-        	{{chore.task}}<br>
-            <span style="color: gray">last completed <span class="date" am-time-ago="chore.completedAt"></span></span><br>
+          {{chore.task}}</span>
+          <i class="icon ion-ios-checkmark" ng-click="markCompleted(chore)"></i>
+        </div>
+        <div class="item item-divider item-icon-left">
+          <span ng-click="showChoreDetailsModal(chore)">
             {{chore.comments.length }} comments
           </span>
-          <button class="button button-icon ion-ios-trash" ng-click="deleteChore(chore)"></button>
-          <i class="icon ion-ios-checkmark" ng-click="markCompleted(chore)"></i>
-      </ion-item>
-    </ion-list>
-  </ion-content>
+          <i class="icon ion-ios-trash" ng-click="deleteChore(chore)"></i>
+        </div>
+        </div>
+    </div>
+  </div>
+</ion-content>
 </ion-view>
 
 <script id="new-chore.html" type="text/ng-template">
   <div class="modal">
 
     // Modal header bar
-    <ion-header-bar class="bar-secondary">
-      <h1 class="title">Post New Chore</h1>
-      <button class="button button-clear button-balanced" ng-click="closeNewChoreModal()">Cancel</button>
+    <ion-header-bar class="bar-balanced">
+      <h1 class="title whiteText">Post New Chore</h1>
+      <button class="button whiteText button-clear" ng-click="closeNewChoreModal()">Cancel</button>
     </ion-header-bar>
 
     // Modal content 
-    <ion-content>
+    <ion-content class="balancedBackground padding">
+    <br>
       <form ng-submit="createChore(newChore)">
         <div class="list">
           <label class="item item-input">
@@ -40,7 +46,7 @@
           </label>
         </div>
         <div class="padding">
-          <button type="submit" class="button button-block button-block button-balanced">Add Chore</button>
+          <button type="submit" class="button button-block button-calm">Add Chore</button>
         </div>
       </form>
     </ion-content>
@@ -52,13 +58,13 @@
   <div class="modal">
 
     // Modal header bar
-    <ion-header-bar class="bar-secondary">
-      <button class="button button-clear button-balanced" ng-click="closeChoreDetailsModal()"><i class="icon ion-ios-arrow-thin-left"></i></button>
-      <h1 class="title">Chore Details</h1>
+    <ion-header-bar class="bar-balanced">
+      <button class="button button-clear" ng-click="closeChoreDetailsModal()"><i class="icon ion-ios-arrow-thin-left whiteText"></i></button>
+      <h1 class="title whiteText">Chore Details</h1>
     </ion-header-bar>
 
     // Modal content 
-    <ion-content>
+    <ion-content class="balancedBackground">
 
       <div class="card">
         <div class="item item-text-wrap">
@@ -76,7 +82,7 @@
           </label>
         </div>
         <div class="padding">
-          <button type="submit" class="button button-block button-block button-balanced">Post</button>
+          <button type="submit" class="button button-block button-calm">Post</button>
         </div>
       </form>
 

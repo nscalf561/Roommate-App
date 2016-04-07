@@ -7,6 +7,7 @@ angular.module('announcement.controller', ['ionic'])
   console.log("HEREEEEE", payload);
   var payload = AuthService.jwtToJSON();
   getAnnouncements();
+  $scope.isClicked = false;
 
 
   function getAnnouncements() {
@@ -47,14 +48,22 @@ angular.module('announcement.controller', ['ionic'])
       });		
 	};
 
+
   $scope.deleteAnnouncement = function (announcement) {
-  $http
-    .delete('http://localhost:3000/api/households/' + payload.households[0] + '/announcements/' + announcement._id)
-    .then(function(res) {
-      console.log('Announcement deleted');
-      getAnnouncements();
-    });
+    // if current user is the one who made the announcement, they can delete it
+    if (payload._id == announcement.userId) {      
+      $http
+        .delete('http://localhost:3000/api/households/' + payload.households[0] + '/announcements/' + announcement._id)
+        .then(function(res) {
+          console.log('Announcement deleted');
+          getAnnouncements();
+        });
+    } else {
+      return;
+    }
+
   };
+
 
 	// New Announcement Modal Functions
   // Creates and loads the new announcement modal
@@ -89,4 +98,9 @@ angular.module('announcement.controller', ['ionic'])
   };
 
 
+  $scope.onSwipeLeft = function() {
+    console.log('WHAT THE FUCK');
+  };
+
+  
 });

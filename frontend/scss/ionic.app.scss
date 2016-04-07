@@ -35,18 +35,11 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 	color: $balanced;
 	text-align: right;
 	font-weight:  normal;
-	
-}
-
-.item .item-content .sideMenu {
-	background-color: $balanced !important;
 }
 
 .balancedBackground {
 	background-color: $balanced;
-	border: none;
 }
-
 .button-calm {
 	color: $balanced !important;
 }
@@ -56,28 +49,20 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .balanced-text {
 	color: $balanced;
 }
-
 .button.button-positive {
 	background-color: $balanced;
 }
-
+.whiteText {
+	color: white;
+}
 
 //announcement
-
 .announcementDiv {
-	.section {
-		margin-bottom: -15px;
-	}
-	.content {
-		margin-left: 5px;
-	}
-	.author {
-		font-weight: bold;
-	}
 	.date {
 		color: gray;
 		text-align: right !important;
-
+		margin-top: -5px;
+		margin-bottom: 3px;
 	}
 }
 
@@ -88,12 +73,10 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 		margin-bottom: 5px;
 	}
 	.date {
-	}
-	.associatedUser {
-		margin-bottom: -5px;
 		text-align: right !important;
 	}
 }
+
 
 //login page
 .loginDiv {
@@ -112,4 +95,5 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 	}
 	
 }
+
 

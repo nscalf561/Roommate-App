@@ -9741,12 +9741,8 @@ a.button {
   text-align: right;
   font-weight: normal; }
 
-.item .item-content .sideMenu {
-  background-color: #34495E !important; }
-
 .balancedBackground {
-  background-color: #34495E;
-  border: none; }
+  background-color: #34495E; }
 
 .button-calm {
   color: #34495E !important; }
@@ -9760,24 +9756,19 @@ a.button {
 .button.button-positive {
   background-color: #34495E; }
 
-.announcementDiv .section {
-  margin-bottom: -15px; }
-
-.announcementDiv .content {
-  margin-left: 5px; }
-
-.announcementDiv .author {
-  font-weight: bold; }
+.whiteText {
+  color: white; }
 
 .announcementDiv .date {
   color: gray;
-  text-align: right !important; }
+  text-align: right !important;
+  margin-top: -5px;
+  margin-bottom: 3px; }
 
 .dashboardDiv .section {
   margin-bottom: 5px; }
 
-.dashboardDiv .associatedUser {
-  margin-bottom: -5px;
+.dashboardDiv .date {
   text-align: right !important; }
 
 .loginDiv {
