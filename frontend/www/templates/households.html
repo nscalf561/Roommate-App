@@ -13,8 +13,6 @@
   <ion-content>
 		<ion-list>
 			<ion-item ng-repeat="household in households | orderBy: 'name' | filter: householdSearch" ng-click="joinHousehold(household)">
-      <!-- will later use this setup when using dynamic data -->
-<!--       <ion-item ng-repeat="household in households.all | orderBy: 'name' | filter: householdSearch" ng-click="joinHousehold(household)"> -->
 				<span style="font-weight: bold">{{household.name}}</span>
 				<br>
 				<span style="color: gray">{{household.address}}</span>

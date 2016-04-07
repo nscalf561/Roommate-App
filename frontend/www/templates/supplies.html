@@ -6,7 +6,14 @@
   </ion-nav-buttons>
 
   <ion-content>
-    <h1> you've made it to the Supplies view</h1>
+      <ion-list id="supplies">
+        <ion-item ng-repeat="supply in supplies">
+            <span style="font-weight: bold">{{supply.item}}</span>
+            <br>
+            <span style="color: gray">{{supply.purchasedBy}}</span>
+            <button class="button button-icon ion-ios-trash" ng-click="deleteSupply(supply)"></button>
+        </ion-item>
+      </ion-list>
   </ion-content>
 </ion-view>
 

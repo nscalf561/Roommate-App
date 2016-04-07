@@ -84,7 +84,7 @@ var supplyController = {
 					if (err) {
 						console.log("There was an error saving the updated house.supplies array:", err);
 					} else {
-						res.status(400).send();
+						res.status(200).send();
 					}
 				});
 			}
