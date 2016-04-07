@@ -1,13 +1,13 @@
 angular.module('chore.controller', ['ionic'])
 
-.controller('ChoreCtrl', function($rootScope, $scope, $ionicModal, $ionicPopup, $http, $timeout, AuthService) {
+.controller('ChoreCtrl', function($scope, $ionicModal, $ionicPopup, $http, $timeout, AuthService) {
 
   var self = this;
   self.all = [];
   self.newChore = {};
 
   var payload = AuthService.jwtToJSON();
-
+  
   getChores();
 
   $scope.chores = self.all;
@@ -17,6 +17,7 @@ angular.module('chore.controller', ['ionic'])
   	$http
   		.get('http://localhost:3000/api/households/' + payload.households[0] + '/chores')
   		.then(function(res){
+        console.log(res.data.chores);
 				self.all = res.data.chores;
   		});
   }
@@ -37,12 +38,13 @@ angular.module('chore.controller', ['ionic'])
         completedAt: new Date(),
         upvotes: 0
       };
+
       // reset chore form to empty
       newChore.task = '';
 
       // add the chore to the house model
       $http
-        .post('http://localhost:3000/api/households/' + $rootScope.houseId + '/chores', chore)
+        .post('http://localhost:3000/api/households/' + payload.households[0] + '/chores', chore)
         .then(function(res) {
           console.log('added new chore:', chore);
           // push the chore object to the front-end array of chores
@@ -59,12 +61,12 @@ angular.module('chore.controller', ['ionic'])
 
     // create new object containing ID of user who is upvoting/downvoting
     var choreInfo = {
-      userWhoUpvoted: $rootScope.userId
+      userWhoUpvoted: payload._id
     };
 
     // save new chore object in database
     $http
-      .put('http://localhost:3000/api/households/' + $rootScope.houseId + '/chores/' + chore._id, choreInfo)
+      .put('http://localhost:3000/api/households/' + payload.households[0] + '/chores/' + chore._id, choreInfo)
       .then(function(res) {
         console.log('edited chore upvotes');
         getChores();
@@ -79,8 +81,8 @@ angular.module('chore.controller', ['ionic'])
     var archivedChore = {
       task: chore.task,
       completedAt: new Date(),
-      completedByName: $rootScope.userName,
-      completedById: $rootScope.userId
+      completedByName: payload.name,
+      completedById: payload._id
     };
 
     // create an object to reset active chore in house db
@@ -95,7 +97,7 @@ angular.module('chore.controller', ['ionic'])
 
     // make call to backend to reset chore details
     $http
-      .put('http://localhost:3000/api/households/' + $rootScope.houseId + '/chores/' + chore._id, resetChore)
+      .put('http://localhost:3000/api/households/' + payload.households[0] + '/chores/' + chore._id, resetChore)
       .then(function(res) {
         console.log('reset chore details');
         getChores();
@@ -103,7 +105,7 @@ angular.module('chore.controller', ['ionic'])
 
     // make call to backend to archive completed chore (for dashboard and data visualization)
     $http
-      .post('http://localhost:3000/api/households/' + $rootScope.houseId + '/completedChores/', archivedChore)
+      .post('http://localhost:3000/api/households/' + payload.households[0] + '/completedChores/', archivedChore)
       .then(function(res) {
         console.log('Archived the chore');
       });
@@ -113,7 +115,7 @@ angular.module('chore.controller', ['ionic'])
 
   $scope.deleteChore = function (chore) {
     $http
-      .delete('http://localhost:3000/api/households/' + $rootScope.houseId + '/chores/' + chore._id)
+      .delete('http://localhost:3000/api/households/' + payload.households[0] + '/chores/' + chore._id)
       .then(function(res) {
         console.log('THIS IS A TEST');
         getChores();
@@ -126,12 +128,12 @@ angular.module('chore.controller', ['ionic'])
 
     var comment = {
       content: chore.newCommentContent,
-      author: $rootScope.userName,
+      author: payload.name,
       createdAt: new Date()
     };
 
     $http
-      .put('http://localhost:3000/api/households/' + $rootScope.houseId + '/chores/' + chore._id, comment)
+      .put('http://localhost:3000/api/households/' + payload.households[0] + '/chores/' + chore._id, comment)
       .then(function(res) {
         getChores();
         chore.comments.push(comment);
