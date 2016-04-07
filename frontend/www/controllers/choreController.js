@@ -60,10 +60,12 @@ angular.module('chore.controller', ['ionic'])
   // increment upvote function
   $scope.incrementUpvote = function(chore) {
 
+
     // create new object containing ID of user who is upvoting/downvoting
     var choreInfo = {
       userWhoUpvoted: payload._id
     };
+
 
     // save new chore object in database
     $http
@@ -94,6 +96,7 @@ angular.module('chore.controller', ['ionic'])
       upvotes: "0",
       // reset completed by date
       completedAt: new Date(),
+      upvotedBy: []
     };
 
     // make call to backend to reset chore details
@@ -102,6 +105,7 @@ angular.module('chore.controller', ['ionic'])
       .then(function(res) {
         console.log('reset chore details');
         getChores();
+        console.log(res);
       });
 
     // make call to backend to archive completed chore (for dashboard and data visualization)
