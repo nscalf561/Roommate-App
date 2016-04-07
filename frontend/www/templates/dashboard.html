@@ -1,13 +1,36 @@
 <ion-view view-title="Master Your Domain">
 
-  <ion-content>
+  <ion-content class="balancedBackground">
     <div class="dashboardDiv">
       <div class="card" ng-repeat="content in dashboardContent | orderBy: 'date'">
-      <!-- will later use this setup when using dynamic data -->
-      <!--       <ion-item ng-repeat="content in dashboardContent.all | orderBy: 'createdAt'"> -->
-        <div class="item item-text-wrap">
-          <div class="content section">{{content.task || content.content || content.item}}</div>
-          <div class="associatedUser section"><span style="font-weight: bold">{{content.completedBy || content.upvotes || content.userName || content.purchasedBy}}</span>  <span class="date" style="color: gray" am-time-ago="content.date"></span></div>
+        <div class="item item-text-wrap item-icon-right">
+          <div class="dashboardIcon">
+            <span ng-if="content.completedBy"><i class="icon ion-settings"></i></span>
+
+            <span ng-if="content.userName"><i class="icon ion-speakerphone"></i></span>
+
+            <span ng-if="content.createdByName"><i class="icon ion-ios-cart"></i></span>            
+          </div>
+
+          <div class="content section">{{content.task || content.content || content.item}}
+          </div>
+        </div>
+        <div class="associatedUser section">
+          <div class="item item-divider">
+
+            <span ng-if="content.completedBy">Added <span am-time-ago="content.completedAt"></span> by {{content.completedBy}}</span>
+
+            <span ng-if="content.userName">
+            Posted <span am-time-ago="content.createdAt"></span> by {{content.userName}}
+            </span>
+
+            <span ng-if="content.createdByName">
+            Added <span am-time-ago="content.createdAt"></span> by {{content.createdByName}}
+            </span>
+
+            
+          </div>
+        </div>
       </div>
     </div>
   </ion-content>

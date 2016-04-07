@@ -16,6 +16,7 @@ angular.module('dashboard.controller', ['angularMoment'])
       .then(function(res) {
 
         var house = res.data.house;
+        $scope.houseName = res.data.house.name;
         
         $scope.dashboardContent = [];
 
