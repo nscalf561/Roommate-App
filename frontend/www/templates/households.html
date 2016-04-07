@@ -13,8 +13,6 @@
   <ion-content>
 		<ion-list>
 			<ion-item ng-repeat="household in households | orderBy: 'name' | filter: householdSearch" ng-click="joinHousehold(household)">
-      <!-- will later use this setup when using dynamic data -->
-<!--       <ion-item ng-repeat="household in households.all | orderBy: 'name' | filter: householdSearch" ng-click="joinHousehold(household)"> -->
 				<span style="font-weight: bold">{{household.name}}</span>
 				<br>
 				<span style="color: gray">{{household.address}}</span>
@@ -37,10 +35,10 @@
     <form ng-submit="createHousehold(newHousehold)">
       <div class="list">
         <label class="item item-input">
-          <input type="text" placeholder="Household Name" ng-model="newHousehold.name" ng-maxlength="30" ng-minlength="3"></input>
+          <input type="text" placeholder="Household Name" ng-model="newHousehold.name" ng-maxlength="30" ng-minlength="1"></input>
         </label>
         <label class="item item-input">
-          <textarea rows="4" placeholder="Address" ng-model="newHousehold.address" ng-maxlength="60" ng-minlength="4"></textarea>
+          <textarea rows="4" placeholder="Address" ng-model="newHousehold.address" ng-maxlength="60" ng-minlength="1"></textarea>
         </label>
       </div>
       <div class="padding">
