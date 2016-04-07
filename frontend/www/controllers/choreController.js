@@ -46,7 +46,6 @@ angular.module('chore.controller', ['ionic'])
         .post('http://localhost:3000/api/households/' + payload.households[0] + '/chores', chore)
         .then(function(res) {
           console.log('added new chore:', chore);
-          // push the chore object to the front-end array of chores
           getChores();
           // close new chore model
           $scope.closeNewChoreModal();
@@ -111,12 +110,12 @@ angular.module('chore.controller', ['ionic'])
   };
 
 
-
   $scope.deleteChore = function (chore) {
+    console.log('we will delete this chore');
     $http
       .delete('http://localhost:3000/api/households/' + payload.households[0] + '/chores/' + chore._id)
       .then(function(res) {
-        console.log('THIS IS A TEST');
+        console.log('Chore deleted');
         getChores();
       });
   };

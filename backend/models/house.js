@@ -20,7 +20,8 @@ var HouseSchema = new Schema ({
 	}],
 	announcements: [{
 		content: String,
-		author: String,
+		userName: String,
+		userId: String,
 		createdAt: { type: Date, default: new Date() }
 	}],
 	supplies: [{
