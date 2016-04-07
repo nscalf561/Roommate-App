@@ -8,13 +8,13 @@
   <ion-content>
     <div class="announcementDiv">
       <div class="card" ng-repeat="announcement in announcements | orderBy: '-createdAt'">
-        <div class="item item-text-wrap">
+        <div class="item item-text-wrap" on-swipe-left="deleteAnnouncement(announcement)">
           <div class="author section">{{announcement.userName}}</div>
           <br>
           <div class="content section">{{announcement.content}}</div>
           <br>
           <div class="date">
-          <i ng-click="deleteAnnouncement(announcement)" class="icon ion-ios-trash" ng-show="$parent.userId === announcement.userId"></i><span class="date" am-time-ago="announcement.createdAt"></span></div>
+          <i ng-click="deleteAnnouncement(announcement)" class="icon ion-ios-trash" ng-show="payload._id === announcement.userId"></i> <span class="date" am-time-ago="announcement.createdAt"></span></div>
         </div>
       </div>
     </div>

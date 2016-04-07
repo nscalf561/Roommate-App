@@ -9790,3 +9790,6 @@ a.button {
       margin: 0 auto;
       height: auto;
       color: white; }
+
+.swipeLeftInstructions {
+  font-weight: italic normal; }

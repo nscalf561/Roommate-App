@@ -23,8 +23,9 @@ angular.module('supply.controller', ['ionic'])
     } else {
       var supply = {
         item: newSupply.item,
-        completedAt: new Date(),
-        purchasedBy: newSupply.purchasedBy
+        createdAt: new Date(),
+        createdByName: payload.name,
+        createdById: payload._id
       };
 
       newSupply.item = '';

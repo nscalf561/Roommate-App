@@ -26,9 +26,11 @@ var HouseSchema = new Schema ({
 	}],
 	supplies: [{
 		item: String,
-		createdBy: String,
+		createdByName: String,
+		createdById: String,
 		createdAt: { type: Date, default: new Date() },
-		purchasedBy: String,
+		purchasedByName: String,
+		purchasedById: String,
 		purchasedOn: { type: Date }
 	}],
 	completedChores: [{
