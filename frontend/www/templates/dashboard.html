@@ -18,6 +18,9 @@
             <!-- icon for archived chores   -->
             <span ng-if="content.completedByName"><i class="icon ion-settings"></i></span>
 
+            <!-- icon for purchasedSupplies  -->
+            <span ng-if="content.purchasedByName"><i class="icon ion-ios-cart"></i></span>
+
           </div>
 
           <div class="content section">{{content.task || content.content || content.item}}
@@ -44,6 +47,10 @@
             Completed <span am-time-ago="content.completedAt"></span> by {{content.completedByName}}
             </span>
             
+            <!-- footer for completed chores -->
+            <span ng-if="content.purchasedByName">
+            Purchased <span am-time-ago="content.purchasedOn"></span> by {{content.purchasedByName}}
+            </span>
           </div>
         </div>
       </div>

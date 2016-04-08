@@ -34,11 +34,14 @@ angular.module('dashboard.controller', ['angularMoment'])
           house.completedChores.forEach(function(completedChore) {
             $scope.dashboardContent.push(completedChore);
           });
+          house.purchasedSupplies.forEach(function(purchasedSupply) {
+            $scope.dashboardContent.push(purchasedSupply);
+          });
         }
 
         // organizes the dashboard so that the newest content is on the top
         var organizedDashboard = $scope.dashboardContent.sort(function(a, b) {
-          if ((a.completedAt || a.createdAt || a.createAt) > (b.completedAt || b.createdAt || b.createAt)) {
+          if ((a.completedAt || a.createdAt || a.createAt || a.purchasedOn) > (b.completedAt || b.createdAt || b.createAt || b.purchasedOn)) {
             return -1;
           } else {
             return 1;
