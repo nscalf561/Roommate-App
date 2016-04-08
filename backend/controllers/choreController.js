@@ -30,7 +30,7 @@ var choreController = {
 					isCompleted: req.body.isCompleted,
 					completedAt: req.body.completedAt,
 					upvotes: req.body.upvotes,
-					completedBy: req.body.completedBy,
+					addedBy: req.body.addedBy,
 					comments: req.body.comments
 				};
 

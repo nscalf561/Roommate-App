@@ -14,7 +14,8 @@ var express              		= require('express'),
 	supplyController       		= require('../controllers/supplyController'),
 	sessionsController     		= require('../controllers/sessionsController'),
 	completedChoreController 	= require('../controllers/completedChoreController'),
-	HouseUser			   		= mongoose.model('HouseUser'),
+	purchasedSupplyController = require('../controllers/purchasedSupplyController'),
+  HouseUser			   		= mongoose.model('HouseUser'),
 	User                   		= mongoose.model('User');
 
 
@@ -96,6 +97,16 @@ router.route('/api/households/:hid/supplies')
 router.route('/api/households/:hid/supplies/:id')
   .get(supplyController.showSupply)
   .delete(supplyController.deleteSupply);
+
+// API Purchased Supplies
+router.route('/api/households/:hid/purchasedSupplies')
+  .get(purchasedSupplyController.index)
+  .post(purchasedSupplyController.createPurchasedSupply);
+
+// API Individual Purchased Supply
+router.route('/api/households/:hid/purchasedSupplies/:id')
+  .get(purchasedSupplyController.showPurchasedSupply)
+  .delete(purchasedSupplyController.deletePurchasedSupply);
 
 // API HouseUser
 router.route('/api/houseuser')

@@ -5,11 +5,19 @@
       <div class="card" ng-repeat="content in dashboardContent | orderBy: 'date'">
         <div class="item item-text-wrap item-icon-right">
           <div class="dashboardIcon">
-            <span ng-if="content.completedBy"><i class="icon ion-settings"></i></span>
 
+            <!-- icon for active chores -->
+            <span ng-if="content.addedBy"><i class="icon ion-settings"></i></span>
+
+            <!-- icon for announcements -->
             <span ng-if="content.userName"><i class="icon ion-speakerphone"></i></span>
 
-            <span ng-if="content.createdByName"><i class="icon ion-ios-cart"></i></span>            
+            <!-- icon for supplies -->
+            <span ng-if="content.createdByName"><i class="icon ion-ios-cart"></i></span>          
+
+            <!-- icon for archived chores   -->
+            <span ng-if="content.completedByName"><i class="icon ion-settings"></i></span>
+
           </div>
 
           <div class="content section">{{content.task || content.content || content.item}}
@@ -17,17 +25,24 @@
         </div>
         <div class="associatedUser section">
           <div class="item item-divider">
+            
+            <!-- footer for active chores -->
+            <span ng-if="content.addedBy">Added <span am-time-ago="content.completedAt"></span> by {{content.addedBy}}</span>
 
-            <span ng-if="content.completedBy">Added <span am-time-ago="content.completedAt"></span> by {{content.completedBy}}</span>
-
+            <!-- footer for announcements -->
             <span ng-if="content.userName">
             Posted <span am-time-ago="content.createdAt"></span> by {{content.userName}}
             </span>
 
+            <!-- footer for supplies -->
             <span ng-if="content.createdByName">
             Added <span am-time-ago="content.createdAt"></span> by {{content.createdByName}}
             </span>
 
+            <!-- footer for completed chores -->
+            <span ng-if="content.completedByName">
+            Completed <span am-time-ago="content.completedAt"></span> by {{content.completedByName}}
+            </span>
             
           </div>
         </div>

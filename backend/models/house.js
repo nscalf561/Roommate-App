@@ -7,10 +7,9 @@ var HouseSchema = new Schema ({
 	address: String,
 	chores: [{
 		task: String,
-		isCompleted: Boolean,
 		completedAt: { type: Date, default: new Date() },
 		upvotes: Number,
-		completedBy: String,
+		addedBy: String,
 		upvotedBy: [String],
 		comments: [{
 			content: String,
@@ -29,15 +28,18 @@ var HouseSchema = new Schema ({
 		createdByName: String,
 		createdById: String,
 		createdAt: { type: Date, default: new Date() },
-		purchasedByName: String,
-		purchasedById: String,
-		purchasedOn: { type: Date }
 	}],
 	completedChores: [{
 		task: String,
 		completedAt: { type: Date, default: new Date() },
 		completedByName: String,
 		completedById: String
+	}],
+	purchasedSupplies: [{
+		item: String,
+		purchasedByName: String,
+		purchaseById: String,
+		purchasedOn: {type: Date}
 	}]
 });
 
