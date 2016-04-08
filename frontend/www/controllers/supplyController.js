@@ -11,8 +11,7 @@ angular.module('supply.controller', ['ionic'])
     $http
       .get('http://localhost:3000/api/households/' + payload.households[0] + '/supplies')
       .then(function(res){
-        console.log("get supplies", res.data.supplies);
-          $scope.supplies = (res.data.supplies);
+        $scope.supplies = (res.data.supplies);
       });
   }
 
@@ -41,8 +40,6 @@ angular.module('supply.controller', ['ionic'])
   };
 
   $scope.deleteSupply = function (supply) {
-    console.log(supply);
-    console.log('we will delete this supply');
 
     var archivedSupply = {
       item: supply.item,
@@ -50,7 +47,6 @@ angular.module('supply.controller', ['ionic'])
       purchasedById: payload._id,
       purchasedOn: new Date()
     };
-    console.log(archivedSupply);
 
     $http
       .delete('http://localhost:3000/api/households/' + payload.households[0] + '/supplies/' + supply._id)

@@ -4,21 +4,17 @@ angular.module('announcement.controller', ['ionic'])
 
 	var self = this;
   self.all = [];
-  console.log("HEREEEEE", payload);
   var payload = AuthService.jwtToJSON();
   getAnnouncements();
-  $scope.isClicked = false;
 
 
   function getAnnouncements() {
      $http
       .get('http://localhost:3000/api/households/' + payload.households[0] + '/announcements')
       .then(function(res){
-        console.log("HEREEEEE", payload);
 				$scope.announcements = res.data.announcements;
   		});
 	}
-
 
 
 	$scope.createAnnouncement = function(newAnnouncement) {
@@ -61,7 +57,6 @@ angular.module('announcement.controller', ['ionic'])
     } else {
       return;
     }
-
   };
 
 
@@ -95,11 +90,6 @@ angular.module('announcement.controller', ['ionic'])
     alertPopup.then(function(res) {
       console.log('redirected user back to new announcement form');
     });
-  };
-
-
-  $scope.onSwipeLeft = function() {
-    console.log('WHAT THE FUCK');
   };
 
   

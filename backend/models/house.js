@@ -38,8 +38,8 @@ var HouseSchema = new Schema ({
 	purchasedSupplies: [{
 		item: String,
 		purchasedByName: String,
-		purchaseById: String,
-		purchasedOn: {type: Date}
+		purchasedById: String,
+		purchasedOn: {type: Date, default: new Date() }
 	}]
 });
 
