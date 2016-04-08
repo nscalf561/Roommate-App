@@ -31,7 +31,9 @@ app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'hbs');
 
 // connect to mongo for our database
-mongoose.connect(config.database);
+mongoose.connect( process.env.MONGOLAB_URI ||
+									process.env.MONGOHQ_URL ||
+									config.database);
 
 //pass passort for configuration
 require('./config/passport')(passport);
