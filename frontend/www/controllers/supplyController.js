@@ -43,12 +43,27 @@ angular.module('supply.controller', ['ionic'])
   $scope.deleteSupply = function (supply) {
     console.log(supply);
     console.log('we will delete this supply');
+
+    var archivedSupply = {
+      item: supply.item,
+      purchasedByName: payload.name,
+      purchasedById: payload._id,
+      purchasedOn: new Date()
+    };
+    console.log(archivedSupply);
+
     $http
       .delete('http://localhost:3000/api/households/' + payload.households[0] + '/supplies/' + supply._id)
       .then(function(res) {
-        console.log('Supply deleted');
+        console.log('Supply deleted, will now archive supply');
         getSupplies();
+        $http
+          .post('http://localhost:3000/api/households/' + payload.households[0] + '/purchasedSupplies/', archivedSupply)
+          .then(function(res) {
+            console.log('Supply archived');
+          });
       });
+
   };
 
 
@@ -57,7 +72,7 @@ angular.module('supply.controller', ['ionic'])
     $scope.supplyModal = modal;
   }, {
     scope: $scope,
-    animation: 'slide-in-up' //look at this later
+    animation: 'slide-in-up'
   });
 
   //opens the new supply modal
