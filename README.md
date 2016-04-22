@@ -11,23 +11,23 @@ Post household announcements.
 ## Development ##
 
 ### Initial wireframes: ###
-<img src="/Schema_ERD.png">
+<img src="images/Schema_ERD.png">
 <br>
 <br>
 <br>
-<img src="/Splashscreen.png">
+<img src="images/Splashscreen.png">
 <br>
 <br>
 <br>
-<img src="/Menu.png">
+<img src="images/Menu.png">
 <br>
 <br>
 <br>
-<img src="/Dashboard.png">
+<img src="images/Dashboard.png">
 <br>
 <br>
 <br>
-<img src="/Chores.png">
+<img src="images/Chores.png">
 ### User Stories ###
 
 https://trello.com/b/ZFWVDd2G/domain
