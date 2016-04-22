@@ -15,7 +15,7 @@ Post household announcements.
 <br>
 <br>
 <br>
-<img src="images/Splashscreen.png">
+<img src="images/SplashScreen.png">
 <br>
 <br>
 <br>
