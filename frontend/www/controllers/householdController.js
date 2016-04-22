@@ -11,9 +11,7 @@ angular.module('household.controller', ['ionic'])
 		$http
 			.get('http://localhost:3000/api/households')
 			.then(function(res) {
-					res.data.houses.forEach(function(house){
-						$scope.households.push(house);
-					});
+				$scope.households = res.data.houses;
 			});
 	}
 
